@@ -43,7 +43,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Pricing unit:** per filled shift.
 - **Survey placement:** the one-question survey appears on the thank-you screen, after signup, so it can't affect the A/B metric.
 - **Survey question:** "How many short-notice shifts does your facility fill in a typical month?"
-- **Answers:** <5 / 5–15 / 16–30 / 31–60 / More than 60 / I don't know
+- **Answers:** Fewer than 5 / 5–15 / 16–30 / 31–60 / More than 60 / I don't know ("<5" relabeled "Fewer than 5" in step 2 to match "More than 60"; same range)
 - **How it's used:** each answer gives a break-even fee per filled shift ($500 ÷ shifts per month), compared against the $500/month reference point. No price appears on the page (D-003).
 - **About the $500/month:** the founder's unvalidated guess from the brief ("roughly $500/month for a mid-size facility"). It's the reference point the pricing analysis compares against, not a planned ShiftPatch plan.
 - **Dependency:** the signup form must include a required role field (to be detailed in the form-fields decision).
@@ -105,3 +105,21 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
   - **Excluded from the headline, reported separately:** Nurse (supply side), Other, Just helping test.
   - All signups are also reported as a secondary number.
 - **Reason:** Friend signups would distort the A/B result, so buyer-role signups are the honest headline.
+
+## D-010: Landing page design, structure, and hero copy
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Visual direction:** "Charge sheet": warm off-white paper, navy ink, one muted teal accent, serif headings with a plain sans body, thin ruled lines, and a small shift-roster grid in the hero.
+- **Page structure, in order:** top bar with a "Pre-launch concept" label → hero (the only part that varies) → how it would work → where this is today → signup form with consent notice → thank-you state with the volume question (built now, UI only) → footer. Plus a separate `/privacy` page.
+- **Nurse source (product claim):** the hospital's own staff and float pool.
+- **Hero copy.** The two variants share a structure so only the pain differs:
+  - **A (money):** "Stop paying a premium for short-notice shifts." / "When a shift opens up at the last minute, the fix is usually overtime or an agency. ShiftPatch is an idea we're testing for filling those shifts without the extra cost." (Reworded in step 2 so "premium" appears only once, in the headline.)
+  - **B (time):** "Stop phoning around to fill tonight's shift." / "When a shift opens up at the last minute, someone ends up working down a call list. ShiftPatch is an idea we're testing for getting the open shift to the right nurses without the calls."
+  - **Button (shared, not a variant):** "Join the early list"
+- **Variant build:** one shared `LandingPage` component; only `Hero` takes the variant. Both copies live in one data file. Preview routes `/preview/a` and `/preview/b` are set to noindex. Assigning real visitors to a variant is decided in the PostHog step. Note that assigning on the server would usually need a cookie, which affects D-002.
+- **Contact address:** shiftpatchsurvey@gmail.com
+- **Approved defaults:** self-hosted fonts (no Google Fonts requests), a text wordmark only, the email tool described generically on `/privacy` until it's chosen, form validation in the browser with a placeholder submit, and Astro starter files replaced.
+- **Approved copy (product claims):** the "How it would work" steps, the privacy policy text, the "Fewer than 5" survey label, and the "Your welcome email will come from shiftpatchsurvey@gmail.com" message.
+- **No public deploy or shared link before PostHog is in.** The privacy policy describes the consent banner and PostHog, so the page can't go live until they exist.
+- **Reason:** Not stated beyond the choices themselves. The owner chose the recommended direction and structure, and wrote the hero headlines.

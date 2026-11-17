@@ -6,7 +6,7 @@ ShiftPatch is a pre-launch concept for a platform that helps hospitals fill nurs
 
 ## How we work: human in the loop
 
-- Before building anything beyond a trivial fix, present what you understood, any ambiguity, missing info, or risk to the assessment (honesty rules, grading checklist, privacy), and 2-3 options with trade-offs. Then wait for my choice.
+- For each step, propose a complete plan with your defaults, and I approve or override. Only stop to ask when something changes the A/B variants, makes a claim about the product, or affects privacy. Everything else: decide, build, and list the defaults you chose in the summary so I can override them.
 - Never make product decisions for me (audience, copy, pricing, A/B variable, channels, event names, tools, page structure). You may give a recommendation, clearly labeled. I decide.
 - After I decide, log the decision and my reason in docs/decisions.md before implementing.
 - Work one step at a time. After each step, explain what was done in plain terms, show me how to verify it, and wait for my go-ahead.
@@ -14,7 +14,6 @@ ShiftPatch is a pre-launch concept for a platform that helps hospitals fill nurs
 - One branch per step. Merge it into main only after I approve that step's done check.
 - Never commit or merge until I explicitly say so.
 - Batch questions in one message.
-- Only ask me about decisions that affect the assessment grade, honesty/privacy, or the product. For small implementation details, choose a sensible default and list what you chose in your summary so I can override it.
 
 ## Non-negotiables
 

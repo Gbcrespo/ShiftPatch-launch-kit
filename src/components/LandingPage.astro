@@ -1,0 +1,149 @@
+---
+// The whole landing page. Shared by both A/B variants: only <Hero> gets the
+// variant, so nothing else on the page can drift between A and B (D-010).
+import Layout from '../layouts/Layout.astro';
+import TopBar from './TopBar.astro';
+import Hero from './Hero.astro';
+import SignupForm from './SignupForm.astro';
+import Footer from './Footer.astro';
+import type { Variant } from '../data/hero';
+
+interface Props {
+	variant: Variant;
+	noindex?: boolean;
+}
+
+const { variant, noindex = false } = Astro.props;
+
+const steps = [
+	{
+		title: 'A shift opens up',
+		body: 'Someone calls in sick or a unit gets busier than planned. A manager posts the open shift: unit, date and hours.',
+	},
+	{
+		title: 'Your own nurses see it',
+		body: "It goes to nurses on your own staff and float pool who've said they'd like extra hours.",
+	},
+	{
+		title: 'Someone picks it up',
+		body: "One of them takes the shift, and the manager can see who's covering it.",
+	},
+];
+---
+
+<Layout
+	title="ShiftPatch: a concept for filling short-notice nurse shifts"
+	description="ShiftPatch is a pre-launch concept for filling short-notice nurse shifts from a hospital's own staff and float pool. Nothing is built yet."
+	noindex={noindex}
+>
+	<TopBar />
+	<main id="main">
+		<Hero variant={variant} />
+
+		<section class="how" aria-labelledby="how-heading">
+			<div class="wrap">
+				<h2 id="how-heading">How it would work</h2>
+				<ol class="steps">
+					{
+						steps.map((s, i) => (
+							<li class="step">
+								<span class="step__num" aria-hidden="true">
+									{String(i + 1).padStart(2, '0')}
+								</span>
+								<h3>{s.title}</h3>
+								<p>{s.body}</p>
+							</li>
+						))
+					}
+				</ol>
+				<p class="note">This is how we'd like it to work. None of it exists yet.</p>
+			</div>
+		</section>
+
+		<section class="today" aria-labelledby="today-heading">
+			<div class="wrap">
+				<h2 id="today-heading">Where this is today</h2>
+				<p>
+					Nothing is built yet. ShiftPatch is a concept, and we're trying to find out whether
+					it's worth building. If you join the list, you'll get three emails and one question
+					about how many shifts you fill. There's nothing to buy.
+				</p>
+			</div>
+		</section>
+
+		<SignupForm />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.how,
+	.today {
+		padding-block: 3rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	h2 {
+		font-size: 1.75rem;
+	}
+
+	.steps {
+		list-style: none;
+		margin: 1.5rem 0 1rem;
+		padding: 0;
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.step {
+		padding-top: 1rem;
+		border-top: 1px solid var(--ink);
+	}
+
+	.step__num {
+		display: block;
+		font-family: var(--serif);
+		font-size: 0.95rem;
+		color: var(--teal-dark);
+		margin-bottom: 0.35rem;
+	}
+
+	h3 {
+		font-size: 1.2rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.step p {
+		color: var(--ink-muted);
+		margin: 0;
+	}
+
+	.note {
+		font-size: 0.95rem;
+		color: var(--ink-muted);
+		font-style: italic;
+		margin: 0;
+	}
+
+	.today p {
+		max-width: var(--measure);
+		font-size: 1.1rem;
+		margin: 0;
+	}
+
+	.today {
+		background: var(--paper-raised);
+	}
+
+	@media (min-width: 48rem) {
+		.how,
+		.today {
+			padding-block: 4rem;
+		}
+
+		.steps {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2rem;
+		}
+	}
+</style>

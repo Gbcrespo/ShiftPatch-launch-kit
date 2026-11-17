@@ -1,0 +1,292 @@
+---
+// Signup form (D-008) + thank-you state with the volume question (D-004).
+// Placeholder only: nothing is sent anywhere yet. PostHog and the email
+// tool are wired up in later steps.
+import { ctaLabel } from '../data/hero';
+import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site';
+---
+
+<section class="signup" id="signup" aria-labelledby="signup-heading">
+	<div class="wrap">
+		<div class="card">
+			<div data-step="form">
+				<h2 id="signup-heading" tabindex="-1">Join the early list</h2>
+				<p class="lede">Three short emails and one quick question. Nothing to buy.</p>
+
+				<form id="signup-form" novalidate>
+					<div class="field">
+						<label for="email">Email</label>
+						<input
+							id="email"
+							name="email"
+							type="email"
+							autocomplete="email"
+							inputmode="email"
+							required
+							aria-describedby="email-error"
+						/>
+						<p class="error" id="email-error" hidden></p>
+					</div>
+
+					<div class="field">
+						<label for="role">Your role</label>
+						<select id="role" name="role" required aria-describedby="role-error">
+							<option value="" selected disabled>Choose one</option>
+							{roles.map((r) => <option value={r}>{r}</option>)}
+						</select>
+						<p class="error" id="role-error" hidden></p>
+					</div>
+
+					<button class="button" type="submit">{ctaLabel}</button>
+
+					<p class="consent">
+						We'll use your email to send three emails about ShiftPatch: a welcome and two
+						follow-ups. Our <a href="/privacy">privacy policy</a> explains what we collect and
+						how to have it deleted.
+					</p>
+				</form>
+			</div>
+
+			<div data-step="thanks" hidden>
+				<h2 id="thanks-heading" tabindex="-1">You're on the list. Thank you.</h2>
+				<p class="lede">
+					One question while you're here. It helps us work out whether this is worth building.
+				</p>
+
+				<form id="survey-form" novalidate>
+					<fieldset aria-describedby="survey-error">
+						<legend>{surveyQuestion}</legend>
+						<div class="options">
+							{
+								surveyAnswers.map((a, i) => (
+									<label class="option">
+										<input type="radio" name="volume" value={a} id={`volume-${i}`} />
+										<span>{a}</span>
+									</label>
+								))
+							}
+						</div>
+					</fieldset>
+					<p class="error" id="survey-error" hidden></p>
+					<button class="button" type="submit">Send answer</button>
+				</form>
+			</div>
+
+			<div data-step="done" hidden>
+				<h2 id="done-heading" tabindex="-1">Got it, thanks.</h2>
+				<p class="lede">Your welcome email will come from {contactEmail}.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const steps = document.querySelectorAll<HTMLElement>('#signup [data-step]');
+
+	function show(name: string) {
+		steps.forEach((s) => (s.hidden = s.dataset.step !== name));
+		document.querySelector<HTMLElement>(`#signup [data-step="${name}"] h2`)?.focus();
+	}
+
+	function setError(field: HTMLElement, errorEl: HTMLElement, message: string | null) {
+		if (message) {
+			errorEl.textContent = message;
+			errorEl.hidden = false;
+			field.setAttribute('aria-invalid', 'true');
+		} else {
+			errorEl.textContent = '';
+			errorEl.hidden = true;
+			field.removeAttribute('aria-invalid');
+		}
+	}
+
+	const signup = document.querySelector<HTMLFormElement>('#signup-form');
+	const email = document.querySelector<HTMLInputElement>('#email');
+	const role = document.querySelector<HTMLSelectElement>('#role');
+	const emailError = document.querySelector<HTMLElement>('#email-error');
+	const roleError = document.querySelector<HTMLElement>('#role-error');
+
+	function checkEmail() {
+		if (!email || !emailError) return true;
+		const value = email.value.trim();
+		const msg = !value
+			? 'Enter your email address.'
+			: !email.checkValidity() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+				? 'That email address doesn’t look right. Check it and try again.'
+				: null;
+		setError(email, emailError, msg);
+		return !msg;
+	}
+
+	function checkRole() {
+		if (!role || !roleError) return true;
+		const msg = role.value ? null : 'Choose the role closest to yours.';
+		setError(role, roleError, msg);
+		return !msg;
+	}
+
+	email?.addEventListener('blur', () => email.value && checkEmail());
+	email?.addEventListener('input', () => email.hasAttribute('aria-invalid') && checkEmail());
+	role?.addEventListener('change', checkRole);
+
+	signup?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const okEmail = checkEmail();
+		const okRole = checkRole();
+		if (!okEmail) return email?.focus();
+		if (!okRole) return role?.focus();
+		// Placeholder submit: no data leaves the page in this step.
+		show('thanks');
+	});
+
+	const survey = document.querySelector<HTMLFormElement>('#survey-form');
+	const fieldset = survey?.querySelector('fieldset');
+	const surveyError = document.querySelector<HTMLElement>('#survey-error');
+
+	survey?.addEventListener('change', () => {
+		if (fieldset && surveyError) setError(fieldset, surveyError, null);
+	});
+
+	survey?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const picked = survey.querySelector('input[name="volume"]:checked');
+		if (!picked) {
+			if (fieldset && surveyError) {
+				setError(fieldset, surveyError, 'Pick one answer. "I don’t know" is fine.');
+			}
+			survey.querySelector<HTMLInputElement>('input[name="volume"]')?.focus();
+			return;
+		}
+		// Placeholder submit: the answer isn't sent anywhere yet.
+		show('done');
+	});
+</script>
+
+<style>
+	.signup {
+		padding-block: 3rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	.card {
+		max-width: 34rem;
+		padding: 1.5rem 1.25rem;
+		background: var(--paper-raised);
+		border: 1px solid var(--rule);
+		border-top: 4px solid var(--teal);
+		border-radius: 4px;
+	}
+
+	h2 {
+		font-size: 1.75rem;
+	}
+
+	h2:focus {
+		outline: none;
+	}
+
+	.lede {
+		color: var(--ink-muted);
+	}
+
+	.field {
+		margin-bottom: 1.25rem;
+	}
+
+	label,
+	legend {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.35rem;
+	}
+
+	input[type='email'],
+	select {
+		width: 100%;
+		min-height: 2.9rem;
+		padding: 0.55rem 0.75rem;
+		border: 1px solid #8a8f9c;
+		border-radius: 4px;
+		background: #fff;
+		color: var(--ink);
+		font: 1.0625rem/1.4 var(--sans);
+	}
+
+	[aria-invalid='true'] {
+		border-color: var(--error) !important;
+		box-shadow: 0 0 0 1px var(--error);
+	}
+
+	fieldset[aria-invalid='true'] {
+		box-shadow: none;
+	}
+
+	.error {
+		margin: 0.35rem 0 0;
+		color: var(--error);
+		font-size: 0.95rem;
+		font-weight: 600;
+	}
+
+	.consent {
+		margin: 1rem 0 0;
+		font-size: 0.9rem;
+		color: var(--ink-muted);
+	}
+
+	fieldset {
+		border: 0;
+		margin: 0 0 1rem;
+		padding: 0;
+	}
+
+	legend {
+		margin-bottom: 0.75rem;
+		line-height: 1.4;
+	}
+
+	.options {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.option {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		min-height: 2.75rem;
+		margin: 0;
+		padding: 0.4rem 0.75rem;
+		border: 1px solid var(--rule);
+		border-radius: 4px;
+		background: #fff;
+		font-weight: 400;
+		cursor: pointer;
+	}
+
+	.option:has(input:checked) {
+		border-color: var(--teal);
+		background: var(--teal-tint);
+	}
+
+	.option input {
+		width: 1.15rem;
+		height: 1.15rem;
+		accent-color: var(--teal);
+		margin: 0;
+	}
+
+	@media (min-width: 48rem) {
+		.signup {
+			padding-block: 4rem;
+		}
+
+		.card {
+			padding: 2rem;
+		}
+
+		.options {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

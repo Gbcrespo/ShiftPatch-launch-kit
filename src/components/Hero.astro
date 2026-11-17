@@ -1,0 +1,135 @@
+---
+// The only component that changes between A/B variants (D-001, D-010).
+import { hero, ctaLabel, type Variant } from '../data/hero';
+
+interface Props {
+	variant: Variant;
+}
+
+const { variant } = Astro.props;
+const copy = hero[variant];
+// Keep hyphenated words like "short-notice" on one line (display only).
+const headline = copy.headline.replace(/-/g, '‑');
+
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const shifts = ['Day', 'Eve', 'Night'];
+// Decorative roster: every slot covered except one.
+const openSlot = { shift: 2, day: 4 };
+---
+
+<section class="hero" data-variant={variant} aria-labelledby="hero-heading">
+	<div class="wrap hero__inner">
+		<div class="hero__text">
+			<h1 id="hero-heading">{headline}</h1>
+			<p class="hero__support">{copy.support}</p>
+			<a class="button" href="#signup">{ctaLabel}</a>
+		</div>
+
+		<div class="roster" aria-hidden="true">
+			<div class="roster__corner"></div>
+			{days.map((d) => <div class="roster__day">{d}</div>)}
+			{
+				shifts.map((s, si) => (
+					<>
+						<div class="roster__shift">{s}</div>
+						{days.map((_, di) =>
+							si === openSlot.shift && di === openSlot.day ? (
+								<div class="roster__cell roster__cell--open">Open</div>
+							) : (
+								<div class="roster__cell" />
+							),
+						)}
+					</>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		padding-block: 2.5rem 3rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	.hero__inner {
+		display: grid;
+		gap: 2.5rem;
+		align-items: center;
+	}
+
+	h1 {
+		font-size: clamp(2rem, 7vw, 3.1rem);
+		max-width: 18ch;
+	}
+
+	.hero__support {
+		font-size: 1.15rem;
+		color: var(--ink-muted);
+		max-width: var(--measure);
+		margin-bottom: 1.75rem;
+	}
+
+	.roster {
+		display: grid;
+		grid-template-columns: 2.6rem repeat(7, 1fr);
+		gap: 4px;
+		padding: 0.9rem;
+		background: var(--paper-raised);
+		border: 1px solid var(--rule);
+		border-radius: 4px;
+		font-size: 0.75rem;
+		color: var(--ink-muted);
+		max-width: 26rem;
+	}
+
+	.roster__day,
+	.roster__shift {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-block: 0.15rem;
+	}
+
+	.roster__shift {
+		justify-content: flex-start;
+	}
+
+	.roster__cell {
+		aspect-ratio: 1 / 1;
+		border-radius: 2px;
+		background: repeating-linear-gradient(
+			0deg,
+			#dfe3ea 0 3px,
+			#e9ecf1 3px 6px
+		);
+	}
+
+	.roster__cell--open {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--teal-tint);
+		outline: 2px dashed var(--teal);
+		outline-offset: -2px;
+		color: var(--teal-dark);
+		font-weight: 600;
+		font-size: 0.7rem;
+	}
+
+	@media (min-width: 56rem) {
+		.hero {
+			padding-block: 4.5rem 5rem;
+		}
+
+		.hero__inner {
+			grid-template-columns: 1.3fr 1fr;
+			gap: 3.5rem;
+		}
+
+		.roster {
+			justify-self: end;
+			width: 100%;
+		}
+	}
+</style>

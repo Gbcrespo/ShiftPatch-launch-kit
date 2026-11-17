@@ -1,0 +1,129 @@
+---
+// Privacy policy (D-002). Update the email-tool line once the tool is chosen.
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+import { contactEmail } from '../data/site';
+
+const updated = '17 November 2026';
+---
+
+<Layout
+	title="Privacy policy | ShiftPatch"
+	description="What ShiftPatch collects on this page, why, and how to have it deleted."
+>
+	<TopBar />
+	<main id="main" class="wrap policy">
+		<h1>Privacy policy</h1>
+		<p class="updated">Last updated {updated}</p>
+
+		<p>
+			ShiftPatch is a pre-launch concept. Nothing has been built yet. This page exists to find
+			out whether hospitals want it. This policy explains what we collect here, why, and how to
+			get it deleted. If anything is unclear, email{' '}
+			<a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+		</p>
+
+		<h2>What we collect</h2>
+		<h3>When you join the list</h3>
+		<ul>
+			<li>Your email address</li>
+			<li>The role you pick (for example, nurse manager)</li>
+			<li>
+				Your answer to one optional question about how many short-notice shifts your facility
+				fills in a month
+			</li>
+		</ul>
+
+		<h3>When you visit the page</h3>
+		<p>
+			We use PostHog, an analytics tool, to see how people use this page: which pages are
+			viewed, which buttons are clicked, whether the form is submitted, which version of the page
+			you saw, and general details such as browser, device type and approximate location
+			(country or city, worked out from your IP address).
+		</p>
+		<p>
+			By default this runs <strong>without cookies</strong>, and we can't recognise you if you
+			come back on a different day. If you accept cookies in the banner, PostHog also sets a
+			cookie so we can tell repeat visits apart, and records your session (mouse movement,
+			scrolling and clicks) so we can see where the page is confusing.
+			<strong>Session recordings hide everything typed into form fields.</strong> If you
+			decline, there are no cookies and no recordings.
+		</p>
+
+		<h3>Emails</h3>
+		<p>
+			We use an email service provider (named here once chosen) to send you three emails from{' '}
+			{contactEmail}: a welcome and two follow-ups. It may tell us whether an email was opened
+			or a link was clicked, and we pass those events to PostHog so we can see which messages
+			are useful.
+		</p>
+
+		<h2>Why we collect it</h2>
+		<p>
+			Only to find out whether ShiftPatch is worth building, and to send you the three emails you
+			signed up for. We don't sell your data, use it for advertising, or share it with anyone
+			except the services named on this page.
+		</p>
+
+		<h2>Where it's stored</h2>
+		<p>PostHog stores our analytics data in the United States.</p>
+
+		<h2>How long we keep it</h2>
+		<p>
+			You can ask us to delete your data at any time. Either way, we delete everything within six
+			months of the end of this test.
+		</p>
+
+		<h2>Your choices</h2>
+		<ul>
+			<li>Decline cookies in the banner. The page works the same either way.</li>
+			<li>Unsubscribe from any email using the link in it.</li>
+			<li>
+				Ask for a copy of your data, a correction, or deletion by emailing{' '}
+				<a href={`mailto:${contactEmail}`}>{contactEmail}</a>. This applies wherever you are,
+				including the EU and Brazil.
+			</li>
+		</ul>
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.policy {
+		max-width: calc(var(--measure) + 2 * var(--gutter));
+		padding-block: 2.5rem 3rem;
+	}
+
+	h1 {
+		font-size: clamp(2rem, 6vw, 2.6rem);
+		margin-bottom: 0.25rem;
+	}
+
+	.updated {
+		color: var(--ink-muted);
+		font-size: 0.95rem;
+		margin-bottom: 2rem;
+	}
+
+	h2 {
+		font-size: 1.45rem;
+		margin-top: 2.25rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--rule);
+	}
+
+	h3 {
+		font-size: 1.1rem;
+		margin-top: 1.5rem;
+	}
+
+	ul {
+		padding-left: 1.2rem;
+		margin: 0 0 1rem;
+	}
+
+	li {
+		margin-bottom: 0.4rem;
+	}
+</style>

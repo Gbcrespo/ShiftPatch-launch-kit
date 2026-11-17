@@ -1,0 +1,60 @@
+---
+import { contactEmail } from '../data/site';
+---
+
+<footer class="footer">
+	<div class="wrap footer__inner">
+		<p class="footer__concept">
+			<strong>ShiftPatch is a pre-launch concept.</strong> Nothing has been built yet, and nothing
+			is for sale.
+		</p>
+		<nav aria-label="Footer">
+			<ul>
+				<li><a href="/privacy">Privacy policy</a></li>
+				<li><a href={`mailto:${contactEmail}`}>{contactEmail}</a></li>
+			</ul>
+		</nav>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		padding-block: 2rem 2.5rem;
+		font-size: 0.95rem;
+		color: var(--ink-muted);
+	}
+
+	.footer__inner {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.footer__concept {
+		margin: 0;
+		max-width: var(--measure);
+	}
+
+	.footer__concept strong {
+		color: var(--ink);
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+	}
+
+	a {
+		overflow-wrap: anywhere;
+	}
+
+	@media (min-width: 48rem) {
+		.footer__inner {
+			grid-template-columns: 1fr auto;
+			align-items: start;
+		}
+	}
+</style>

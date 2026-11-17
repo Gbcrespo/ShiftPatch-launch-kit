@@ -1,23 +1,163 @@
+---
+import '@fontsource/source-serif-4/600.css';
+import '@fontsource/source-sans-3/400.css';
+import '@fontsource/source-sans-3/600.css';
+
+interface Props {
+	title: string;
+	description: string;
+	noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		<title>{title}</title>
 	</head>
 	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
 		<slot />
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--paper: #f7f4ec;
+		--paper-raised: #fffdf8;
+		--ink: #1f2a44;
+		--ink-muted: #4a5468;
+		--rule: #d9d3c4;
+		--teal: #2f6f6a;
+		--teal-dark: #24564f;
+		--teal-tint: #e3eeec;
+		--error: #a3302a;
+
+		--serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+		--sans: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+		--measure: 38rem;
+		--page: 68rem;
+		--gutter: 1rem;
+	}
+
+	@media (min-width: 48rem) {
+		:root {
+			--gutter: 2rem;
+		}
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		-webkit-text-size-adjust: 100%;
+	}
+
 	body {
 		margin: 0;
+		background: var(--paper);
+		color: var(--ink);
+		font-family: var(--sans);
+		font-size: 1.0625rem;
+		line-height: 1.6;
+	}
+
+	h1,
+	h2,
+	h3 {
+		font-family: var(--serif);
+		font-weight: 600;
+		line-height: 1.2;
+		margin: 0 0 0.75rem;
+		text-wrap: balance;
+	}
+
+	p {
+		margin: 0 0 1rem;
+	}
+
+	a {
+		color: var(--teal-dark);
+		text-underline-offset: 0.15em;
+	}
+
+	a:hover {
+		color: var(--ink);
+	}
+
+	:focus-visible {
+		outline: 3px solid var(--ink);
+		outline-offset: 3px;
+	}
+
+	.wrap {
 		width: 100%;
-		height: 100%;
+		max-width: var(--page);
+		margin-inline: auto;
+		padding-inline: var(--gutter);
+	}
+
+	.button {
+		display: inline-block;
+		min-height: 2.75rem;
+		padding: 0.7rem 1.4rem;
+		border: 0;
+		border-radius: 4px;
+		background: var(--teal);
+		color: #fff;
+		font: 600 1.0625rem/1.3 var(--sans);
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.button:hover {
+		background: var(--teal-dark);
+		color: #fff;
+	}
+
+	.skip-link {
+		position: absolute;
+		left: 1rem;
+		top: -3rem;
+		padding: 0.5rem 0.75rem;
+		background: var(--ink);
+		color: #fff;
+		z-index: 10;
+	}
+
+	.skip-link:focus {
+		top: 1rem;
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		* {
+			scroll-behavior: auto !important;
+			transition: none !important;
+		}
+	}
+
+	html {
+		scroll-behavior: smooth;
 	}
 </style>

@@ -1,46 +1,28 @@
-# Astro Starter Kit: Basics
+# ShiftPatch launch kit
+
+ShiftPatch is a **pre-launch concept**: an idea for helping hospitals fill short-notice nurse shifts from their own staff and float pool. Nothing has been built. This repo holds the landing page used to find out whether it's worth building.
+
+Decisions, and the reasons for them, are in [`docs/decisions.md`](docs/decisions.md).
+
+## Run it locally
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Then open:
 
-## 🚀 Project Structure
+| Page | What it shows |
+| :--- | :--- |
+| `http://localhost:4321/preview/a` | Variant A: money framing |
+| `http://localhost:4321/preview/b` | Variant B: time framing |
+| `http://localhost:4321/privacy` | Privacy policy |
+| `http://localhost:4321/` | Variant A for now, until variant assignment is added |
 
-Inside of your Astro project, you'll see the following folders and files:
+The two variants are the same `LandingPage` component. Only the hero copy differs, and it lives in `src/data/hero.ts`.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Status
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Landing page UI: done. The signup form and survey check what's entered but don't send anything yet.
+- Analytics, the consent banner and email: not built yet.
