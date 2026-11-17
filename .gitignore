@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local-only source documents (D-006): never commit
+docs/brief.pdf

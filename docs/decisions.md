@@ -1,0 +1,105 @@
+# Decisions
+
+Each entry records what was decided, by whom, and why. Newest at the bottom.
+
+## D-001: A/B test the hero on money vs. time framing
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** The A/B test changes only the hero framing.
+  - **Variant A (money):** cost savings, meaning less overtime and agency spend on short-notice shifts.
+  - **Variant B (time):** time savings, meaning no more phoning around to fill shifts.
+  - Everything else on the page is identical across variants.
+- **Success metric:** `signup_form_submitted` (refined by D-009: buyer-role signups are the headline number)
+- **Reason:** It shows which pain buyers act on. That sets the go-to-market focus (ops vs. finance angle, pitch, ROI story).
+- **Ruled out:** Testing price. The cheaper option always wins, and a free signup can't measure willingness to pay.
+
+## D-002: Privacy policy, consent, and retention
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Policy discloses:** form fields, PostHog analytics, session replay with masked inputs, the email tool, purpose, retention and deletion, and the ShiftPatch Gmail as contact.
+- **Policy is linked from:** the footer, plus a consent line under the signup form.
+- **Consent model:** cookieless by default. PostHog runs in cookieless mode for every visitor. A banner asks for consent, and accepting enables cookies and session replay (inputs masked). No replay without consent.
+- **Consent line under the form:** a notice, not a checkbox.
+- **Retention:** deleted on request at any time. Everything is deleted within 6 months after the test ends.
+- **PostHog region:** US (existing project). The policy discloses this in one line.
+- **Reason:** Every visitor is counted for the A/B metric, so the test isn't starved of data, and nothing identifying (cookies, recordings) runs without consent. A notice avoids adding signup friction for emails people are signing up to receive. Keeping the existing US project avoids re-setup; disclosure covers the transfer.
+- **Known data trade-off:** visitors who decline can't be linked across days, so return visits count as new visitors and may see the other variant.
+- **Ruled out:** opt-in before any tracking (it hides the visitors who decline, which shrinks and skews the A/B sample) and no session replay (it contradicts the brief).
+
+## D-003: No price on the page
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** The landing page shows no price on either variant.
+- **Reason:** Traffic will be small, so every signup counts, and with no price on the page the hero framing stays the only difference between variants. A visible price next to the money-framed hero could change how Variant A performs compared with B. Willingness to pay is asked in the one-question survey instead (see D-004).
+- **Ruled out:** a planned price in the main flow (it muddies the A/B test and lowers signups) and a planned price in the FAQ (less upfront, little learned).
+
+## D-004: Pricing unit and survey placement
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Pricing unit:** per filled shift.
+- **Survey placement:** the one-question survey appears on the thank-you screen, after signup, so it can't affect the A/B metric.
+- **Survey question:** "How many short-notice shifts does your facility fill in a typical month?"
+- **Answers:** <5 / 5–15 / 16–30 / 31–60 / More than 60 / I don't know
+- **How it's used:** each answer gives a break-even fee per filled shift ($500 ÷ shifts per month), compared against the $500/month reference point. No price appears on the page (D-003).
+- **About the $500/month:** the founder's unvalidated guess from the brief ("roughly $500/month for a mid-size facility"). It's the reference point the pricing analysis compares against, not a planned ShiftPatch plan.
+- **Dependency:** the signup form must include a required role field (to be detailed in the form-fields decision).
+- **Reason:**
+  - Per filled shift: the buyer pays when the product actually does its job, and it's the unit the break-even math uses.
+  - Thank-you screen: asking after signup means the survey can't affect the A/B metric.
+  - Wording: see D-005.
+  - "I don't know" as the only opt-out: role is already captured on the form.
+- **Ruled out:** per hour worked (reads like agency markup, hard to quote) and per unit/ward per month (loosely tied to value). For the wording: an agency comparison (gives the analysis no number to work with on its own) and price ranges or an open price (anchoring, and needs prices picked).
+
+## D-005: Pricing is a separate analysis, not part of the A/B test
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** Pricing is handled as a separate pricing analysis, outside the A/B test. The A/B test stays money vs. time framing (D-001).
+- **Main data input:** the one-question thank-you-screen survey (D-004).
+- **Where it lives:** a section or appendix in the decision memo, expanded in the final presentation.
+- **Scope and timing:** timeboxed, and done only after all committed deliverables are finished.
+- **Reason:** A price A/B test only shows that the cheaper option wins, and a free signup can't measure willingness to pay. A break-even threshold lets Juan compare per-shift and flat pricing transparently instead of trusting a guessed price.
+
+## D-006: The brief stays local, out of git
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** The original brief is kept at `docs/brief.pdf` for fact-checking. `.gitignore` lists that exact path (not all PDFs, so future PDF deliverables in `docs/` aren't silently ignored). It is never committed or pushed.
+- **Reason:** The brief stays out of git so nothing from Designli ends up in the repo, while Claude can still check facts against the original.
+- **Ruled out:** committing it verbatim (breaks the "never Designli" rule). A neutral fact sheet that gets committed remains an option for later.
+- **Status (2026-11-17): parked.** The brief has not been added and is not needed for now. The owner may add it later. The `.gitignore` entry for `docs/brief.pdf` stays in place so it's protected if it's added.
+
+## D-007: Focus on the landing page; defer the remaining step-1 decisions
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** Step 1 settles only what the landing-page UI needs: feature-interest cards (yes/no) and the signup form fields. These are deferred to the steps where they get built:
+  - Email tool (welcome email + two follow-ups, open/click events to PostHog)
+  - Channels with tracked `/go/` links and UTM tags (including `utm_source=personal_network`)
+  - `docs/tracking-plan.md` and the five-slot A/B hypothesis
+- **Reason:** Focus on building the landing page. Decide the rest when it gets built.
+
+## D-008: Page UI: no feature cards; minimal signup form
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Feature-interest cards:** none.
+- **Signup form fields:** two, both required.
+  - **Email**, labeled "Email" (not "Work email")
+  - **Role**, a required choice from:
+    Director of nursing / CNO · Nurse manager · Staffing or scheduling coordinator · Finance or operations · Nurse · Other · Just helping test
+- **No name field.** The welcome email uses a generic greeting.
+- **Reason (inferred, owner to confirm):** The fewest fields gives the most signups and the least personal data to disclose and delete. The survey already covers facility volume (D-004), and role separates buyers from people helping test. With no cards, the page stays focused on the form, and the A/B test has no extra copy that could carry money or time framing. "Email" doesn't put off people helping test who have no work address.
+- **Ruled out:** clickable or static feature cards; an optional facility-name field; a detailed form (name, facility, size, country).
+
+## D-009: Headline A/B number is buyer-role signups
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** The headline A/B result is `signup_form_submitted` filtered to buyer roles, which means every role except "Just helping test". All signups are reported as a secondary number.
+- **Reason (inferred, owner to confirm):** People from `personal_network` are likely to pick "Just helping test". Counting them in the headline would measure friends being helpful rather than buyers responding to the money or time framing.
+- **Open detail for the tracking plan:** whether "Nurse" and "Other" count as buyer roles. Default for now: they do, since only "Just helping test" is excluded.

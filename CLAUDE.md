@@ -13,6 +13,8 @@ ShiftPatch is a pre-launch concept for a platform that helps hospitals fill nurs
 - Simple factual questions get a direct answer, no options needed.
 - One branch per step. Merge it into main only after I approve that step's done check.
 - Never commit or merge until I explicitly say so.
+- Batch questions in one message.
+- Only ask me about decisions that affect the assessment grade, honesty/privacy, or the product. For small implementation details, choose a sensible default and list what you chose in your summary so I can override it.
 
 ## Non-negotiables
 
