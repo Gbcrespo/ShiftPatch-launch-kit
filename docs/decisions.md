@@ -93,13 +93,15 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
   - **Role**, a required choice from:
     Director of nursing / CNO · Nurse manager · Staffing or scheduling coordinator · Finance or operations · Nurse · Other · Just helping test
 - **No name field.** The welcome email uses a generic greeting.
-- **Reason (inferred, owner to confirm):** The fewest fields gives the most signups and the least personal data to disclose and delete. The survey already covers facility volume (D-004), and role separates buyers from people helping test. With no cards, the page stays focused on the form, and the A/B test has no extra copy that could carry money or time framing. "Email" doesn't put off people helping test who have no work address.
+- **Reason:** The fewest fields keeps signups up, the survey already covers volume, and role separates buyers from helpers. Feature cards aren't required by the brief, and friend clicks on them wouldn't mean much.
 - **Ruled out:** clickable or static feature cards; an optional facility-name field; a detailed form (name, facility, size, country).
 
 ## D-009: Headline A/B number is buyer-role signups
 
 - **Date:** 2026-11-17
 - **Decided by:** project owner
-- **Decision:** The headline A/B result is `signup_form_submitted` filtered to buyer roles, which means every role except "Just helping test". All signups are reported as a secondary number.
-- **Reason (inferred, owner to confirm):** People from `personal_network` are likely to pick "Just helping test". Counting them in the headline would measure friends being helpful rather than buyers responding to the money or time framing.
-- **Open detail for the tracking plan:** whether "Nurse" and "Other" count as buyer roles. Default for now: they do, since only "Just helping test" is excluded.
+- **Decision:** The headline A/B result is `signup_form_submitted` filtered to buyer roles.
+  - **Buyer roles (headline):** Director of nursing / CNO, Nurse manager, Staffing or scheduling coordinator, Finance or operations.
+  - **Excluded from the headline, reported separately:** Nurse (supply side), Other, Just helping test.
+  - All signups are also reported as a secondary number.
+- **Reason:** Friend signups would distort the A/B result, so buyer-role signups are the honest headline.
