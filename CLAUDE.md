@@ -11,6 +11,8 @@ ShiftPatch is a pre-launch concept for a platform that helps hospitals fill nurs
 - After I decide, log the decision and my reason in docs/decisions.md before implementing.
 - Work one step at a time. After each step, explain what was done in plain terms, show me how to verify it, and wait for my go-ahead.
 - Simple factual questions get a direct answer, no options needed.
+- One branch per step. Merge it into main only after I approve that step's done check.
+- Never commit or merge until I explicitly say so.
 
 ## Non-negotiables
 
