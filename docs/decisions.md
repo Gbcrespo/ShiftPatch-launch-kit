@@ -121,5 +121,14 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Contact address:** shiftpatchsurvey@gmail.com
 - **Approved defaults:** self-hosted fonts (no Google Fonts requests), a text wordmark only, the email tool described generically on `/privacy` until it's chosen, form validation in the browser with a placeholder submit, and Astro starter files replaced.
 - **Approved copy (product claims):** the "How it would work" steps, the privacy policy text, the "Fewer than 5" survey label, and the "Your welcome email will come from shiftpatchsurvey@gmail.com" message.
-- **No public deploy or shared link before PostHog is in.** The privacy policy describes the consent banner and PostHog, so the page can't go live until they exist.
+- **No shared link and no indexing before PostHog is in and step 6 passes.** (Reworded in step 3, see D-011. It originally said no public deploy at all.)
 - **Reason:** Not stated beyond the choices themselves. The owner chose the recommended direction and structure, and wrote the hero headlines.
+
+## D-011: Deploy to Cloudflare Pages, live but unlisted
+
+- **Date:** 2026-11-17
+- **Decided by:** project owner
+- **Decision:** Deploy to Cloudflare Pages on a free `*.pages.dev` address, built from `main` on every push. The site is publicly reachable but unlisted: `robots.txt` blocks all crawlers, the pages carry noindex tags, and the link isn't shared until PostHog is in and step 6 passes. D-010's no-deploy rule is reworded to match.
+- **Setup:** project `shiftpatch-concept`; Astro preset, `npm run build`, output `dist`, root = repo root; Node 24 via `.nvmrc`; `functions/` at the project root for later Pages Functions; preview deployments for other branches turned off. No secrets in the repo (`.env.*`, `.dev.vars`, `.wrangler/` are ignored).
+- **Reason (inferred, owner to confirm):** The form sends nothing yet, so no data is collected, and the privacy policy overstates tracking rather than hiding any. A login gate (Cloudflare Access) would add setup for little gain.
+- **Ruled out:** locking the site behind Cloudflare Access; waiting to deploy until the PostHog step.
