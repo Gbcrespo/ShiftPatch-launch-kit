@@ -2,14 +2,18 @@
 import '@fontsource/source-serif-4/600.css';
 import '@fontsource/source-sans-3/400.css';
 import '@fontsource/source-sans-3/600.css';
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
 	title: string;
 	description: string;
 	noindex?: boolean;
+	// Which analytics setup the page gets (D-018): the live landing page,
+	// a review-only preview, or any other page.
+	analytics?: 'landing' | 'preview' | 'other';
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, analytics = 'other' } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,9 +26,10 @@ const { title, description, noindex = false } = Astro.props;
 		{noindex && <meta name="robots" content="noindex, nofollow" />}
 		<title>{title}</title>
 	</head>
-	<body>
+	<body data-analytics={analytics}>
 		<a class="skip-link" href="#main">Skip to content</a>
 		<slot />
+		<ConsentBanner />
 	</body>
 </html>
 
@@ -138,6 +143,12 @@ const { title, description, noindex = false } = Astro.props;
 
 	.skip-link:focus {
 		top: 1rem;
+	}
+
+	/* PostHog feedback tab: off the thank-you steps (D-018). */
+	html[data-signed-up] [class^='PostHogWidget'],
+	html[data-signed-up] [class*=' PostHogWidget'] {
+		display: none !important;
 	}
 
 	.visually-hidden {

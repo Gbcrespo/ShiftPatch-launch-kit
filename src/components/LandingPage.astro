@@ -9,7 +9,7 @@ import Footer from './Footer.astro';
 import type { Variant } from '../data/hero';
 
 interface Props {
-	variant: Variant;
+	variant: Variant | 'assign';
 	noindex?: boolean;
 }
 
@@ -35,6 +35,7 @@ const steps = [
 	title="ShiftPatch: a concept for filling short-notice nurse shifts"
 	description="ShiftPatch is a pre-launch concept for filling short-notice nurse shifts from a hospital's own staff and float pool. Nothing is built yet."
 	noindex={noindex}
+	analytics={variant === 'assign' ? 'landing' : 'preview'}
 >
 	<TopBar />
 	<main id="main">
@@ -75,6 +76,30 @@ const steps = [
 	</main>
 	<Footer />
 </Layout>
+
+<script>
+	import { startAnalytics, resolveHeroVariant, registerProps, track } from '../lib/analytics';
+
+	const page = (document.body.dataset.analytics ?? 'other') as 'landing' | 'preview' | 'other';
+	startAnalytics(page);
+	const heroEl = document.querySelector<HTMLElement>('.hero');
+
+	if (heroEl && page === 'landing') {
+		resolveHeroVariant((v) => {
+			heroEl.dataset.variant = v;
+			heroEl.setAttribute('aria-labelledby', `hero-heading-${v}`);
+			track('landing_page_viewed');
+		});
+	} else if (heroEl && page === 'preview') {
+		// Review-only pages: tag events with the shown variant, no exposure.
+		const v = heroEl.dataset.variant;
+		if (v === 'a' || v === 'b') registerProps({ hero_variant: v });
+	}
+
+	document
+		.querySelector('[data-hero-cta]')
+		?.addEventListener('click', () => track('hero_cta_clicked'));
+</script>
 
 <style>
 	.how,

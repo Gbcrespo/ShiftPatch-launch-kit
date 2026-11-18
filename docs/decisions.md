@@ -147,3 +147,72 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Decision:** `docs/grading-checklist.md` holds the hypothesis format and the analytics checklist. All work from step 4 on is checked against it, and each step's summary says how it measures up.
 - **Correction:** the "five-slot" hypothesis template mentioned in D-007 was an assumption and was wrong. The format in the checklist replaces it.
 - **Reason:** One fixed checklist to check every step against, so nothing the work is judged on gets missed.
+
+## D-014: Market the buyer side first
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** Research, prospects and channels target the buyer: hospital nursing and staffing leaders (CNO / director of nursing, staffing office, nurse managers, finance or operations).
+- **Reason:** The buyer is the only side with a budget, and it matches D-009 (buyer-role signups are the headline A/B number). Buyer prospects can be checked against CMS and hospital pages.
+- **Ruled out:** supply (nurses: no budget, outside the D-009 headline, and naming individual nurses is more sensitive) and watchers (consultants, analysts: easy to verify, but they can't validate the idea as buyers).
+
+## D-015: Florida only, for now
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** The customer profile and the 30 prospects cover Florida hospitals only.
+- **Reason:** It matches Juan's base and gives one coherent outreach story. Florida has 200+ CMS-listed hospitals and one license lookup (FL DOH MQA), so verification stays consistent. Narrowing is easy to explain.
+- **Known trade-off:** fewer hospitals with recent, specific evidence of the problem than nationwide, so some rows may land at medium confidence.
+- **Ruled out:** all of the US (outreach spread thin, 50 state boards to verify against) and 3–4 shortage states (needs its own sourced justification and several license lookups).
+
+## D-016: identify() every signup
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** On signup, call `identify()` with the lowercased email (plus `role` and `is_buyer_role` as person properties) for every signup, including visitors who declined cookies. No cookie is set without consent. /privacy gets one added line: "If you join the list, we link your email to your visit in PostHog so we can see which emails were useful."
+- **Reason:** Signing up is a deliberate act of giving us the email, and it only links that one visit. It lets the email events (step 5) join the same person, so the funnel holds end to end.
+- **Fallback:** if the SDK won't identify in cookieless mode, `signup_form_submitted` carries the email as a person property instead.
+- **Ruled out:** identify only after cookie consent (breaks the email-to-visit funnel for decliners).
+- **Refines:** D-002 (decliners stay anonymous until they choose to sign up).
+
+## D-017: The volume question is an API-mode PostHog survey
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** The D-004 question is created in PostHog Surveys as an API-mode survey. The existing thank-you UI stays and sends PostHog's `survey shown` / `survey sent` events.
+- **Reason:** Results show up in the Surveys tab with no design change, and the D-010 page structure stays as approved.
+- **Note:** `survey shown` / `survey sent` are PostHog's own event names (with spaces). The tracking plan lists them as PostHog built-ins, outside our snake_case rule.
+- **Ruled out:** a PostHog popover survey (off-brand, can be blocked or dismissed, changes the page structure).
+
+## D-018: Step 4 tracking plan, experiment setup and copy
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner (approved the step 4 plan)
+- **Tracking plan:** the events in `docs/tracking-plan.md` (landing_page_viewed, hero_cta_clicked, signup_form_started, signup_form_submitted, cookie_banner_answered, channel_link_clicked, plus PostHog built-ins).
+- **Flag and experiment:** flag `hero-framing`, variants `control` = A (money) and `time` = B (time), split 50/50. Experiment "Hero framing: money vs time". Primary metric `signup_form_submitted` where `is_buyer_role = true` (D-009). Secondary metrics: all `signup_form_submitted`, and `survey sent`. Test accounts excluded.
+- **Consent banner copy:** "We count visits to this page without cookies. Can we also use cookies and record your session (typing is always hidden) to see where the page is confusing?" Buttons: Accept / No thanks, plus a privacy policy link.
+- **Feedback widget:** a PostHog popover survey behind a small "Feedback" tab, not shown on the thank-you step: "Anything confusing or missing on this page?" (open text, optional).
+- **Proxy:** a Cloudflare Pages Function at `/sp/*` on our own origin.
+- **Reason:** The event names cover the funnel from visit to signup to survey answer as real events, with the variant and UTM tags on every event (grading checklist). Same-origin proxying keeps ad blockers from dropping events with no custom domain needed. The copy keeps the D-002 consent model honest and plain.
+- **Ruled out:** a separate Cloudflare Worker or PostHog's managed proxy (both need a custom domain).
+
+## D-019: Traction channels for tracked links
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** Three channels get tracked `/go/<channel>` links, plus the `personal_network` baseline:
+  - **Direct outreach** (Sales, founder-led problem-discovery messages to the Florida prospects): `/go/direct_outreach`, `utm_medium=outreach`
+  - **LinkedIn organic** (Existing platforms): `/go/linkedin`, `utm_medium=social`
+  - **Offline events**: `/go/<event slug>`, `utm_medium=event`. The owner asked for the healthcare leadership events that actually take place in the first half of 2027, and which are in Florida, to be researched first. The slug(s) follow from that research (see `docs/research/events-2027h1.md`).
+  - **Personal network** (this week's 10–15 visits): `/go/personal_network`, `utm_medium=referral`
+- **Campaign tag:** `utm_campaign=prelaunch-2026-11` on every link.
+- **Reason:** These were the top three of the 19 Traction channels scored for Florida nursing and staffing buyers in `docs/research/traction-channels.md` (21, 19 and 17 of 25): the most precise reach of named buyers, free, and honest for a pre-launch concept. Only `personal_network` runs this week. The others are launch-ready but not run.
+- **Ruled out:** content marketing (17, tied with offline events but lower reach; slow, and needs public posting) and the remaining 15 channels (see the ranking).
+
+## D-020: Offline events stay in Florida
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** The offline-events channel (D-019) uses Florida events only. The tracked link is `/go/fonl_annual_2027` (FONL Annual Conference, Palmetto, FL, Nov 3–5, 2027, confirmed on FONL's own page). No Florida buyer event in January–June 2027 is confirmed on an organizer page (`docs/research/events-2027h1.md`). FHA Hospital Days (Tallahassee, Mar 16–17, 2027) gets a link only if FHA confirms the dates. No further event research.
+- **Reason (owner's words):** "Let's stick to Florida, we still need to confirm if the product is viable there. If we can't find other offline events, it's ok, we keep the research tighter."
+- **Ruled out:** out-of-state events (AONL in Phoenix, ACHE in Nashville, Becker's in Chicago, HFMA in Denver), even though AONL has the largest nurse-leader audience in the window.
