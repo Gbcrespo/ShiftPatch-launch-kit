@@ -258,3 +258,22 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
   - The memo will say both.
 - **Reason:** Changing the consent setup would affect replay and privacy (D-002), and adding identity code isn't worth it for this sample.
 - **Ruled out:** passing a visit ID through the `/go` redirect, and any other new identity code.
+
+## D-024: Email through the ShiftPatch Gmail with Google Apps Script
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner (tool, privacy and footer). The rest are Claude's defaults, listed so the owner can override them.
+- **Tool:** the ShiftPatch Gmail (`shiftpatchsurvey@gmail.com`) sends through Google Apps Script, Gmail's own automation. It's the sender and the reply-to. No Brevo or other email service.
+  - Readers see "ShiftPatch <shiftpatchsurvey@gmail.com>", signed by Google, with no rewritten From.
+  - PostHog Workflows was ruled out because it can't send from a gmail.com address (its email channel needs DNS records on a domain you own).
+- **List (privacy, owner approved):** signups (email, role, hero variant, unsubscribe status) are kept in a Google Sheet in the same Google account. `/privacy` says so.
+- **Footer (owner decided):** no postal address. Every email has an unsubscribe link.
+- **Sequence (defaults):** welcome immediately, follow-up 1 at +2 hours, follow-up 2 at +6 hours, so reviewers get all three the same day. Plain text, signed by a person, honest that ShiftPatch is a pre-launch concept. The copy needs the owner's approval before anything sends.
+- **Contact data (default):** email, role and `hero_variant`. No facility size: the form has no such field (D-008), and adding one would change the page and the A/B friction.
+- **Events (default):** only `welcome_email_sent`, `welcome_email_opened` and `welcome_email_link_clicked` go to PostHog, with `distinct_id` = the contact's email. Follow-up sends are logged in the Sheet.
+  - Visitors who accepted cookies were identified by that email at signup (D-016), so these join the same person.
+  - Visitors who declined match by the `email` person property only (D-023).
+- **Code (default):** a new `/api/contact` function (the form calls it after `signup_form_submitted`, nothing else changes) and a new `/email/<action>` function (`sent` webhook signed with HMAC, plus `open`, `click` and `unsubscribe` links with signed tokens). The secrets live only in Cloudflare environment variables and the script's own properties. `/go` is unchanged.
+- **Timing (default):** aim to be live before the 2026-11-19 12:00 BRT launch. If not, the launch time (D-021) still holds.
+- **Reason:** It uses the Gmail the owner already has, so there's no new vendor and no cost. Real Gmail sending gives the best inbox placement available without a domain.
+- **Ruled out:** Brevo, which would rewrite the sender to `@brevosend.com`. Also the Gmail API from Cloudflare, which needs a Google Cloud project, OAuth, a scheduler, and more code.

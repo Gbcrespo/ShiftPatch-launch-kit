@@ -84,6 +84,14 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 - Flag `hero-framing`: `control` = Variant A (money), `time` = Variant B (time), 50/50.
 - Experiment "Hero framing: money vs time". Primary metric: `signup_form_submitted` where `is_buyer_role = true`. Secondary metrics: all `signup_form_submitted`, and `survey sent` for the volume question.
 
-## Later steps (not built yet)
+## Email events (step 5, D-024)
 
-Email events (step 5) will be added here, named by the same rule, once the email tool is chosen.
+Sent by the `/email/<action>` Cloudflare function, with `distinct_id` = the contact's lowercased email. Visitors who accepted cookies were identified by that email at signup (D-016), so these join the same person. Visitors who declined match by the `email` person property only (D-023).
+
+| Event | Fires when | Where | Properties |
+| :--- | :--- | :--- | :--- |
+| `welcome_email_sent` | Apps Script has sent the welcome email (signed call to `/email/sent`) | server | `email_step` (`welcome`) |
+| `welcome_email_opened` | The welcome email's 1×1 image loads (`/email/open`). Inflated: Apple Mail and Gmail's image proxy load images automatically | server | `email_step` |
+| `welcome_email_link_clicked` | The welcome email's "How it would work" link is clicked (`/email/click`, then a redirect to `/?utm_source=welcome_email…#how-heading`). The honest engagement number | server | `email_step`, `link` (`how_it_would_work`) |
+
+Follow-up emails aren't tracked in PostHog. Their send times are in the Google Sheet (D-024).
