@@ -14,6 +14,7 @@ ShiftPatch is a pre-launch concept for a platform that helps hospitals fill nurs
 - One branch per step. Merge it into main only after I approve that step's done check.
 - Never commit or merge until I explicitly say so.
 - Batch questions in one message.
+- Check all work against docs/grading-checklist.md, and say how each step measures up in its summary.
 
 ## Non-negotiables
 

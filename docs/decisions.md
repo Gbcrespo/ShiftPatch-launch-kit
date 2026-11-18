@@ -80,7 +80,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Decision:** Step 1 settles only what the landing-page UI needs: feature-interest cards (yes/no) and the signup form fields. These are deferred to the steps where they get built:
   - Email tool (welcome email + two follow-ups, open/click events to PostHog)
   - Channels with tracked `/go/` links and UTM tags (including `utm_source=personal_network`)
-  - `docs/tracking-plan.md` and the five-slot A/B hypothesis
+  - `docs/tracking-plan.md` and the A/B hypothesis (originally called "five-slot"; that template was wrong. The format is in `docs/grading-checklist.md`, see D-013.)
 - **Reason:** Focus on building the landing page. Decide the rest when it gets built.
 
 ## D-008: Page UI: no feature cards; minimal signup form
@@ -122,7 +122,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Approved defaults:** self-hosted fonts (no Google Fonts requests), a text wordmark only, the email tool described generically on `/privacy` until it's chosen, form validation in the browser with a placeholder submit, and Astro starter files replaced.
 - **Approved copy (product claims):** the "How it would work" steps, the privacy policy text, the "Fewer than 5" survey label, and the "Your welcome email will come from shiftpatchsurvey@gmail.com" message.
 - **No shared link and no indexing before PostHog is in and step 6 passes.** (Reworded in step 3, see D-011. It originally said no public deploy at all.)
-- **Reason:** Not stated beyond the choices themselves. The owner chose the recommended direction and structure, and wrote the hero headlines.
+- **Reason:** The Charge sheet style looks equally credible next to a cost message and a time message, so the design doesn't favor either variant. Nurses come from the hospital's own staff and float pool because that's what the concept describes, and it avoids implying we supply nurses.
 
 ## D-011: Deploy to Cloudflare Pages, live but unlisted
 
@@ -130,5 +130,20 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Decided by:** project owner
 - **Decision:** Deploy to Cloudflare Pages on a free `*.pages.dev` address, built from `main` on every push. The site is publicly reachable but unlisted: `robots.txt` blocks all crawlers, the pages carry noindex tags, and the link isn't shared until PostHog is in and step 6 passes. D-010's no-deploy rule is reworded to match.
 - **Setup:** project `shiftpatch-concept`; Astro preset, `npm run build`, output `dist`, root = repo root; Node 24 via `.nvmrc`; `functions/` at the project root for later Pages Functions; preview deployments for other branches turned off. No secrets in the repo (`.env.*`, `.dev.vars`, `.wrangler/` are ignored).
-- **Reason (inferred, owner to confirm):** The form sends nothing yet, so no data is collected, and the privacy policy overstates tracking rather than hiding any. A login gate (Cloudflare Access) would add setup for little gain.
+- **Reason:** The form sends nothing yet, so an unlisted live site carries no real risk. A login gate would add setup for no benefit.
 - **Ruled out:** locking the site behind Cloudflare Access; waiting to deploy until the PostHog step.
+
+## D-012: Approve full plans instead of answering option-by-option questions
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** Claude proposes a full plan for each step with its defaults, and the owner approves or overrides it. Claude stops to ask only when something changes the A/B variants, makes a product claim, or affects privacy. (CLAUDE.md's "How we work" already reflects this.)
+- **Reason:** Switched from option-by-option questions to approving full plans, because the volume of questions was slowing the build without improving decisions. A/B variants, product claims and privacy still need my approval.
+
+## D-013: Grading checklist for all future work
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** `docs/grading-checklist.md` holds the hypothesis format and the analytics checklist. All work from step 4 on is checked against it, and each step's summary says how it measures up.
+- **Correction:** the "five-slot" hypothesis template mentioned in D-007 was an assumption and was wrong. The format in the checklist replaces it.
+- **Reason:** One fixed checklist to check every step against, so nothing the work is judged on gets missed.
