@@ -216,3 +216,15 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Decision:** The offline-events channel (D-019) uses Florida events only. The tracked link is `/go/fonl_annual_2027` (FONL Annual Conference, Palmetto, FL, Nov 3–5, 2027, confirmed on FONL's own page). No Florida buyer event in January–June 2027 is confirmed on an organizer page (`docs/research/events-2027h1.md`). FHA Hospital Days (Tallahassee, Mar 16–17, 2027) gets a link only if FHA confirms the dates. No further event research.
 - **Reason (owner's words):** "Let's stick to Florida, we still need to confirm if the product is viable there. If we can't find other offline events, it's ok, we keep the research tighter."
 - **Ruled out:** out-of-state events (AONL in Phoenix, ACHE in Nashville, Becker's in Chicago, HFMA in Denver), even though AONL has the largest nurse-leader audience in the window.
+
+## D-021: Today is testing only; analysis starts at launch, 2026-11-19 12:00 BRT
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Decision:** Everything on 2026-11-18 is testing. The analysis window starts at a fixed launch time, **2026-11-19 12:00 BRT (15:00 UTC)**, when the owner shares the links.
+  - The experiment "Hero framing: money vs time" is held in **draft** until then. Its flag `hero-framing` stays on, so the page still assigns variants, but nothing counts toward the results until the experiment is launched at 12:00 BRT, which sets its start date to that moment. (PostHog can schedule flag changes but not an experiment launch, so the launch is one click, by the owner or Claude.)
+  - Every other insight, funnel or count for the A/B test and the channels uses `date_from = 2026-11-19T15:00:00Z`.
+  - Localhost visits count as internal automatically, just like `/?internal=1`.
+  - No IP-based internal filter.
+- **Reason:** A fixed start keeps the 2026-11-18 test traffic out of every number, including the 2 non-internal `channel_link_clicked` events from the deploy check (about 15:40 UTC on 2026-11-18). Localhost dev traffic had leaked into the experiment once while testing, and marking it internal is the filter that reliably excludes it.
+- **Ruled out:** an IP filter on the owner's home IP.

@@ -28,9 +28,13 @@ export function startAnalytics(page: Page): typeof posthog {
 		session_recording: { maskAllInputs: true },
 	});
 
+	// Local development counts as internal too: the experiment's test-account
+	// filter only reliably excludes people marked internal (verified in step 4).
+	const isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+	if (isLocal || new URLSearchParams(location.search).get('internal') === '1') markInternal();
+	// Register after any opt-in above: opting in resets the SDK's properties.
 	registerUtms();
 	if (page === 'preview') keep({ is_preview: true });
-	if (new URLSearchParams(location.search).get('internal') === '1') markInternal();
 	if (posthog.get_explicit_consent_status() === 'granted') posthog.startSessionRecording();
 
 	return posthog;

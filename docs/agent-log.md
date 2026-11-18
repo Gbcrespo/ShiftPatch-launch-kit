@@ -17,6 +17,7 @@ How the step 4 research was orchestrated, followed by each agent's own log block
 | Agent 4 | sonnet | Healthcare leadership events Jan–Jun 2027, Florida first (the owner's follow-up to the channel pick) | 15:10 | before 15:16 (its own log says "about 15:25, approximate", which is later than the notification it sent) | D-019 | `research/events-2027h1.md` |
 | Agent 1c (round 4) | sonnet | Up to 10 more rows via association pages | 15:10 | 15:13 (+7) | rows already covered | `research/prospects-round4-log.md` (rows merged) |
 | Agent 1d (round 5) | sonnet | The last 3 rows | 15:16 | about 15:20 (+0) | rows already covered | `research/prospects-round5-log.md` |
+| Agent 1e (round 6) | sonnet | Last 3 rows, 10-minute cap set by the owner, stop if not verifiable | 16:15 | about 16:21 (+0) | rows already covered | `research/prospects-round6-log.md` |
 | Agent 3 | sonnet | Independent spot-check of 5 random rows (seed 20261118: P21, P27, P07, P11, P03) | 15:20 | about 15:35 (its own estimate) | final prospects.csv only | `research/prospect-spotcheck.md` |
 
 **Dependencies.** Agent 2 needed the tracking plan. Agent 1 needed the owner's audience and geography answers. Agents 1b, 1c and 1d each got the list of organizations already covered, so they wouldn't duplicate rows, and each wrote to its own CSV, which the main session validated and merged into `research/prospects.csv` (same header, unique ids, at most two rows per CCN, 6-digit CCNs, no empty required fields). Agent 4 ran because the owner asked for it when picking channels. Agent 3 launched only after the final merge, and got only the CSV path, not any agent's reasoning.
@@ -25,7 +26,9 @@ How the step 4 research was orchestrated, followed by each agent's own log block
 
 **Spot-check outcome.** No row failed, and all 5 CCNs match CMS. P11 and P27 passed every check. P03 (role current?), P07 (evidence page 403) and P21 (wording) were partial. The main session re-opened P21's posting, corrected its evidence sentence (full-time nights, not per diem) and lowered it to medium. Final list: 27 rows, 9 high and 18 medium. The RN license lookups remain a manual check, because the MQA form can't be submitted by the agents' tools.
 
-**Owner decisions during the run.** D-014 to D-018 before launch. D-019 (channels: direct outreach, LinkedIn organic, offline events, plus personal_network) after the main session's QA of Agent 2. D-020 (offline events stay in Florida: `fonl_annual_2027`) after Agent 4.
+**Round 6 (after the merge).** The owner asked for one more 10-minute attempt at the last 3 rows, with Agent 3 to verify anything new. Agent 1e found no buyer it could verify as current with organization-specific evidence (Hendry Regional, Jackson Hospital Marianna), so it added 0 rows and Agent 3 had nothing to check. The list stays at 27.
+
+**Owner decisions during the run.** D-014 to D-018 before launch. D-019 (channels: direct outreach, LinkedIn organic, offline events, plus personal_network) after the main session's QA of Agent 2. D-020 (offline events stay in Florida: `fonl_annual_2027`) after Agent 4. D-021 (today is testing only; analysis starts 2026-11-19 12:00 BRT) after the deploy.
 
 **QA of Agent 2 by the main session.** All 19 channels are scored in one table. Three hypotheses use the grading-checklist sentence with all five slots filled, and each names its PostHog number and where it lives. Every event and property named exists in `tracking-plan.md` (`landing_page_viewed`, `signup_form_started`, `signup_form_submitted`, `survey sent`, `channel_link_clicked`, `utm_source`, `role`, `is_buyer_role`, `channel`). Its two proposed tracking changes needed no new events: both are now documented in `tracking-plan.md` (the survey response property, and how `channel_link_clicked` identifies people).
 
@@ -195,3 +198,16 @@ _Source: `research/prospect-spotcheck.md`_
 - kept/dropped: no rows dropped (verification only); items marked PARTIAL where primary pages were blocked
 - known gaps: no license verification; several 403 pages; no second source for the CFO titles beyond the official pages; the Wilkens/Young listing conflict at Manatee is unresolved on the hospital's own page
 - output file: docs/research/prospect-spotcheck.md
+
+## Agent 1e: prospects round 6
+
+_Source: `research/prospects-round6-log.md`_
+
+agent: 1e | model: sonnet | start 2026-11-18 16:15 UTC, end ~16:21 UTC
+task: find up to 3 verified FL buyer-side prospects (rural/critical-access focus)
+method: web search + page fetches; dropped anything not verifiable as current
+queries: "Hendry Regional Medical Center Chief Nursing Officer Clewiston"; "Jackson Hospital Marianna Florida chief nursing officer leadership"; "Hendry Regional Medical Center leadership team chief nursing officer 2026" (hendryregional.org)
+sources: https://swflorida.blogspot.com/2025/06/david-theroux-named-ceo-of-hendry.html (accessed 2026-11-18; Theroux CEO eff. 2025-06-16); https://www.career.com/job/hendry-regional-medical-center/rn-supervisor/j202605220307271511794 (accessed 2026-11-18; full-time RN Supervisor, posted 8/18/2026, expired, no float/per diem mention); https://chipleybugle.com/?p=173967 (accessed 2026-11-18; Jackson Hospital CEO Brooke Donaldson, 2021 article); http://www.hendryregional.org/getpage.php?name=leadership&sub=About (via search only; stale, lists Springer CNO 2015 and Williams as CEO, who has retired)
+kept: none. dropped: Hendry (no current CNO verifiable; CEO only; posting has no float/per diem evidence); Jackson Hospital Marianna (CNO/COO Gina Anderson only seen in search snippet from Feb 2025, not read on a loading page; own leadership URL 404; CEO article from 2021).
+gaps: no current CNO for Hendry or Jackson Marianna confirmed; HFMA FL, FHA, ACHE FL pages not tried (time).
+output files: prospects-round6.csv (header only), prospects-round6-log.md

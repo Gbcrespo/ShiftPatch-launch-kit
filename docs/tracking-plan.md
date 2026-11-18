@@ -65,6 +65,8 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 ## Feature flag and experiment
 
+- **Analysis window starts 2026-11-19 15:00 UTC (12:00 BRT)**, the launch time (D-021). Anything earlier is testing. Use this as `date_from` in every insight.
+
 - Flag `hero-framing`: `control` = Variant A (money), `time` = Variant B (time), 50/50.
 - Experiment "Hero framing: money vs time". Primary metric: `signup_form_submitted` where `is_buyer_role = true`. Secondary metrics: all `signup_form_submitted`, and `survey sent` for the volume question.
 
