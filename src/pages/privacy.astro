@@ -58,10 +58,11 @@ const updated = '18 November 2026';
 
 		<h3>Emails</h3>
 		<p>
-			We use an email service provider (named here once chosen) to send you three emails from{' '}
-			{contactEmail}: a welcome and two follow-ups. It may tell us whether an email was opened
-			or a link was clicked, and we pass those events to PostHog so we can see which messages
-			are useful.
+			We send you three emails from {contactEmail}: a welcome and two follow-ups. We send the
+			three emails from our Gmail account using Google Apps Script, and keep the list of signups
+			in a Google spreadsheet in the same account. Both are run by Google. The welcome email can
+			tell us whether it was opened or its link was clicked, and we pass those events to PostHog
+			so we can see which messages are useful.
 		</p>
 
 		<h2>Why we collect it</h2>

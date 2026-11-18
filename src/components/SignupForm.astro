@@ -147,10 +147,30 @@ import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site
 		const okRole = checkRole();
 		if (!okEmail) return email?.focus();
 		if (!okRole) return role?.focus();
-		if (email && role) identifySignup(email.value, role.value);
+		if (email && role) {
+			identifySignup(email.value, role.value);
+			addContact(email.value, role.value);
+		}
 		show('thanks');
 		surveyShown();
 	});
+
+	// Step 5a (D-024): add the contact to the email list. Fire and forget, so the
+	// thank-you screen never waits on it. hero_variant uses the same a/b values
+	// as the PostHog property.
+	function addContact(emailValue: string, roleValue: string) {
+		const v = document.querySelector<HTMLElement>('.hero')?.dataset.variant;
+		fetch('/api/contact', {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({
+				email: emailValue,
+				role: roleValue,
+				hero_variant: v === 'a' || v === 'b' ? v : null,
+			}),
+			keepalive: true,
+		}).catch(() => undefined);
+	}
 
 	const survey = document.querySelector<HTMLFormElement>('#survey-form');
 	const fieldset = survey?.querySelector('fieldset');
