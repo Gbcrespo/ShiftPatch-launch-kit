@@ -228,3 +228,20 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
   - No IP-based internal filter.
 - **Reason:** A fixed start keeps the 2026-11-18 test traffic out of every number, including the 2 non-internal `channel_link_clicked` events from the deploy check (about 15:40 UTC on 2026-11-18). Localhost dev traffic had leaked into the experiment once while testing, and marking it internal is the filter that reliably excludes it.
 - **Ruled out:** an IP filter on the owner's home IP.
+
+## D-022: A/B hypothesis and step 4 review decisions
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner, after the step 4 review (`docs/reviews/step-4-posthog-review.md`)
+- **A/B hypothesis (the owner's words, in the checklist format):**
+  > We believe that **leading the hero with time savings instead of cost savings** will result in **a higher buyer-role signup rate**, validated by **buyer visitors from launch until the memo**, using **the PostHog experiment "Hero framing: money vs time" primary metric, buyer-role `signup_form_submitted`**, because **the buyer's daily pain is phoning around to fill shifts, which they feel personally every week**.
+  - **The number:** "Buyer-role signups (D-009 headline)" in experiment 612484 (variant `time` = B vs `control` = A). Cross-check: the insight "A/B: buyer-signup rate per visitor (by hero_variant)".
+  - **Edits for the format only:** "I believe" → "We believe", and "the buyer's daily pain as phoning around" → "is phoning around".
+- **Insights:** create the saved insights the hypotheses point to, all from the launch time (2026-11-19 15:00 UTC, D-021) with test accounts filtered out.
+- **Channel funnels:** read channels by `utm_source`, and read `channel_link_clicked` on its own (Trends by `channel`).
+  - The retest showed that a per-person funnel starting at `landing_page_viewed` also drops visitors who accept cookies, because Accept moves them to a new person.
+  - So the headline channel number is a rate computed from unique people per event (buyer-role signups ÷ visitors, by `utm_source`). The per-person funnel is kept only as a secondary view, labelled as undercounting accepters.
+- **Variant:** `hero_variant` (a/b) is the source of truth for any A/B breakdown outside the experiment. `$feature/hero-framing` can flip after Accept or signup. The experiment itself attributes by exposure and is correct.
+- **Survey test answers:** read survey results from the launch time. Step 6d deletes the 14 test answers' persons listed in the review.
+- **`$pageview` without `hero_variant`:** accepted as is. Use `landing_page_viewed` for anything split by variant.
+- **Reason:** These keep every launch number readable without code changes the day before launch. The owner wrote the hypothesis, and the analysis rules follow from what the review measured.

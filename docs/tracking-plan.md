@@ -66,6 +66,20 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 ## Feature flag and experiment
 
 - **Analysis window starts 2026-11-19 15:00 UTC (12:00 BRT)**, the launch time (D-021). Anything earlier is testing. Use this as `date_from` in every insight.
+- **Variant source of truth: `hero_variant`** (D-022). Don't break anything down by `$feature/hero-framing`: it can flip after Accept or `identify()`. Exposures and the experiment are unaffected.
+- **`$pageview` has no `hero_variant`**, because it fires before the flag answers. Use `landing_page_viewed` for anything split by variant (D-022).
+- **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). A per-person funnel undercounts visitors who accept cookies, because Accept moves them to a new person (D-022).
+
+### Saved insights (all from 2026-11-19 15:00 UTC, test accounts filtered)
+
+| Insight | Short id | For |
+| :--- | :--- | :--- |
+| Channels: buyer-signup rate per visitor (by utm_source) | `opzPWguM` | H1–H3 headline |
+| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | per-person view (undercounts accepters) |
+| Channels: link clicks (by channel) | `ZS0Uhz2p` | H1–H3 clicks |
+| Signups by role (by utm_source) | `d9eeKWIG` | H2 |
+| A/B: buyer-signup rate per visitor (by hero_variant) | `oMvaY0hy` | A/B cross-check |
+| Volume question answers (pricing input) | `lQ1PbGvG` | D-004/D-005 |
 
 - Flag `hero-framing`: `control` = Variant A (money), `time` = Variant B (time), 50/50.
 - Experiment "Hero framing: money vs time". Primary metric: `signup_form_submitted` where `is_buyer_role = true`. Secondary metrics: all `signup_form_submitted`, and `survey sent` for the volume question.
