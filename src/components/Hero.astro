@@ -3,13 +3,16 @@
 import { hero, ctaLabel, type Variant } from '../data/hero';
 
 interface Props {
-	variant: Variant;
+	// 'assign': the visitor's variant comes from the PostHog flag at runtime
+	// (D-018). Both copies are in the HTML; the hero text stays hidden until
+	// the variant is known, so only the hero can differ between A and B.
+	variant: Variant | 'assign';
 }
 
 const { variant } = Astro.props;
-const copy = hero[variant];
+const shown: Variant[] = variant === 'assign' ? ['a', 'b'] : [variant];
 // Keep hyphenated words like "short-notice" on one line (display only).
-const headline = copy.headline.replace(/-/g, '‑');
+const nb = (t: string) => t.replace(/-/g, '‑');
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const shifts = ['Day', 'Eve', 'Night'];
@@ -17,12 +20,22 @@ const shifts = ['Day', 'Eve', 'Night'];
 const openSlot = { shift: 2, day: 4 };
 ---
 
-<section class="hero" data-variant={variant} aria-labelledby="hero-heading">
+<section
+	class="hero"
+	data-variant={variant === 'assign' ? 'pending' : variant}
+	aria-labelledby={variant === 'assign' ? undefined : `hero-heading-${variant}`}
+>
 	<div class="wrap hero__inner">
 		<div class="hero__text">
-			<h1 id="hero-heading">{headline}</h1>
-			<p class="hero__support">{copy.support}</p>
-			<a class="button" href="#signup">{ctaLabel}</a>
+			{
+				shown.map((v) => (
+					<div class="hero__copy" data-copy={v}>
+						<h1 id={`hero-heading-${v}`}>{nb(hero[v].headline)}</h1>
+						<p class="hero__support">{hero[v].support}</p>
+					</div>
+				))
+			}
+			<a class="button" href="#signup" data-hero-cta>{ctaLabel}</a>
 		</div>
 
 		<div class="roster" aria-hidden="true">
@@ -50,6 +63,17 @@ const openSlot = { shift: 2, day: 4 };
 	.hero {
 		padding-block: 2.5rem 3rem;
 		border-bottom: 1px solid var(--rule);
+	}
+
+	/* Variant assignment: hide the hero text until the flag answers. */
+	.hero[data-variant='pending'] .hero__text {
+		visibility: hidden;
+	}
+
+	.hero[data-variant='a'] [data-copy='b'],
+	.hero[data-variant='b'] [data-copy='a'],
+	.hero[data-variant='pending'] [data-copy='b'] {
+		display: none;
 	}
 
 	.hero__inner {

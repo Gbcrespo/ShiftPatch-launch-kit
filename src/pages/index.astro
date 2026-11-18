@@ -1,7 +1,8 @@
 ---
-// Temporary: shows variant A until visitor assignment is built in the
-// PostHog step (D-010). Use /preview/a and /preview/b to compare variants.
+// The live landing page. The visitor's hero variant comes from the PostHog
+// flag `hero-framing` at runtime (D-018). /preview/a and /preview/b show one
+// variant each, for review only.
 import LandingPage from '../components/LandingPage.astro';
 ---
 
-<LandingPage variant="a" noindex />
+<LandingPage variant="assign" noindex />

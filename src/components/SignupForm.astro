@@ -1,7 +1,6 @@
 ---
 // Signup form (D-008) + thank-you state with the volume question (D-004).
-// Placeholder only: nothing is sent anywhere yet. PostHog and the email
-// tool are wired up in later steps.
+// Sends PostHog events (docs/tracking-plan.md); the email tool comes in step 5.
 import { ctaLabel } from '../data/hero';
 import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site';
 ---
@@ -81,10 +80,14 @@ import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site
 </section>
 
 <script>
+	import { identifySignup, surveySent, surveyShown, track } from '../lib/analytics';
+
 	const steps = document.querySelectorAll<HTMLElement>('#signup [data-step]');
 
 	function show(name: string) {
 		steps.forEach((s) => (s.hidden = s.dataset.step !== name));
+		// The feedback tab stays off the thank-you steps (D-018).
+		document.documentElement.toggleAttribute('data-signed-up', name !== 'form');
 		document.querySelector<HTMLElement>(`#signup [data-step="${name}"] h2`)?.focus();
 	}
 
@@ -125,6 +128,15 @@ import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site
 		return !msg;
 	}
 
+	let started = false;
+	function markStarted(field: 'email' | 'role') {
+		if (started) return;
+		started = true;
+		track('signup_form_started', { field });
+	}
+	email?.addEventListener('input', () => markStarted('email'), { once: true });
+	role?.addEventListener('change', () => markStarted('role'), { once: true });
+
 	email?.addEventListener('blur', () => email.value && checkEmail());
 	email?.addEventListener('input', () => email.hasAttribute('aria-invalid') && checkEmail());
 	role?.addEventListener('change', checkRole);
@@ -135,8 +147,9 @@ import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site
 		const okRole = checkRole();
 		if (!okEmail) return email?.focus();
 		if (!okRole) return role?.focus();
-		// Placeholder submit: no data leaves the page in this step.
+		if (email && role) identifySignup(email.value, role.value);
 		show('thanks');
+		surveyShown();
 	});
 
 	const survey = document.querySelector<HTMLFormElement>('#survey-form');
@@ -157,7 +170,7 @@ import { roles, surveyQuestion, surveyAnswers, contactEmail } from '../data/site
 			survey.querySelector<HTMLInputElement>('input[name="volume"]')?.focus();
 			return;
 		}
-		// Placeholder submit: the answer isn't sent anywhere yet.
+		surveySent((picked as HTMLInputElement).value);
 		show('done');
 	});
 </script>

@@ -1,0 +1,16 @@
+## Agent 1d (sonnet) - round 5
+- Start: 2026-11-18T15:16:30Z  End: 2026-11-18T15:19:13Z
+- Task: add up to 3 verified FL buyer-side prospects (P28-P30), non-HCA, Orlando/Panhandle/rural/Palm Beach preferred.
+- Result: 0 rows added. CSV contains header only. Nothing fabricated; no candidate met the role-page-loads plus org-specific-evidence bar.
+- Method: web searches for 2025-2026 CNO/CFO appointments, then WebFetch/curl on role and evidence pages.
+- Queries: Florida hospital names CNO 2026 critical access/Panhandle/Orlando; Doctors Memorial Perry CNO; Jackson Hospital Marianna / NW Florida Community / Bay Medical / Sacred Heart CNO; Orlando Health/AdventHealth/Palm Beach CNO 2026; Jackson Hospital Marianna float/PRN RN; Jackson Hospital leadership (Morgan, Ussery); Panhandle nurse staffing overtime 2026; Palm Beach hospitals CNO/CFO 2025-26; Orlando Health RN float pool/per diem; Orlando Health St. Cloud CNO.
+- Sources used (accessed 2026-11-18): https://chipleybugle.com/?p=190556 (Marcey Morgan named CFO, Jackson Hospital Marianna, 2023-11-06); https://washingtoncounty.news/?p=1780 (Nichole Ussery named CNO, 2021-05-14); https://nursa.com/facilities/jackson-hospital (no shifts shown); https://consultqd.clevelandclinic.org/cleveland-clinic-welcomes-new-nurse-leaders-in-florida (2019); https://www.career.com/job/orlando-health/rn-corp-float-pool/j202202230521441915107 (expired 2022 posting).
+- Dropped and why:
+  - Jackson Hospital (Marianna, critical access, Panhandle): Morgan (CFO) and Ussery (CNO) role pages are 2023 and 2021 announcements, not current; no dated org-specific RN float/PRN evidence loaded (a search snippet mentioned a May 2026 travel posting but the page redirected away). Medium-at-best, left out; worth a retry via hospital HR/leadership page.
+  - Orlando Health (St. Cloud, South Seminole, Dr. P. Phillips): orlandohealth.com returned HTTP 429 on every fetch, so no CNO role page could be verified. Float-pool postings found were expired (2022) or undated; Becker's/Vivian/dotmed returned 403.
+  - Cleveland Clinic Florida nurse leaders: source dated 2019, stale.
+  - Doctors Memorial Perry: CNO not found; CFO/CEO items on Becker's were 403 and undated.
+  - Orlando Health Wiregrass Ranch (Dolezal) and Watson Clinic Lakeland Highlands (Beakley): new-build hospitals, role pages not fetched, no staffing evidence.
+  - Excluded orgs and HCA hospitals skipped per rules.
+- Known gaps: orlandohealth.com rate limits automated fetches (retry later, or use Becker's via another route); no CCN lookups done since no row was kept; HFMA/FHA/ACHE pages not reached; critical-access sites (Calhoun-Liberty, Hendry, Raulerson, Shands Live Oak/Starke) not searched.
+- Output files: prospects-round5.csv (header only), prospects-round5-log.md
