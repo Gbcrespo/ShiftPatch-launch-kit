@@ -245,3 +245,16 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Survey test answers:** read survey results from the launch time. Step 6d deletes the 14 test answers' persons listed in the review.
 - **`$pageview` without `hero_variant`:** accepted as is. Use `landing_page_viewed` for anything split by variant.
 - **Reason:** These keep every launch number readable without code changes the day before launch. The owner wrote the hypothesis, and the analysis rules follow from what the review measured.
+
+## D-023: Known limitation: accepting cookies splits a visitor into two people
+
+- **Date:** 2026-11-18
+- **Decided by:** project owner
+- **Known limitation:** accepting cookies gives the visitor a new PostHog ID, so pre-consent events and post-consent events land on two people. `alias()` can't merge them in cookieless mode.
+- **Decision:** no code change at this scale (10–15 visits).
+  - The headline channel metric is buyer signups ÷ visitors per `utm_source`, counted from events (insight `opzPWguM`).
+  - The person-based funnel (`KK0a37NQ`) stays as a secondary view, labelled as undercounting visitors who accept.
+  - Visitors who accept may also count as 2 exposures in the experiment, so A/B results are directional only.
+  - The memo will say both.
+- **Reason:** Changing the consent setup would affect replay and privacy (D-002), and adding identity code isn't worth it for this sample.
+- **Ruled out:** passing a visit ID through the `/go` redirect, and any other new identity code.

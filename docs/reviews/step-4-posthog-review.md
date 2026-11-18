@@ -289,6 +289,31 @@ HogQL: `hero_variant × $feature/hero-framing` over the last day (excluding `/pr
 - **Accepted:** `channel_link_clicked` and `landing_page_viewed` are on `4238e3f9…` (cookieless). The re-sent exposure, `cookie_banner_answered`, `signup_form_started`, `signup_form_submitted`, `survey shown` and `$identify` are on `17171767…`. Every one of those events keeps `utm_source = personal_network`, `utm_content = review_test2` and `hero_variant = a`. `$feature/hero-framing` flips to `time` from `signup_form_started` on (D-022).
 - **Rate query** (the shape of `opzPWguM`, filtered to `review_test2`): Visitors 2, Buyer-role signups 2, so both signups are counted. A per-person funnel would show 1 of 2.
 
+## Final status (step 4 close-out, D-023)
+
+| # | Item | Final status | Closed by |
+| :-- | :--- | :--- | :--- |
+| 1 | Channel UTM links | PASS | — |
+| 2 | Funnel end to end | PASS for visit → signup → survey; **BLOCKED** for email events | **Step 5** (email events) |
+| 3 | Hypothesis events exist | PASS | — |
+| 4 | Experiment object | PASS (draft by design, D-021) | — |
+| 5 | Event names | PASS | — |
+| 6 | Session replay + `maskAllInputs` | PASS (the owner's visual check of a recording is still open) | — |
+| 7a/7b | Five-slot hypotheses, number named | PASS (A/B hypothesis added, D-022) | — |
+| 7c | Where the number lives | PASS (6 saved insights) | — |
+| 7d | No significance claims | PASS | — |
+| DC1 | Page events carry variant and UTM tags | PASS with a documented exception (`$pageview` has no `hero_variant`, D-022) | — |
+| DC2 | Exposures for A and B | **BLOCKED** | **Launch at share time** (2026-11-19 12:00 BRT, right before the `personal_network` link goes out) |
+| A | Draft, flag on, launch keeps setup | PASS | — |
+| B | Channel click joins the visit | PASS for declined; known limitation for accepted (D-023) | — |
+| C/V | Variant consistency | Known limitation: `hero_variant` is the source of truth (D-022) | — |
+| D | Test survey answers | **BLOCKED** for clean-up | **Step 6d** (delete test persons and test survey answers before launch) |
+
+**Test data clean-up so far:**
+- The 2 identified review people (`review_test-accepted`, `review_test2-accepted`) are deleted, with their events and recordings.
+- The 6 cookieless review visitors have no person record, so PostHog's person delete can't remove their events (persons-bulk-delete found 0 by person id or distinct id). Those events are dated before the launch, so every launch insight and the experiment leave them out.
+- The 14 test survey answers are still there for 6d.
+
 ## Queries used (HogQL unless noted)
 
 - Event inventory: `SELECT event, count(), max(timestamp), min(timestamp) FROM events WHERE timestamp > now() - INTERVAL 30 DAY GROUP BY event`
