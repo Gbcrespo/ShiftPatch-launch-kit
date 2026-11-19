@@ -277,3 +277,23 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Timing (default):** aim to be live before the 2026-11-19 12:00 BRT launch. If not, the launch time (D-021) still holds.
 - **Reason:** It uses the Gmail the owner already has, so there's no new vendor and no cost. Real Gmail sending gives the best inbox placement available without a domain.
 - **Ruled out:** Brevo, which would rewrite the sender to `@brevosend.com`. Also the Gmail API from Cloudflare, which needs a Google Cloud project, OAuth, a scheduler, and more code.
+
+## D-025: Launch moves to 2026-11-19 15:00 BRT (18:00 UTC); step 6 plan
+
+- **Date:** 2026-11-19
+- **Decided by:** project owner
+- **Launch time:** the analysis window now starts at **2026-11-19 15:00 BRT (18:00 UTC)**. This replaces D-021's 12:00 BRT (15:00 UTC); the rest of D-021 stands. The experiment "Hero framing: money vs time" (612484) is launched at 15:00 BRT, right before the `personal_network` link is shared, and every insight uses `date_from = 2026-11-19T18:00:00Z`.
+- **6d test data:** the 18 listed test persons (step 4 review part D and step 5 test addresses) were deleted with their events and recordings. `gbcrespo10+test6@gmail.com` and `gbcre.eng+test1@hotmail.com` (5d provider tests on 2026-11-19) are kept. Like the step 6a test runs, they are dated before launch and excluded by the launch date and the test-account filter.
+- **Dashboard:** layout Option 1, "A/B first": experiment results full width on top, then the signup funnel by channel next to the buyer-signup rate per channel, then traffic by channel next to link clicks.
+- **Step 6 plan:** approved as proposed (6a end-to-end runs on 4 `/go/` links before launch, 6b checklist, 6c dashboard, 6d exclusion by date with no further deletions).
+- **Reason:** the owner didn't give one ("not relevant").
+
+## D-026: Step 6a findings; experiment launched
+
+- **Date:** 2026-11-19
+- **Decided by:** project owner
+- **Launch:** experiment 612484 was launched on the owner's "go". PostHog set its start to **2026-11-19 17:48:18 UTC** (14:48 BRT), about 12 minutes before the D-025 time. The saved insights still start at 18:00 UTC. The `personal_network` link is shared at or after 15:00 BRT, so no real visit falls between the two.
+- **Finding 1, accepted as a known limit:** visitors who decline cookies get no PostHog person record, and `signup_form_submitted` doesn't carry the email. Their `welcome_email_*` events (distinct_id = email) can't be joined to their visit, channel or variant. Email engagement for decliners is reported as totals only. This corrects D-023 and the tracking plan, which said decliners match by the `email` person property. No privacy change.
+- **Finding 2, fix after launch:** on iOS, two page loads sent `$pageview` but lost the batch carrying `landing_page_viewed` and the exposure, probably because the visitor switched apps right away (cause not verified). Quick mobile bounces are undercounted in visits and exposures. The memo says so.
+- **Finding 3, not fixed:** `/go/linkedin` logged `channel_link_clicked` twice, 17 s apart, for one visit on iPhone. **Cause (owner confirmed):** a long press on the link in the email on iPhone, which opened a preview (quick look) that loaded the link before the actual tap. So a preview counts as a click. Real visitors who long-press a link will add an extra `channel_link_clicked` too; read link clicks as slightly inflated next to visits.
+- **Reason:** the owner's call: accept 1, fix 2 after launch. 3 has a known, harmless cause (an iPhone link preview), so no code change.

@@ -65,12 +65,12 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 ## Feature flag and experiment
 
-- **Analysis window starts 2026-11-19 15:00 UTC (12:00 BRT)**, the launch time (D-021). Anything earlier is testing. Use this as `date_from` in every insight.
+- **Analysis window starts 2026-11-19 18:00 UTC (15:00 BRT)**, the launch time (D-025, replacing D-021's 15:00 UTC). Anything earlier is testing. Use this as `date_from` in every insight.
 - **Variant source of truth: `hero_variant`** (D-022). Don't break anything down by `$feature/hero-framing`: it can flip after Accept or `identify()`. Exposures and the experiment are unaffected.
 - **`$pageview` has no `hero_variant`**, because it fires before the flag answers. Use `landing_page_viewed` for anything split by variant (D-022).
 - **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). A per-person funnel undercounts visitors who accept cookies, because Accept moves them to a new person (D-022).
 
-### Saved insights (all from 2026-11-19 15:00 UTC, test accounts filtered)
+### Saved insights (all from 2026-11-19 18:00 UTC, test accounts filtered)
 
 | Insight | Short id | For |
 | :--- | :--- | :--- |
@@ -80,13 +80,16 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 | Signups by role (by utm_source) | `d9eeKWIG` | H2 |
 | A/B: buyer-signup rate per visitor (by hero_variant) | `oMvaY0hy` | A/B cross-check |
 | Volume question answers (pricing input) | `lQ1PbGvG` | D-004/D-005 |
+| Channels: traffic (visitors by utm_source) | `dBS4IKQb` | step 6 dashboard |
+
+**Dashboard "ShiftPatch launch"** (id 2381553, step 6c, D-025 layout "A/B first"): experiment 612484 results (full width), then `KK0a37NQ` next to `opzPWguM`, then `dBS4IKQb` next to `ZS0Uhz2p`. Every tile starts at 18:00 UTC with test accounts filtered; the experiment counts from its launch.
 
 - Flag `hero-framing`: `control` = Variant A (money), `time` = Variant B (time), 50/50.
 - Experiment "Hero framing: money vs time". Primary metric: `signup_form_submitted` where `is_buyer_role = true`. Secondary metrics: all `signup_form_submitted`, and `survey sent` for the volume question.
 
 ## Email events (step 5, D-024)
 
-Sent by the `/email/<action>` Cloudflare function, with `distinct_id` = the contact's lowercased email. Visitors who accepted cookies were identified by that email at signup (D-016), so these join the same person. Visitors who declined match by the `email` person property only (D-023).
+Sent by the `/email/<action>` Cloudflare function, with `distinct_id` = the contact's lowercased email. Visitors who accepted cookies were identified by that email at signup (D-016), so these join the same person. Visitors who declined can't be joined: they have no person record and no email on their events, so their email events count as totals only (D-026).
 
 | Event | Fires when | Where | Properties |
 | :--- | :--- | :--- | :--- |
