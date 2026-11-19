@@ -211,3 +211,114 @@ sources: https://swflorida.blogspot.com/2025/06/david-theroux-named-ceo-of-hendr
 kept: none. dropped: Hendry (no current CNO verifiable; CEO only; posting has no float/per diem evidence); Jackson Hospital Marianna (CNO/COO Gina Anderson only seen in search snippet from Feb 2025, not read on a loading page; own leadership URL 404; CEO article from 2021).
 gaps: no current CNO for Hendry or Jackson Marianna confirmed; HFMA FL, FHA, ACHE FL pages not tried (time).
 output files: prospects-round6.csv (header only), prospects-round6-log.md
+
+---
+
+# Step 7: content and GTM deliverables (2026-11-19, all times UTC)
+
+## Orchestration
+
+**Set-up.** The owner approved the step 7 plan (D-027): the "Copy voice and honesty" section went into CLAUDE.md, and the four questions were answered (LinkedIn connection note + first message, "testing in the open" posts, 6 posts, no per-person link tag) before any agent launched. Agents wrote only their own files. The main session made all edits to CLAUDE.md, decisions.md, code and this log.
+
+| Agent | Model | Task | Launched | Returned | Depends on | Output |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Agent A, phase 1 | sonnet | Pick 20 of 30 prospects | 20:22 | about 20:24 | D-027 | `gtm/outreach-picks.md` |
+| Agent B | sonnet | 6 LinkedIn posts, graphic template and PNG | 20:22 | about 20:24 | D-027 (angle, cadence) | `gtm/linkedin-posts.md`, `design/social-graphic/*`, `gtm/assets/linkedin-template.png` |
+| Agent C, phase 1 | opus | 2–3 paid options, UTM check | 20:22 | 20:28 | D-027 | `gtm/paid-options.md` |
+| Agent A, phase 2 (resumed) | sonnet | 20 connection notes + first messages | 20:35 | about 20:38 | D-028 (picks approved) | `gtm/outreach-messages.md` |
+| Agent C, phase 2 (resumed) | opus | LinkedIn Ads spec | 20:35 | 20:38 | D-028 (option A, timing, link) | `gtm/paid-campaign-spec.md` |
+
+**Checkpoint 1 (D-028).** The owner approved the 20 picks as listed, chose LinkedIn Sponsored Content at about $750 over 3 weeks, scheduled paid to start only after the A/B test is read, and approved `/go/linkedin_ads` (`paid_social`, same campaign tag).
+
+**Main-session work.**
+- Added `linkedin_ads` to `CHANNELS` in `functions/go/[channel].ts`.
+- Verified it with `wrangler pages dev` on port 8799: the 302 carries `utm_source=linkedin_ads`, `utm_medium=paid_social` and `utm_campaign=prelaunch-2026-11`, and `channel_link_clicked` arrived in PostHog at 20:35:57 with `channel=linkedin_ads` and `$host=localhost:8799`, which the test-account filter excludes. A `/go/linkedin` request in the same local run didn't show up in PostHog. Not investigated; it was a local test only.
+
+**Main-session QA.**
+- **Outreach:** a script checked all 20 entries. Every fact is in the named CSV row and every source URL matches the row. P30 cites the release at its `problem_evidence_url`, as its entry says. Notes are 265–297 characters with no link. Every first message has exactly `/go/direct_outreach?c=msg_v1`. No claim, labor or money/time words, except P29's single phoning-around question, which the rules allow. P18's source label was narrowed from "outreach_fact / problem_evidence" to `problem_evidence` (the quote and the 40 beds are in that column).
+- **Posts:** each description of the idea matches the approved "How it would work" wording in `LandingPage.astro`. The only link is `/go/linkedin?c=post01`–`06`.
+- **PNG:** viewed at 1200×627, with the "Pre-launch concept" label.
+- **Paid spec:** uses only `/go/linkedin_ads` and the existing insights `opzPWguM`, `ZS0Uhz2p` and `d9eeKWIG`. Events named: `channel_link_clicked`, `landing_page_viewed`, `signup_form_submitted`.
+- No deliverable claims the product exists or uses the Designli name.
+
+## Agent A, phase 1 (copied from `gtm/outreach-picks.md`)
+
+
+- **Agent:** Agent A, phase 1
+- **Model:** Claude Sonnet 5.5 (claude-sonnet-5-5)
+- **Start:** Thu, Nov 19, 2026 8:22:38 PM UTC
+- **End:** Thu, Nov 19, 2026 08:24:26 PM UTC
+- **Task:** pick 20 of 30 prospects for founder-led problem-discovery outreach. No messages written.
+- **Method:** Read CLAUDE.md, decisions D-009, D-014, D-015, D-019, D-027, target-customer.md and H1 in traction-channels.md, plus all 30 rows with notes. Removed the 3 labor-dispute rows and the 4 rows whose notes ask for a role check. Of the remaining 23, kept all 10 high-confidence rows, then chose 10 of the 13 medium rows by role mix, organization cap (max 2), HCA share and fact quality. For each pick I chose one neutral fact, preferring outreach_fact because most evidence fields are job postings or lean to money.
+- **Sources:** only repo files: `docs/research/prospects.csv`, `CLAUDE.md`, `docs/decisions.md`, `docs/research/target-customer.md`, `docs/research/traction-channels.md`. No new web sources were opened. Facts and URLs are as recorded in the CSV; I did not re-verify them.
+- **Kept or dropped and why:** see sections 1 and 2.
+- **Known gaps:** see section 4. Also the FONE vs FONL question (P14) is open, and the P20 and P26 pages have date issues.
+- **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\outreach-picks.md
+
+## Agent A, phase 2 (copied from `gtm/outreach-messages.md`)
+
+
+- **Agent:** Agent A, phase 2
+- **Model:** Claude Sonnet 5.5 (claude-sonnet-5-5)
+- **Start:** Thu, Nov 19, 2026 8:35:39 PM UTC
+- **End:** Thu, Nov 19, 2026 08:37:53 PM UTC
+- **Task:** write a LinkedIn connection note and a first message for each of the 20 approved prospects (D-027, D-028). Nothing is sent.
+- **Method:** Took the 20 rows and their chosen facts from `docs/gtm/outreach-picks.md`, and read the "How it would work" wording in `src/components/LandingPage.astro` and the voice rules in `CLAUDE.md`. Wrote each piece by hand, with a different opening and question for each person. Counted characters with a script (every note is 300 or fewer, every message is between 475 and 539) and checked for the words union, strike, dispute and for exclamation marks.
+- **Sources:** repo files only: `docs/gtm/outreach-picks.md`, `docs/research/prospects.csv` (facts and URLs as recorded), `src/components/LandingPage.astro`, `CLAUDE.md`, `docs/decisions.md` (D-027, D-028). No new pages were opened, and the facts and URLs were not re-verified.
+- **Kept or dropped and why:** all 20 picks kept. Facts dropped are listed under "Facts not used".
+- **Known gaps:** role currency is unchecked for everyone (manual step, D-028). Several facts are only a title listing (P15, P16, P17, P27), so those notes lean on the ask. P26 and P10 cite expired or date-conflicted postings by role only, with no dates. P18 is an assistant CNO. The message length is about 500 and runs 475 to 539. The notes assume "last year" for P25 (appointment Oct 2025) and "this year" for P28 (Feb 2026 release), which holds only if sent in 2026. The `[Signer name]` placeholder counts toward lengths: a real name may change them by a few characters.
+- **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\outreach-messages.md
+
+## Agent B (copied from `gtm/linkedin-posts.md`)
+
+
+- **Agent:** Agent B
+- **Model:** Sonnet 5.5 (claude-sonnet-5-5)
+- **Start / end (UTC):** 2026-11-19 20:22:38 / 2026-11-19 20:24:18
+- **Task:** Step 7, LinkedIn organic: 6 posts for the "testing in the open" notebook plus one reusable graphic template.
+- **Method:** Read CLAUDE.md, decisions D-001/D-010/D-019/D-027, tracking-plan.md, target-customer.md, traction-channels.md, LandingPage.astro. Drafted posts with varied length and structure, each asking one question. Built the graphic as HTML/inline SVG and rendered it with headless Chrome, then checked the PNG size (1200x627) and viewed it.
+- **Sources:** traction-channels.md (channel #15, 19/25, [S10]); target-customer.md section 4 (The Capitolist, 2026-01-23, FHA report); LandingPage.astro "How it would work".
+- **Kept / dropped:** Only vacancy and turnover figures used (neutral). Dropped overtime, agency and Jackson Health dollar figures (they favor money) and the 67% early-departure figure (not needed). No labor-dispute material (CLAUDE.md).
+- **Known gaps:** Florida nurse leaders' organic LinkedIn activity is unverified. Post 3's figure comes from a news report of the FHA report, not the FHA PDF. The default PNG is rendered only for post 4; posts 3 and 6 need re-renders. Real signer name not in repo. Posts not checked against LinkedIn's own rendering.
+- **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\linkedin-posts.md; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\design\social-graphic\template.html; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\design\social-graphic\render.ps1; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\design\social-graphic\README.md; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\assets\linkedin-template.png
+
+## Agent C, phase 1 (copied from `gtm/paid-options.md`)
+
+
+- **Agent:** Agent C, phase 1
+- **Model:** Opus 5.5 (claude-opus-5-5)
+- **Start (UTC, `date -u`):** Thu, Nov 19, 2026  8:22:40 PM
+- **End (UTC, `date -u`):** Thu, Nov 19, 2026  8:27:47 PM
+- **Task:** Propose 2 to 3 paid media platform and budget options for reaching Florida hospital nursing and staffing leaders, with sourced costs, a test budget in clicks, trade-offs, a labelled recommendation, and a UTM check. Options only; no spec.
+- **Method:** Read CLAUDE.md, D-001, D-009, D-014, D-015, D-019, D-022, D-027, `tracking-plan.md`, `grading-checklist.md`, `target-customer.md`, `traction-channels.md` and `functions/go/[channel].ts`. Checked the consent banner's CSS against LinkedIn's pop-up rule. Searched and fetched LinkedIn help, policy and developer pages, Google policy and help pages, a vendor search benchmark, and association sponsorship pages. Extracted the FONL and FHA PDFs with `pdftotext` into the scratchpad. Clicks = spend ÷ CPC, rounded down.
+- **Sources fetched:** linkedin.com/help answers a424655 and a423690; business.linkedin.com ad-targeting, audience and maximize-your-budget pages; members.linkedin.com/legal/ads-policy; learn.microsoft.com LinkedIn Ad Budget Pricing API; support.google.com/adspolicy/answer/6020955; localiq.com/blog/search-advertising-benchmarks; stackmatix.com/blog/linkedin-ads-cost; webtonic.io health-wellness LinkedIn stats; aonl.org banner-ad page; sponsors.aha.org AONL 2026 media kit; FONL 2026 prospectus PDF; FONL home page; FHA 2024 academic sponsorship PDF. Search summaries only: LinkedIn help a417950, Google Keyword Planner help, Becker's media kit, South Florida Hospital News, LinkedIn overspend figures.
+- **Kept:** LinkedIn first-party minimums and targeting facets; vendor CPC ranges, labelled as vendor and national; LocaliQ search CPCs; AONL and FONL published prices.
+- **Dropped and why:** WordStream 2025 figures ($2.62 health CPC): the WordStream page returned 403, and the third-party copies conflicted with each other. The API sample bid figures on Microsoft Learn: an illustrative example, not a price. The 2010 Becker's $400 rate: 16 years old. The Texas Hospital Association and FSASC rate cards: other organizations, not buyable for this audience. A sponsored newsletter as a separate option: no public rate for a Florida nurse-leader newsletter was found, so it is folded into option C.
+- **Known gaps:** no audience size for any option (needs logged-in LinkedIn Campaign Manager and Google Keyword Planner); no hospital-leader-specific CPC; no click-through rate for any association email; whether LinkedIn *permanent* location targets a US state not stated outright; no Google minimum budget or Florida location help page fetched; 2027 rates for AONL, FONL and FHA not found; whether the consent bar counts as a "pop-up" under LinkedIn policy is my reading, unconfirmed.
+- **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\paid-options.md
+
+## Agent C, phase 2 (copied from `gtm/paid-campaign-spec.md`)
+
+
+- **Agent:** Agent C, phase 2
+- **Model:** Opus 5.5 (claude-opus-5-5)
+- **Start (UTC, `date -u`):** Thu, Nov 19, 2026  8:35:42 PM
+- **End (UTC, `date -u`):** Thu, Nov 19, 2026  8:37:39 PM
+- **Task:** Write the LinkedIn Sponsored Content campaign spec for the owner's choice in D-028: audience, creative, budget, schedule, stop rules, one metric, one hypothesis, policy notes, open items.
+- **Method:** Read D-028, `design/social-graphic/README.md`, `render.ps1` and `template.html` (default label and source text), `functions/go/[channel].ts` (confirmed the `linkedin_ads` entry with `paid_social`), the first part of `docs/gtm/linkedin-posts.md` (for the organic dates and signer placeholder), `docs/tracking-plan.md` (insights and events), and `docs/research/target-customer.md` (titles and the vacancy figure). Reused the LinkedIn sources fetched in phase 1. Checked each ad against the CLAUDE.md voice rules and the neutral-pain rule.
+- **Sources:** [LinkedIn Help a424655](https://www.linkedin.com/help/linkedin/answer/a424655); [LinkedIn Help a423690](https://www.linkedin.com/help/lms/answer/a423690); [LinkedIn audience page](https://business.linkedin.com/advertise/ads/audience); [LinkedIn, Maximize your budget](https://business.linkedin.com/advertise/ads/best-practices/maximize-your-budget); [LinkedIn Advertising Policies](https://members.linkedin.com/legal/ads-policy); LinkedIn Help a417950 (search summary); [The Capitolist, 2026-01-23](https://thecapitolist.com/florida-hospitals-add-jobs-and-ease-nurse-shortages-but-retention-challenges-remain/) via `target-customer.md`; vendor-blog CPC range from `paid-options.md` ([Stackmatix](https://www.stackmatix.com/blog/linkedin-ads-cost), [Webtonic](https://www.webtonic.io/blog/health-wellness-linkedin-ads-statistics)). All accessed 2026-11-19.
+- **Kept:** the phase 1 targeting, budget and policy findings; the D-009 titles in the wording `target-customer.md` uses; one sourced Florida number (vacancy 21% to 10%).
+- **Dropped and why:**
+  - The "67% of 13,657 RN departures within 24 months" figure: `traction-channels.md` marks it unverified on the FHA page.
+  - Overtime and agency figures (Jackson Health, FHA cost growth): they lean toward money and would tilt the A/B test.
+  - The phoning-around pain: unsourced, and it leans toward time.
+  - The `d9eeKWIG` signups-by-role insight as a metric: the brief asks for one metric.
+  - Character limits and CTA lists: not fetched from LinkedIn, so they are left as verify items, not stated.
+- **Known gaps:**
+  - No audience forecast or LinkedIn bid suggestion (needs a logged-in account).
+  - Permanent-location state targeting not confirmed.
+  - Ad specs and even rotation not confirmed on a LinkedIn page.
+  - Which LinkedIn Page runs the ads is undecided.
+  - The memo's A/B read date is unknown, so the schedule is relative, with an example only.
+  - The consent-bar reading is unconfirmed.
+- **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\paid-campaign-spec.md
