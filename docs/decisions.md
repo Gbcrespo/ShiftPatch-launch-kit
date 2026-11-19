@@ -297,3 +297,25 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Finding 2, fix after launch:** on iOS, two page loads sent `$pageview` but lost the batch carrying `landing_page_viewed` and the exposure, probably because the visitor switched apps right away (cause not verified). Quick mobile bounces are undercounted in visits and exposures. The memo says so.
 - **Finding 3, not fixed:** `/go/linkedin` logged `channel_link_clicked` twice, 17 s apart, for one visit on iPhone. **Cause (owner confirmed):** a long press on the link in the email on iPhone, which opened a preview (quick look) that loaded the link before the actual tap. So a preview counts as a click. Real visitors who long-press a link will add an extra `channel_link_clicked` too; read link clicks as slightly inflated next to visits.
 - **Reason:** the owner's call: accept 1, fix 2 after launch. 3 has a known, harmless cause (an iPhone link preview), so no code change.
+
+## D-027: Step 7 plan: outreach, LinkedIn posts, paid campaign spec
+
+- **Date:** 2026-11-19
+- **Decided by:** project owner (approved the step 7 plan)
+- **Copy voice:** the "Copy voice and honesty" section in CLAUDE.md applies to every piece of copy. It includes a neutral-pain rule: outreach and posts name the short-notice-shift problem without favoring money or time, so they don't tilt the live hero A/B test (D-001).
+- **Outreach (Agent A):** 20 prospects, picked by the agent and approved by the owner. Each gets a LinkedIn connection note (300 characters or fewer, one cited fact, no link) and a first message (about 500 characters, with the link) sent once the invite is accepted. Link: `/go/direct_outreach?c=msg_v1`.
+- **No per-person link tag:** links never carry a prospect id, so the channel is measured but people aren't (in the spirit of D-002).
+- **LinkedIn organic (Agent B):** angle "testing in the open", a founder notebook where each post asks nurse leaders one question. 6 posts, about 3 a week: Mon 23, Tue 24, Wed 25 Nov and Tue 1, Wed 2, Thu 3 Dec 2026 (US Thanksgiving skipped). Link `/go/linkedin?c=postNN`. One reusable graphic template (HTML/SVG source plus a PNG).
+- **Paid (Agent C):** phase 1 options first; the owner picks the option and the paid `/go/` slug before phase 2.
+- **Nothing is sent, published or run.** Everything is written and ready.
+- **Reason:** the owner picked the recommended option for each question.
+
+## D-028: Step 7 checkpoint 1: outreach picks, paid option, paid link
+
+- **Date:** 2026-11-19
+- **Decided by:** project owner
+- **Outreach picks:** the 20 rows in `docs/gtm/outreach-picks.md`, approved as picked: P04, P08, P10, P14–P30 except P05–P07, P09, P11–P13 (10 high, 10 medium; 7 HCA Florida). Checking that each person is still in post before sending stays a manual step.
+- **Paid option:** LinkedIn Sponsored Content, about $750 over 3 weeks (lifetime cap), targeted to Florida, the D-009 buyer titles and the hospital industry. Website-visit objective. No Lead Gen Forms and no Insight Tag (a third-party cookie `/privacy` doesn't cover). A logged-in Campaign Manager forecast comes first; under 300 members means it can't run as written.
+- **Timing:** paid is scheduled to start only after the hero A/B test is read for the memo, so ad clicks don't make up the experiment's sample.
+- **Paid link:** `/go/linkedin_ads`, `utm_source=linkedin_ads`, `utm_medium=paid_social`, keeping `utm_campaign=prelaunch-2026-11` like every other link. Built on the step 7 branch and verified locally. It goes live only when the branch is pushed.
+- **Reason:** the owner picked the recommended option for each question.

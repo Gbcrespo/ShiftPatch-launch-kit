@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ShiftPatch LinkedIn graphic template</title>
+<meta name="viewport" content="width=1200">
+<style>
+  :root { --paper:#f7f4ec; --ink:#1f2a44; --muted:#4a5468; --rule:#d9d3c4; --teal:#2f6f6a; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; width:1200px; height:627px; overflow:hidden; background:var(--paper); }
+  body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; color:var(--ink); position:relative; }
+  .frame { position:absolute; inset:40px 56px; }
+  .top { position:absolute; left:0; right:0; top:0; height:44px; border-bottom:2px solid var(--ink);
+         display:flex; justify-content:space-between; align-items:flex-start; }
+  .mark { font-family: Georgia, "Times New Roman", serif; font-size:26px; font-weight:700; letter-spacing:.2px; }
+  .tag { font-size:15px; color:var(--teal); border:1.5px solid var(--teal); padding:3px 12px; letter-spacing:.6px; text-transform:uppercase; }
+  .head { position:absolute; left:0; top:92px; width:700px; height:330px; display:flex; align-items:center; }
+  h1 { margin:0; font-family: Georgia, "Times New Roman", serif; font-weight:700; line-height:1.14; color:var(--ink); font-size:56px; }
+  .grid { position:absolute; right:0; top:104px; }
+  .bottom { position:absolute; left:0; right:0; bottom:0; border-top:1px solid var(--rule); padding-top:16px;
+            display:flex; justify-content:space-between; font-size:19px; color:var(--muted); }
+  .src { max-width:760px; }
+  .note { color:var(--teal); }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="top">
+    <div class="mark">ShiftPatch</div>
+    <div class="tag">Pre-launch concept</div>
+  </div>
+  <div class="head"><h1 id="h">How short is &ldquo;short notice&rdquo; where you work?</h1></div>
+  <svg class="grid" width="300" height="300" viewBox="0 0 300 300" aria-hidden="true">
+    <g id="roster" font-family="Georgia, serif" font-size="13" fill="#4a5468" text-anchor="middle"></g>
+  </svg>
+  <div class="bottom">
+    <div class="src" id="s">A question I'm testing in the open. Reply and tell me.</div>
+    <div class="note">An idea, not a product</div>
+  </div>
+</div>
+<script>
+(function () {
+  var p = new URLSearchParams(location.search);
+  var h = p.get('h'), s = p.get('s');
+  var he = document.getElementById('h');
+  if (h) he.textContent = h;
+  if (s !== null) document.getElementById('s').textContent = s;
+  var n = he.textContent.length;
+  he.style.fontSize = (n > 110 ? 38 : n > 80 ? 44 : n > 55 ? 50 : 56) + 'px';
+  // Roster motif: 7 days x 5 shift rows. Filled cells are fixed, so every render matches.
+  var days = ['M','T','W','T','F','S','S'], NS = 'http://www.w3.org/2000/svg';
+  var g = document.getElementById('roster');
+  var filled = {'0,0':1,'1,0':1,'2,0':1,'4,0':1,'0,1':1,'1,1':1,'3,1':1,'4,1':1,'5,1':1,'1,2':1,'2,2':1,'3,2':1,'5,2':1,'6,2':1,'0,3':1,'2,3':1,'3,3':1,'4,3':1,'6,3':1,'1,4':1,'3,4':1,'4,4':1,'5,4':1};
+  var open = '3,2'; // the one open shift, drawn as an outline
+  function el(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  for (var c = 0; c < 7; c++) {
+    var t = el('text', {x: 20 + c*40, y: 14}); t.textContent = days[c]; g.appendChild(t);
+    for (var r = 0; r < 5; r++) {
+      var key = c + ',' + r, isOpen = key === open;
+      g.appendChild(el('rect', {x: c*40+2, y: 26 + r*50, width: 36, height: 42, fill: isOpen ? 'none' : (filled[key] ? '#2f6f6a' : '#f7f4ec'),
+        'fill-opacity': filled[key] ? .85 : 1, stroke: isOpen ? '#1f2a44' : '#d9d3c4', 'stroke-width': isOpen ? 2 : 1.2, 'stroke-dasharray': isOpen ? '5 4' : ''}));
+    }
+  }
+})();
+</script>
+</body>
+</html>

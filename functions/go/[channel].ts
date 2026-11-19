@@ -15,6 +15,7 @@ const CHANNELS: Record<string, { medium: string }> = {
 	direct_outreach: { medium: 'outreach' }, // ready, not sent this week
 	linkedin: { medium: 'social' }, // ready, not posted this week
 	fonl_annual_2027: { medium: 'event' }, // Florida events only (D-020); Nov 3–5, 2027
+	linkedin_ads: { medium: 'paid_social' }, // LinkedIn Sponsored Content (D-028); runs only after the A/B is read
 };
 
 export const onRequestGet: PagesFunction = async ({ request, params, waitUntil }) => {
