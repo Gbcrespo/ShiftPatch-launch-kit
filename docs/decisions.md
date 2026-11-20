@@ -409,7 +409,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 | Limit | Decision | Stated on |
 | :--- | :--- | :--- |
 | Accepting cookies splits a visitor: counted twice at funnel step 1, and 2 exposures | D-023, D-030, D-031 | experiment, `KK0a37NQ`, `dRTNVtm9`, `opzPWguM`, `d9eeKWIG` |
-| Prefetch, preview and background loads counted before 2026-11-20 13:51 UTC; iPhone long-press previews still count as clicks | D-026, D-033, D-035 | experiment, `dBS4IKQb`, `ZS0Uhz2p` |
+| Prefetch, preview and background loads counted before 2026-11-20 13:51 UTC; iPhone long-press previews still count as clicks | D-026, D-033, D-035 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `oMvaY0hy`, `ZS0Uhz2p` |
 | Quick iOS bounces can lose `landing_page_viewed` and the exposure | D-026 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9` |
 | Flag-timeout fallbacks show A with no exposure | D-031 | experiment, `oMvaY0hy` |
 | Pre-launch survey test answers that can't be deleted | D-032 | `lQ1PbGvG` |

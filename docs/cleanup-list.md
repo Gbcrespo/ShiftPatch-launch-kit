@@ -43,7 +43,7 @@ Total: 185 events. Every one is before 2026-11-19 17:48:18 UTC; none of these pe
 | `d1688f5f-3225-5f24-8dfe-a5a2c783f189` | Owner, step 8 test 3 (preview) | same |
 
 **Can't be deleted (no person record, cookieless):**
-- the 17 pre-launch survey answerers without a record (D-032: read the survey from launch)
+- the pre-launch survey answerers without a record: 19 in the audit after the deletion. That count includes row 12, whose record is gone while its event deletion is still pending (D-032: read the survey from launch)
 - the unattributed visit `836fe88c…` (labeled, kept on purpose)
 - the link-preview click `d4ce36f0…`
 - the localhost clicks
@@ -55,4 +55,4 @@ Total: 185 events. Every one is before 2026-11-19 17:48:18 UTC; none of these pe
 - **Only IDs the owner approves.**
 - **Afterwards, re-run the auditor.**
   - Tile numbers must not move: every event on this list is before 18:00 UTC.
-  - "Before launch" survey answers should drop by 3 answers and 3 persons (rows 12–14).
+  - "Before launch" survey answers should drop by 1 answer and 1 person (row 12 only; rows 13–14 were kept, D-038), once PostHog finishes deleting the events.
