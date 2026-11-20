@@ -68,14 +68,14 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 - **Analysis window starts 2026-11-19 18:00 UTC (15:00 BRT)**, the launch time (D-025, replacing D-021's 15:00 UTC). Anything earlier is testing. Use this as `date_from` in every insight.
 - **Variant source of truth: `hero_variant`** (D-022). Don't break anything down by `$feature/hero-framing`: it can flip after Accept or `identify()`. Exposures and the experiment are unaffected.
 - **Don't split `$pageview` by `hero_variant`.** Before D-035 it never had it (it fired before the flag answered); since D-035 it has it only when the flag answered before the page was seen. Use `landing_page_viewed` for anything split by variant (D-022), and only events that carry `$feature/hero-framing` (D-031).
-- **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). A per-person funnel undercounts visitors who accept cookies, because Accept moves them to a new person (D-022).
+- **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). Accept moves a visitor to a new person (D-022, D-023). Since D-030 the per-person funnels start at "Landed", so a visitor who accepts is counted twice at step 1 instead of being dropped.
 
 ### Saved insights (all from 2026-11-19 18:00 UTC, test accounts filtered)
 
 | Insight | Short id | For |
 | :--- | :--- | :--- |
 | Channels: buyer-signup rate per visitor (by utm_source) | `opzPWguM` | H1–H3 headline |
-| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | per-person view (undercounts accepters) |
+| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | per-person view (accepters count twice at step 1, D-030) |
 | Channels: link clicks (by channel) | `ZS0Uhz2p` | H1–H3 clicks |
 | Signups by role (by utm_source) | `d9eeKWIG` | H2 |
 | A/B: buyer-signup rate per visitor (by hero_variant) | `oMvaY0hy` | A/B cross-check |

@@ -408,13 +408,15 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 
 | Limit | Decision | Stated on |
 | :--- | :--- | :--- |
-| Accepting cookies splits a visitor: counted twice at funnel step 1, and 2 exposures | D-023, D-030, D-031 | experiment, `KK0a37NQ`, `dRTNVtm9`, `opzPWguM`, `d9eeKWIG` |
+| Accepting cookies splits a visitor: counted twice at funnel step 1, and 2 exposures | D-023, D-030, D-031 | experiment, `KK0a37NQ`, `dRTNVtm9`, `opzPWguM`, `oMvaY0hy`, `d9eeKWIG` |
 | Prefetch, preview and background loads counted before 2026-11-20 13:51 UTC; iPhone long-press previews still count as clicks | D-026, D-033, D-035 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `oMvaY0hy`, `ZS0Uhz2p` |
-| Quick iOS bounces can lose `landing_page_viewed` and the exposure | D-026 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9` |
+| Quick iOS bounces can lose `landing_page_viewed` and the exposure | D-026 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `oMvaY0hy` |
 | Flag-timeout fallbacks show A with no exposure | D-031 | experiment, `oMvaY0hy` |
 | Pre-launch survey test answers that can't be deleted | D-032 | `lQ1PbGvG` |
-| `welcome_email` isn't a channel | D-034 | `opzPWguM`, `dBS4IKQb`, `ZS0Uhz2p` (excluded); `KK0a37NQ`, `dRTNVtm9` (captioned) |
-| **Unattributed direct visit** `836fe88c…` (2026-11-19 19:14 UTC, Chrome on Linux), possibly the owner, unconfirmed. Labeled and kept; it's the "(none)" visitor | this entry | `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9` |
+| `welcome_email` isn't a channel | D-034 | `opzPWguM`, `dBS4IKQb`, `ZS0Uhz2p` (excluded); `KK0a37NQ`, `dRTNVtm9`, `d9eeKWIG` (captioned) |
+| **Unattributed direct visit** `836fe88c…` (2026-11-19 19:14 UTC, Chrome on Linux), possibly the owner, unconfirmed. Labeled and kept; it's the "(none)" visitor | this entry | `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `d9eeKWIG` |
 | **Decliners' email events can't be joined** to their visit, channel or variant | D-026 finding 1 | no tile uses email events, so the dashboard description says it. D-034's "email funnel" isn't a saved insight: `welcome_email` visits stay in the two per-person funnels, and the memo reports email engagement as totals |
 | **Small sample: directional only, no significance** | this entry (and D-023) | dashboard description, experiment and every tile caption |
 | Internal `$opt_in` and old-code `$pageview` pass the test filter (no tile event) | D-037 | audit check 6a (not on any tile) |
+
+The nine audited insights are the six dashboard tiles plus `lQ1PbGvG`, `oMvaY0hy` and `d9eeKWIG`. Each limit is captioned on every one of them it affects.
