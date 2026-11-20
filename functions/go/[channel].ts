@@ -33,6 +33,9 @@ export const onRequestGet: PagesFunction = async ({ request, params, waitUntil }
 
 	const ip = request.headers.get('cf-connecting-ip') ?? undefined;
 	const ua = request.headers.get('user-agent') ?? '';
+	// Prefetches and link-preview fetchers get the same redirect but send no
+	// event (D-033), so they don't count as clicks.
+	if (isPrefetchOrPreview(request.headers, ua)) return redirect(target);
 	const event = {
 		api_key: TOKEN,
 		event: 'channel_link_clicked',
@@ -64,8 +67,23 @@ export const onRequestGet: PagesFunction = async ({ request, params, waitUntil }
 		}).catch(() => undefined),
 	);
 
-	return new Response(null, {
+	return redirect(target);
+};
+
+const redirect = (target: URL) =>
+	new Response(null, {
 		status: 302,
 		headers: { location: target.toString(), 'cache-control': 'no-store' },
 	});
-};
+
+// Link-preview and crawler user agents (chat apps, social networks, search).
+// In-app browsers such as "LinkedInApp" or "Instagram" are real visitors and
+// don't match. iMessage previews identify as facebookexternalhit + Twitterbot.
+const PREVIEW_UA =
+	/facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|slack-imgproxy|whatsapp|telegrambot|discordbot|skypeuripreview|applebot|googlebot|bingbot|redditbot|pinterestbot|embedly|iframely|headlesschrome|\bbot\b|crawler|spider/i;
+
+function isPrefetchOrPreview(headers: Headers, ua: string) {
+	const purpose = `${headers.get('sec-purpose') ?? ''} ${headers.get('purpose') ?? ''} ${headers.get('x-purpose') ?? ''} ${headers.get('x-moz') ?? ''}`.toLowerCase();
+	if (/prefetch|prerender|preview/.test(purpose)) return true;
+	return ua.trim() === '' || PREVIEW_UA.test(ua);
+}

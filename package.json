@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit": "node scripts/metrics-audit.mjs"
   },
   "dependencies": {
     "@fontsource/source-sans-3": "^5.3.1",

@@ -319,3 +319,71 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Timing:** paid is scheduled to start only after the hero A/B test is read for the memo, so ad clicks don't make up the experiment's sample.
 - **Paid link:** `/go/linkedin_ads`, `utm_source=linkedin_ads`, `utm_medium=paid_social`, keeping `utm_campaign=prelaunch-2026-11` like every other link. Built on the step 7 branch and verified locally. It goes live only when the branch is pushed.
 - **Reason:** the owner picked the recommended option for each question.
+
+## D-029: Test-account filter uses direct conditions, not cohort 728308
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** replace the cohort condition in the project test-account filter with direct person conditions: `is_internal` is not `true`, `$internal_or_test_user` is not `true`, and `email` doesn't contain `example.com` or `gbcrespo10`. The `$host` localhost/127.0.0.1 and `$pathname` `/preview/` conditions stay.
+- **Note:** experiment 612484 uses this same filter (`filterTestAccounts: true`), so the change also applies to its exposures. No internal person has an exposure after launch, so its numbers don't move.
+- **Reason:** the cohort was stale (11 members, last recalculated 2026-11-19 17:00 UTC; the owner's profile was created at 19:46), which let the owner's visits into every tile.
+
+## D-030: Funnel first step is the action "Landed"
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** the channel funnel (`KK0a37NQ`) starts at a new action "Landed" = `landing_page_viewed` OR `cookie_banner_answered`, so a visitor who accepts and then signs up has a first step on their post-Accept person. No code change. Caption: visitors who accept are counted twice at step 1.
+- **Reason:** the smallest honest fix after declining the visit-ID change (D-023).
+
+## D-031: Keep the experiment as is; count A/B signups only from exposed events
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** experiment 612484, its flag and its metrics are not touched. Each visitor who accepts cookies counts as 2 exposures, which lowers conversion the same way in both variants; the memo says so. The memo also reports signups by `hero_variant` from events, counting only events that carry `$feature/hero-framing`, so flag-timeout fallbacks (shown A with no exposure, like person `836fe88c…`) don't tilt the count toward A. The cross-check insight `oMvaY0hy` gets that same filter.
+- **Reason:** changing a running experiment is a bigger risk than a known, symmetric bias.
+
+## D-032: Delete pre-launch test profiles; read the survey from launch
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** delete internal/test person profiles whose events are all before 2026-11-19 17:48 UTC, only from a list the owner approves (`docs/cleanup-list.md`). Keep the owner's main profile (`b7b21c2e…`, step 5 evidence) and anything with events after launch. Pre-launch survey answers that can't be deleted (cookieless, no person record) and the owner's own pre-launch answer stay. A caption says so, and survey results are read from launch (15:00 BRT).
+- **Reason:** clean People and survey results for the reviewer.
+
+## D-033: Check whether the /go/ crawler and prefetch filter shipped
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** report only.
+- **Finding:** it wasn't shipped. No branch, stash or commit has crawler, bot or prefetch handling in `functions/go/[channel].ts`.
+- **Follow-up decision (owner, 2026-11-20): ship the minimal change with D-035.** `/go/<channel>` still redirects every request the same way, but sends no `channel_link_clicked` when the request says it's a prefetch, prerender or preview (`Sec-Purpose`, `Purpose`, `X-Purpose`, `X-Moz` headers), or when the user agent is empty or a known link-preview bot or crawler (facebookexternalhit, Twitterbot, LinkedInBot, Slackbot, WhatsApp, TelegramBot, Discordbot and others). In-app browsers still count. The iPhone long-press preview (D-026 finding 3) uses a normal Safari user agent and still counts as a click; the link-clicks caption keeps saying so.
+
+## D-034: welcome_email is not an acquisition channel
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** exclude `utm_source = welcome_email` from the acquisition tiles: traffic (`dBS4IKQb`), buyer-signup rate (`opzPWguM`) and link clicks (`ZS0Uhz2p`). Keep it in the email funnel.
+- **Reason:** it's returning signups, not a channel.
+
+## D-035: Send the exposure and the page view only once the page is visible
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner (approach: the recommended option)
+- **Decision:** read the `hero-framing` flag on load with `send_event: false`, so the headline renders exactly as today. Once the page is really visible (`document.prerendering` is false and `visibilityState` is `visible`, or the first `prerenderingchange`/`visibilitychange` to visible), call `getFeatureFlag('hero-framing')` once more so posthog-js itself sends the same `$feature_flag_called` it sends today, with all its properties, once per page load. PostHog derives `$experiment_exposure` from it on the server: the SDK doesn't send that event. `landing_page_viewed` and `$pageview` are sent at that same moment. Automatic page views are turned off, and `capture_pageleave: true` is set so `$pageleave` keeps working. No UX change: same render timing, headline, banner, surveys and replay. No event names change.
+- **Test:** a background tab sends no `landing_page_viewed`, `$pageview` or `$feature_flag_called` until it's focused. `?internal=1` visits still send `$opt_in` and `$set` right away (internal marking, unchanged). The reference and test visits use fresh incognito windows, because the SDK reports a flag only once per browser.
+- **Reason:** prefetch and preview loads inflate visitors and exposures.
+
+## D-036: Show "All signups" on the dashboard; buyer signups stay the headline
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** add a second per-person funnel, "Landed → any signup → volume answer (by utm_source)", next to the buyer funnel on the dashboard, so it's visible that the funnel works end to end with real events whatever the role. The headline numbers stay buyer-role signups: the experiment's primary metric, the buyer funnel (`KK0a37NQ`) and the buyer-signup rate (`opzPWguM`).
+- **Layout (Claude's default):** row 2 holds the buyer funnel, then the all-signups funnel, then the buyer-signup rate, each 4 columns wide. Rows 1 and 3 are unchanged (D-025 order kept).
+- **Reason:** the buyer funnel reads 0 at step 2 while the only real signup is a non-buyer ("Just helping test"), which looks like a broken funnel.
+
+## D-037: Test-account filter also checks the event's own is_internal
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** add the event-property condition `is_internal` is not `true` to the project test-account filter, next to the D-029 person conditions.
+- **Why it's needed:** with person-on-events, the person conditions read the person's properties *as they were when the event was captured*. The owner's `$pageview` at 2026-11-19 19:46:01 UTC was captured before `is_internal` reached the profile, so D-029 alone let it through. Every event from `?internal=1` carries `is_internal` itself (a super property), so this catches it. No tile used that event, so tile numbers don't move.
+- **Reason:** the smallest fix that closes the gap; found by the step 8 audit (check 6a).

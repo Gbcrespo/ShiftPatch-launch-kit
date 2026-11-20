@@ -26,6 +26,12 @@ export function startAnalytics(page: Page): typeof posthog {
 		// Replay only after consent, never with typed text.
 		disable_session_recording: true,
 		session_recording: { maskAllInputs: true },
+		// Page views are sent by hand once the page is really visible (D-035),
+		// so prefetched, prerendered and background-tab loads don't count.
+		// $pageleave is switched on at that moment too, so a page nobody saw
+		// sends no $pageleave either.
+		capture_pageview: false,
+		capture_pageleave: false,
 	});
 
 	// Local development counts as internal too: the experiment's test-account
@@ -36,8 +42,41 @@ export function startAnalytics(page: Page): typeof posthog {
 	registerUtms();
 	if (page === 'preview') keep({ is_preview: true });
 	if (posthog.get_explicit_consent_status() === 'granted') posthog.startSessionRecording();
+	whenVisible(() => {
+		posthog.capture('$pageview');
+		posthog.set_config({ capture_pageleave: true });
+	});
 
 	return posthog;
+}
+
+// Runs callbacks, in order, once the page is really seen (D-035): not while
+// it's prerendering (document.prerendering) and not while it's hidden (a
+// background tab or a prefetch). Each callback runs at most once per load.
+const visibleQueue: Array<() => void> = [];
+let pageSeen = false;
+
+function isSeen() {
+	return !(document as Document & { prerendering?: boolean }).prerendering && document.visibilityState === 'visible';
+}
+
+function flushVisible() {
+	if (pageSeen || !isSeen()) return;
+	pageSeen = true;
+	document.removeEventListener('visibilitychange', flushVisible);
+	document.removeEventListener('prerenderingchange', flushVisible);
+	for (const fn of visibleQueue.splice(0)) fn();
+}
+
+if (typeof document !== 'undefined') {
+	document.addEventListener('visibilitychange', flushVisible);
+	document.addEventListener('prerenderingchange', flushVisible);
+}
+
+export function whenVisible(fn: () => void) {
+	if (pageSeen) return fn();
+	visibleQueue.push(fn);
+	flushVisible();
 }
 
 export function consentStatus() {
@@ -48,6 +87,8 @@ export function consentStatus() {
 // posthog-js does when a cookieless visitor opts in.
 const kept: Record<string, unknown> = {};
 let exposedFlagValue: string | null = null;
+// True once this page load's exposure has gone out (D-035).
+let exposureSent = false;
 
 function keep(properties: Record<string, unknown>) {
 	Object.assign(kept, properties);
@@ -62,7 +103,7 @@ export function answerConsent(choice: 'accepted' | 'declined') {
 		// experiment credits their later signup to the right arm.
 		posthog.opt_in_capturing();
 		posthog.register(kept);
-		if (exposedFlagValue) {
+		if (exposedFlagValue && exposureSent) {
 			// Pin the flag to what was shown, so the new ID's own evaluation can't
 			// stamp a different variant on later events (stored only with consent).
 			posthog.featureFlags.overrideFeatureFlags({
@@ -93,11 +134,22 @@ export function resolveHeroVariant(onVariant: (v: Variant) => void, timeoutMs = 
 	posthog.onFeatureFlags(() => {
 		// Flags reload after identify or consent; the variant is fixed once shown.
 		if (done) return;
-		// getFeatureFlag sends $feature_flag_called, the experiment exposure.
-		const flag = posthog.getFeatureFlag(analyticsConfig.flagKey);
+		// Read the variant now, without the exposure, so the headline renders
+		// exactly as before (D-035).
+		const flag = posthog.getFeatureFlag(analyticsConfig.flagKey, { send_event: false });
 		if (flag === 'control' || flag === analyticsConfig.testVariant) {
 			exposedFlagValue = flag;
 			keep({ [`$feature/${analyticsConfig.flagKey}`]: flag });
+			// Once the page is seen, read the flag again with the event on: the
+			// SDK sends the same $feature_flag_called it always has, with all its
+			// properties, and PostHog derives $experiment_exposure from it. Only
+			// if the value still matches what was shown.
+			whenVisible(() => {
+				const key = analyticsConfig.flagKey;
+				if (posthog.getFeatureFlag(key, { send_event: false }) !== flag) return;
+				posthog.getFeatureFlag(key);
+				exposureSent = true;
+			});
 			finish(flag === 'control' ? 'a' : 'b');
 		}
 	});

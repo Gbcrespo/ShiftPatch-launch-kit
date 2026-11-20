@@ -78,7 +78,7 @@ const steps = [
 </Layout>
 
 <script>
-	import { startAnalytics, resolveHeroVariant, registerProps, track } from '../lib/analytics';
+	import { startAnalytics, resolveHeroVariant, registerProps, track, whenVisible } from '../lib/analytics';
 
 	const page = (document.body.dataset.analytics ?? 'other') as 'landing' | 'preview' | 'other';
 	startAnalytics(page);
@@ -88,7 +88,8 @@ const steps = [
 		resolveHeroVariant((v) => {
 			heroEl.dataset.variant = v;
 			heroEl.setAttribute('aria-labelledby', `hero-heading-${v}`);
-			track('landing_page_viewed');
+			// Sent with the page view and the exposure, once the page is seen (D-035).
+			whenVisible(() => track('landing_page_viewed'));
 		});
 	} else if (heroEl && page === 'preview') {
 		// Review-only pages: tag events with the shown variant, no exposure.

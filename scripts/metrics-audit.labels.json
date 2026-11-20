@@ -1,0 +1,10 @@
+{
+  "_about": "Generic labels for known PostHog persons in the audit (person ID → label). IDs and generic labels only: no emails, no names.",
+  "f95b4cd9-83d9-5bde-b40f-c5bb5ef6a62a": "Friend 1, profile 1 of 3: /go/personal_network click (server, cookieless)",
+  "3cb63f99-5493-57bb-a3de-40f700b47622": "Friend 1, profile 2 of 3: page view (iPhone, cookieless, exposed to control)",
+  "f7f85f93-e73b-5c9e-9806-6ff644e50f47": "Friend 1, profile 3 of 3: after Accept (identified, signed up)",
+  "d4ce36f0-c81e-547d-b67b-d45c165a6ce1": "Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed)",
+  "836fe88c-eb65-5e90-b897-69b497b5398e": "Unattributed 1: direct visit, Chrome on Linux, 2026-11-19 19:14 UTC, possibly the owner (unconfirmed), kept",
+  "b7b21c2e-c1d0-525e-940c-6e060f49d1b8": "Owner, main profile (is_internal), kept as step-5 evidence",
+  "1681bc92-b4ef-52d5-96c8-c58ee16a40aa": "Owner, local QA clicks from localhost:8799 (step 7)"
+}
