@@ -40,7 +40,9 @@ const INSIGHT_START = '2026-11-19 18:00:00'; // UTC, 15:00 BRT (D-025)
 const SURVEY_ID = '01a1ef17-b69e-0000-336f-3ef067316d59';
 const SURVEY_ANSWER = '$survey_response_dc9030ae-22f8-4519-a037-86d6b878a113';
 // Saved insights the memo reads that aren't dashboard tiles.
-const EXTRA_INSIGHTS = ['lQ1PbGvG', 'oMvaY0hy', 'd9eeKWIG'];
+// After D-040 the old funnels KK0a37NQ and dRTNVtm9 leave the dashboard but stay
+// saved; they're still audited here. d1JCOgLG is listed until it's a tile.
+const EXTRA_INSIGHTS = ['lQ1PbGvG', 'oMvaY0hy', 'd9eeKWIG', 'KK0a37NQ', 'dRTNVtm9', 'd1JCOgLG'];
 // D-034: welcome_email is returning signups, not a channel.
 const NON_CHANNEL_SOURCES = ['welcome_email'];
 
@@ -176,6 +178,34 @@ function funnel(ev, isStep2) {
 	return out;
 }
 
+// Generic per-person ordered funnel: steps[0] is step 1; each later step must
+// come after the previous one and within `windowMs` of step 1. Breakdown is the
+// utm_source of the step 1 event (PostHog "attributed to step 1", D-040).
+const isLanded = (e) => e.event === 'landing_page_viewed' || e.event === 'cookie_banner_answered';
+function stageFunnel(ev, steps, windowMs) {
+	const from = utc(INSIGHT_START);
+	const byPerson = new Map();
+	for (const e of ev) if (e.t >= from) (byPerson.get(e.pid) ?? byPerson.set(e.pid, []).get(e.pid)).push(e);
+	const out = {};
+	for (const list of byPerson.values()) {
+		let best = null;
+		for (const s1 of list.filter(steps[0])) {
+			let reached = 1;
+			let t = s1.t;
+			for (const step of steps.slice(1)) {
+				const hit = list.find((e) => step(e) && e.t >= t && e.t <= s1.t + windowMs);
+				if (!hit) break;
+				reached++;
+				t = hit.t;
+			}
+			if (!best || reached > best.reached) best = { reached, b: bd(s1.utm_source) };
+		}
+		if (!best) continue;
+		for (let n = 1; n <= best.reached; n++) out[`step${n}|${best.b}`] = (out[`step${n}|${best.b}`] ?? 0) + 1;
+	}
+	return out;
+}
+
 // ---- Raw counts per tile (target definitions) --------------------------------
 // Each returns { "series|breakdown": number }. They use the *target*
 // definitions decided in step 8, so a tile still waiting for its change shows
@@ -191,16 +221,37 @@ const RAW = {
 		about: 'Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).',
 		fn: (ev) => funnel(ev, isSignup),
 	},
+	d1JCOgLG: {
+		about: 'Stage funnel (D-040), per person, ordered, 7-day window: Landed → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Breakdown: utm_source of step 1.',
+		fn: (ev) =>
+			stageFunnel(
+				ev,
+				[isLanded, (e) => e.event === 'signup_form_started', isSignup, (e) => e.event === 'welcome_email_opened', (e) => e.event === 'welcome_email_link_clicked'],
+				7 * 86400e3,
+			),
+	},
 	opzPWguM: {
-		about: 'Unique persons per utm_source (welcome_email excluded): Visitors = landing_page_viewed, buyer-role signups, all signups, volume answers.',
+		about: 'Channel table (D-042): unique persons per utm_source (welcome_email excluded) for visitors (landing_page_viewed), all signups, buyer signups and hero clicks, plus all signups ÷ visitors and buyer signups ÷ visitors.',
 		fn: (ev) => {
 			const w = ev.filter((e) => e.t >= utc(INSIGHT_START) && isChannel(e));
 			const out = {};
-			const add = (name, list) => Object.entries(uniqBy(list, (e) => bd(e.utm_source))).forEach(([b, n]) => (out[`${name}|${b}`] = n));
-			add('Visitors', w.filter((e) => e.event === 'landing_page_viewed'));
-			add('Buyer-role signups', w.filter((e) => isSignup(e) && e.buyer));
-			add('All signups', w.filter(isSignup));
-			add('Volume question answered', w.filter(isVolume));
+			const per = (list) => uniqBy(list, (e) => bd(e.utm_source));
+			const A = per(w.filter((e) => e.event === 'landing_page_viewed'));
+			const B = per(w.filter(isSignup));
+			const C = per(w.filter((e) => isSignup(e) && e.buyer));
+			const D = per(w.filter((e) => e.event === 'hero_cta_clicked'));
+			const keys = new Set([...Object.keys(A), ...Object.keys(B), ...Object.keys(C), ...Object.keys(D)]);
+			const ratio = (x, y) => (y ? Math.round((x / y) * 10000) / 10000 : 0);
+			for (const k of keys) {
+				Object.assign(out, {
+					[`Visitors|${k}`]: A[k] ?? 0,
+					[`All signups|${k}`]: B[k] ?? 0,
+					[`Buyer signups|${k}`]: C[k] ?? 0,
+					[`Hero clicks|${k}`]: D[k] ?? 0,
+					[`All signups ÷ visitors|${k}`]: ratio(B[k] ?? 0, A[k] ?? 0),
+					[`Buyer signups ÷ visitors|${k}`]: ratio(C[k] ?? 0, A[k] ?? 0),
+				});
+			}
 			return out;
 		},
 	},
@@ -325,7 +376,7 @@ async function shownExperiment(exp) {
 function compare(shown, raw, keepZeros = false) {
 	const keys = [...new Set([...Object.keys(shown), ...Object.keys(raw)])].sort();
 	return keys
-		.map((k) => ({ key: k, shown: Number(shown[k] ?? 0), raw: Number(raw[k] ?? 0) }))
+		.map((k) => ({ key: k, shown: Math.round(Number(shown[k] ?? 0) * 10000) / 10000, raw: Math.round(Number(raw[k] ?? 0) * 10000) / 10000 }))
 		.filter((r) => keepZeros || r.shown !== 0 || r.raw !== 0)
 		.map((r) => ({ ...r, ok: r.shown === r.raw }));
 }
@@ -362,7 +413,7 @@ async function main() {
 	// 1. Tiles
 	md.push('### 1. Tiles: PostHog vs raw', '');
 	const tiles = (dashboard.tiles ?? []).filter((t) => !t.deleted);
-	const insightIds = [...tiles.filter((t) => t.insight).map((t) => t.insight.short_id), ...EXTRA_INSIGHTS];
+	const insightIds = [...new Set([...tiles.filter((t) => t.insight).map((t) => t.insight.short_id), ...EXTRA_INSIGHTS])];
 
 	// Experiment tile
 	if (tiles.some((t) => t.widget?.config?.experimentId === EXPERIMENT_ID)) {
@@ -383,10 +434,21 @@ async function main() {
 	}
 
 	for (const id of insightIds) {
-		const res = await api(`/insights/?short_id=${id}&refresh=force_blocking`);
-		const ins = res.results?.[0];
+		let res = await api(`/insights/?short_id=${id}&refresh=force_blocking`);
+		let ins = res.results?.[0];
+		// A throttled refresh can come back with no result; retry once from cache
+		// rather than reading the gap as zeros.
+		if (ins && !Array.isArray(ins.result)) {
+			res = await api(`/insights/?short_id=${id}&refresh=blocking`);
+			ins = res.results?.[0];
+		}
+		if (ins && !Array.isArray(ins.result)) {
+			md.push(`**${ins.name}** (\`${id}\`): PostHog returned no result, so this tile couldn't be checked.`, '');
+			mismatches.push(`${id}: no result returned by PostHog`);
+			continue;
+		}
 		if (!ins) { md.push(`**${id}**: not found.`, ''); mismatches.push(`${id}: insight not found`); continue; }
-		const onDash = !EXTRA_INSIGHTS.includes(id);
+		const onDash = tiles.some((t) => t.insight?.short_id === id);
 		const def = RAW[id];
 		md.push(`**${ins.name}** (\`${id}\`${onDash ? ', dashboard tile' : ', not on the dashboard'}). Test accounts filtered: ${ins.query?.source?.filterTestAccounts}. From ${ins.query?.source?.dateRange?.date_from}.`);
 		md.push(`Caption: ${ins.description ? `“${ins.description}”` : '_none_'}`, '');
@@ -396,7 +458,15 @@ async function main() {
 			continue;
 		}
 		md.push(`Raw = ${def.about}`, '');
-		const rows = compare(flattenInsight(ins), def.fn(clean));
+		const rawOut = def.fn(clean);
+		const rows = compare(flattenInsight(ins), rawOut);
+		// Zero rows are hidden, so check the series names separately: every
+		// formula PostHog defines must be one the raw definition computes.
+		const formulas = (ins.query?.source?.trendsFilter?.formulaNodes ?? []).map((f) => f.custom_name ?? f.formula);
+		const rawNames = new Set(Object.keys(rawOut).map((k) => k.split('|')[0]));
+		const unknown = rawNames.size ? formulas.filter((n) => !rawNames.has(n)) : [];
+		if (formulas.length) md.push(`Series names: ${formulas.join(', ')}${unknown.length ? ` — **not in the raw definition: ${unknown.join(', ')}**` : ' (all in the raw definition)'}.`, '');
+		if (unknown.length) mismatches.push(`${id}: series not in the raw definition: ${unknown.join(', ')}`);
 		md.push(table(['Series | breakdown', 'PostHog', 'Raw', ''], rows.map((r) => [r.key, r.shown, r.raw, r.ok ? '✓' : '≠ MISMATCH'])), '');
 		for (const r of rows) {
 			metrics[`${id}|${r.key}|shown`] = r.shown;
@@ -559,6 +629,12 @@ GROUP BY t_internal, t_test LIMIT 100`);
 		const keys = [...new Set([...Object.keys(prev.metrics), ...Object.keys(metrics)])].sort();
 		const moved = keys.filter((k) => (prev.metrics[k] ?? 0) !== (metrics[k] ?? 0)).map((k) => {
 			const a = prev.metrics[k] ?? 0, b = metrics[k] ?? 0;
+			// tile|series|breakdown|side: a new breakdown value under a series that
+			// already existed is traffic; a whole new series or tile is a definition change.
+			const parts = k.split('|');
+			const seriesSeen = parts.length >= 4 && Object.keys(prev.metrics).some((p) => p.startsWith(`${parts[0]}|${parts[1]}|`));
+			if (!(k in prev.metrics)) return [k, '—', b, seriesSeen ? '▲ new breakdown value: check it is real traffic' : 'new key (a tile or series added), not traffic'];
+			if (!(k in metrics)) return [k, a, '—', 'key gone (a tile or series removed), not lost data'];
 			const cumulative = !k.startsWith('test|') && !k.includes('mismatch');
 			const flag = b < a && cumulative ? '▼ UNEXPECTED unless a filter change or deletion explains it' : b > a ? '▲ check it is real traffic' : '▼';
 			return [k, a, b, flag];

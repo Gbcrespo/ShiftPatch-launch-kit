@@ -53,3 +53,11 @@ Decisions D-029 to D-038. The audit is `npm run audit` (`scripts/metrics-audit.m
 
 - Run `npm run audit` once more with no changes. The Summary must say every tile matches its raw count.
 - Check that the 13 queued deletions finished (People, and the audit's "before launch" survey line).
+
+## Step 9: the funnel the brief asks for (2026-11-20)
+
+Decisions D-040 to D-044. The dashboard now fits on one screen:
+- **Row 1:** the stage funnel `d1JCOgLG` (Landed → form started → signed up → welcome email opened → email link clicked, by channel) next to the experiment.
+- **Row 2:** the channel table `opzPWguM` (visitors, all and buyer signups, hero clicks, both rates), then traffic and link clicks.
+
+The old funnels `KK0a37NQ` and `dRTNVtm9` stay saved, off the dashboard. The captions are one sentence each, and the limits are listed in the dashboard description (D-043). The audit covers the new funnel and the rate formulas.

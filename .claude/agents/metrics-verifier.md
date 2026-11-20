@@ -38,8 +38,9 @@ You are an independent verifier for the ShiftPatch launch metrics (PostHog proje
    - `welcome_email` isn't a channel
    - the unattributed direct visit
    - small sample, directional only
+   - email opens can be automatic (Apple Mail, Gmail image proxy)
 
-   Gather your own list too: read `docs/decisions.md` (D-023 onwards) and `docs/tracking-plan.md`. For each limit, find the decision entry (quote its D-number) and the caption of each tile it affects (`dashboard-get`, `insight-get`). Missing either one fails the criterion.
+   Gather your own list too: read `docs/decisions.md` (D-023 onwards) and `docs/tracking-plan.md`. For each limit, find the decision entry (quote its D-number) and where it's stated on the dashboard. Since D-043, the limits live in the **dashboard description** (`dashboard-get`) as short bullets, and each tile caption is one sentence with at most one D-number. Check the D-039 register is still complete. A limit missing from both the description and its decision entry fails the criterion.
 5. **Criterion 4**:
    - The script takes no date or ID that changes between runs. It has fixed starts, and reads the dashboard and experiment by ID.
    - It needs only Node and the key in `.env`.

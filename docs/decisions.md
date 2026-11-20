@@ -408,15 +408,78 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 
 | Limit | Decision | Stated on |
 | :--- | :--- | :--- |
-| Accepting cookies splits a visitor: counted twice at funnel step 1, and 2 exposures | D-023, D-030, D-031 | experiment, `KK0a37NQ`, `dRTNVtm9`, `opzPWguM`, `oMvaY0hy`, `d9eeKWIG` |
-| Prefetch, preview and background loads counted before 2026-11-20 13:51 UTC; iPhone long-press previews still count as clicks | D-026, D-033, D-035 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `oMvaY0hy`, `ZS0Uhz2p` |
-| Quick iOS bounces can lose `landing_page_viewed` and the exposure | D-026 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `oMvaY0hy` |
-| Flag-timeout fallbacks show A with no exposure | D-031 | experiment, `oMvaY0hy` |
-| Pre-launch survey test answers that can't be deleted | D-032 | `lQ1PbGvG` |
-| `welcome_email` isn't a channel | D-034 | `opzPWguM`, `dBS4IKQb`, `ZS0Uhz2p` (excluded); `KK0a37NQ`, `dRTNVtm9`, `d9eeKWIG` (captioned) |
-| **Unattributed direct visit** `836fe88c…` (2026-11-19 19:14 UTC, Chrome on Linux), possibly the owner, unconfirmed. Labeled and kept; it's the "(none)" visitor | this entry | `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9`, `d9eeKWIG` |
-| **Decliners' email events can't be joined** to their visit, channel or variant | D-026 finding 1 | no tile uses email events, so the dashboard description says it. D-034's "email funnel" isn't a saved insight: `welcome_email` visits stay in the two per-person funnels, and the memo reports email engagement as totals |
-| **Small sample: directional only, no significance** | this entry (and D-023) | dashboard description, experiment and every tile caption |
+| Accepting cookies splits a visitor: counted twice at funnel step 1, and 2 exposures | D-023, D-030, D-031 | dashboard description |
+| Prefetch, preview and background loads counted before 2026-11-20 13:51 UTC | D-033, D-035 | dashboard description |
+| iPhone long-press previews still count as clicks | D-026 finding 3 | dashboard description |
+| Quick iOS bounces can lose `landing_page_viewed` and the exposure | D-026 finding 2 | dashboard description |
+| Flag-timeout fallbacks show A with no exposure | D-031 | dashboard description; `oMvaY0hy` caption |
+| Pre-launch survey test answers that can't be deleted | D-032 | dashboard description; `lQ1PbGvG` caption |
+| `welcome_email` isn't a channel | D-034 | excluded on `opzPWguM`, `dBS4IKQb` and `ZS0Uhz2p` (captions say so); `d9eeKWIG` caption |
+| The `/go/` click can't be joined to the visit, so clicks have their own tile | D-022 | dashboard description; `ZS0Uhz2p` caption |
+| Decliners' email events can't be joined to their visit, channel or variant | D-026 finding 1 | dashboard description |
+| **Email opens can be automatic**: Apple Mail and Gmail's image proxy load the tracking image, so `welcome_email_opened` is inflated (tracking plan, email events). The honest engagement number is `welcome_email_link_clicked` | this entry | dashboard description |
+| Unattributed direct visit `836fe88c…` (2026-11-19 19:14 UTC), possibly the owner, unconfirmed; labeled and kept | this entry | dashboard description |
+| Small sample: directional only, no significance | this entry (and D-023) | dashboard description |
 | Internal `$opt_in` and old-code `$pageview` pass the test filter (no tile event) | D-037 | audit check 6a (not on any tile) |
 
-The nine audited insights are the six dashboard tiles plus `lQ1PbGvG`, `oMvaY0hy` and `d9eeKWIG`. Each limit is captioned on every one of them it affects.
+Since D-043 (2026-11-20), the limits are listed in the dashboard description and each tile caption is one sentence; the "Stated on" column above reflects that. This table is the register of every limit and its decision.
+
+## D-040: One stage funnel from the channel to the welcome email (F1)
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** one per-person funnel replaces `KK0a37NQ` and `dRTNVtm9` on the dashboard: Landed (action 492050) → `signup_form_started` → `signup_form_submitted` (all roles) → `welcome_email_opened` → `welcome_email_link_clicked`.
+  - Ordered, test accounts filtered, from 2026-11-19 18:00 UTC.
+  - Broken down by `utm_source` attributed to step 1, so the email steps (which have no UTM tags) don't create a "None" group.
+  - Conversion window: 7 days (Claude's default), long enough for a next-day open.
+  - The two old funnels stay saved, off the dashboard. Nothing is deleted.
+- **Reason:** the brief asks for the full named funnel on the dashboard, from the channel that reached the visitor to the welcome email they opened.
+
+## D-041: hero_cta_clicked is its own number, not a funnel step (F2)
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** `hero_cta_clicked` stays out of the funnel. It's shown as unique persons per `utm_source` in the channel table (D-042).
+- **Reason:** visitors who scroll straight to the form are real, and shouldn't count as drop-offs. The friend clicked the hero button only after signing up.
+
+## D-042: Channel table with signup rates (F3)
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** `opzPWguM` is renamed "Channels: signup rate per visitor (all roles and buyers)", shown as a table per `utm_source`:
+  - unique visitors (`landing_page_viewed`)
+  - all signups
+  - buyer signups
+  - hero clicks
+  - two formulas: all signups ÷ visitors, and buyer signups ÷ visitors
+  - The survey series is dropped (it's in the experiment), and `welcome_email` stays excluded (D-034).
+- **Reason:** the tile showed counts, not rates.
+
+## D-043: Short captions; the limits move to the dashboard description (F4)
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** each tile caption is one plain sentence with at most one D-number. The dashboard description lists the limits as short bullets:
+  - visitors who accept are counted twice at the funnel's first step and in the experiment
+  - decliners' email events can't join their visit
+  - Apple Mail can open emails automatically
+  - the channel click has its own tile, because the `/go/` click can't join the visit
+  - the unattributed direct visit
+  - directional only
+- This replaces D-039's "captioned on every tile it affects". The D-039 register stays as the reference.
+- **Reason:** the long captions made the tiles hard to read.
+
+## D-044: Legend on for the funnel (F5)
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** the D-040 funnel shows its legend.
+- **Reason:** with a breakdown by channel, the bars need a key.
+
+## D-045: Owner's iPhone test visits stay in the numbers
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner ("ignore them, not a big deal")
+- **What:** seven iOS profiles came in through `/go/personal_network` on 2026-11-20 between 14:44 and 14:50 UTC: ad527ed3…, 56850f68…, 59492d76…, 87d66938…, c5c0d8d4…, 99ecd560… and 01e2abcf…. They were the owner testing on an iPhone without `?internal=1`. They aren't deleted or filtered, and they're labeled in `scripts/metrics-audit.labels.json`.
+- **Effect:** they're all of variant B's exposures so far, most of the A/B and channel signups, and most survey answers after launch. **The memo has to exclude them by hand.** Count only events before 2026-11-20 14:44 UTC, or leave out these person IDs.
+- **Reason:** the owner's call.

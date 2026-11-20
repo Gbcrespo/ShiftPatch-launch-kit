@@ -13,5 +13,13 @@
   "d1688f5f-3225-5f24-8dfe-a5a2c783f189": "Owner, step 8 test 3: preview, variant A (?internal=1)",
   "66c13370-0e79-5431-927d-52e35920c579": "Owner, step 8 local /go/ check (localhost:8799)",
   "a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1": "Owner, step 8 local /go/ check (localhost:8799)",
-  "476d4df1-2c74-58c7-82ea-5e520e91571c": "Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1"
+  "476d4df1-2c74-58c7-82ea-5e520e91571c": "Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1",
+  "6c686719-86c5-5263-b171-b463312a3646": "Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9)",
+  "ad527ed3-edd7-5d40-b8c6-b716b1f82739": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)",
+  "56850f68-a988-58a1-bb1c-7d9598e479e8": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)",
+  "59492d76-413e-50b0-8cc2-93474aad5ef3": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)",
+  "87d66938-3912-5dba-b879-a5b5a2e674e5": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)",
+  "c5c0d8d4-d47d-5761-9ce4-528ef0ee873c": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)",
+  "99ecd560-7927-559d-acc0-c4f88d6ab8f1": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)",
+  "01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2": "Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045)"
 }

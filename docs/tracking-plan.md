@@ -8,7 +8,20 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 ## Funnel
 
-`landing_page_viewed` → `hero_cta_clicked` (optional step) → `signup_form_started` → `signup_form_submitted` → `survey sent` (the volume question)
+The dashboard's stage funnel (insight `d1JCOgLG`, D-040). It counts people, in order, within a 7-day window from step 1, from 2026-11-19 18:00 UTC. It's broken down by the `utm_source` of step 1.
+
+| # | Stage | Event | Notes |
+| :--- | :--- | :--- | :--- |
+| 1 | Landed | action "Landed" (492050) = `landing_page_viewed` OR `cookie_banner_answered` | A visitor who accepts cookies counts twice here (D-030) |
+| 2 | Form started | `signup_form_started` | |
+| 3 | Signed up (all roles) | `signup_form_submitted` | Buyer roles are split out in the channel table and the experiment |
+| 4 | Welcome email opened | `welcome_email_opened` | Joins only for visitors who accepted cookies (D-026). Can be an automatic open (Apple Mail, Gmail image proxy) |
+| 5 | Email link clicked | `welcome_email_link_clicked` | |
+
+Events that aren't funnel stages, and where they're shown instead:
+- **`channel_link_clicked`** has its own tile, "Channels: link clicks" (`ZS0Uhz2p`). The `/go/` click is a server event, and it can't be joined to the visit that follows it (D-022).
+- **`hero_cta_clicked`** is a column (unique persons per channel) in "Channels: signup rate per visitor" (`opzPWguM`). Visitors who scroll straight to the form are real, so it isn't a funnel step (D-041).
+- **`survey sent`** (the volume question) appears in the experiment's secondary metric and in `lQ1PbGvG`.
 
 ## Our events
 
@@ -74,16 +87,17 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 | Insight | Short id | For |
 | :--- | :--- | :--- |
-| Channels: buyer-signup rate per visitor (by utm_source) | `opzPWguM` | H1–H3 headline |
-| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | per-person view (accepters count twice at step 1, D-030) |
+| Channels: signup rate per visitor (all roles and buyers) | `opzPWguM` | H1–H3 headline; dashboard (D-042): visitors, all and buyer signups, hero clicks, signups ÷ visitors |
+| Funnel: channel → signup → welcome email (by utm_source) | `d1JCOgLG` | dashboard stage funnel (D-040) |
+| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | saved, off the dashboard since D-040 |
 | Channels: link clicks (by channel) | `ZS0Uhz2p` | H1–H3 clicks |
 | Signups by role (by utm_source) | `d9eeKWIG` | H2 |
 | A/B: buyer-signup rate per visitor (by hero_variant) | `oMvaY0hy` | A/B cross-check |
 | Volume question answers (pricing input) | `lQ1PbGvG` | D-004/D-005 |
 | Channels: traffic (visitors by utm_source) | `dBS4IKQb` | step 6 dashboard |
-| Channels: funnel visit → any signup → volume answer (by utm_source) | `dRTNVtm9` | step 8 dashboard (D-036): shows the funnel works; not the headline |
+| Channels: funnel visit → any signup → volume answer (by utm_source) | `dRTNVtm9` | saved, off the dashboard since D-040 |
 
-**Dashboard "ShiftPatch launch"** (id 2381553, step 6c, D-025 layout "A/B first", D-036): experiment 612484 results (full width), then `KK0a37NQ`, `dRTNVtm9` and `opzPWguM`, then `dBS4IKQb` next to `ZS0Uhz2p`. Funnel step 1 is the action "Landed" (D-030). `opzPWguM`, `dBS4IKQb` and `ZS0Uhz2p` exclude `utm_source = welcome_email` (D-034); `oMvaY0hy` counts only events with `$feature/hero-framing` (D-031).
+**Dashboard "ShiftPatch launch"** (id 2381553, D-040 to D-044): it fits on one screen. Row 1: the stage funnel `d1JCOgLG` next to the experiment 612484 results. Row 2: the channel table `opzPWguM`, then traffic `dBS4IKQb` and link clicks `ZS0Uhz2p`. Each tile has a one-sentence caption, and the known limits are listed in the dashboard description (D-043). `opzPWguM`, `dBS4IKQb` and `ZS0Uhz2p` exclude `utm_source = welcome_email` (D-034). `oMvaY0hy` counts only events with `$feature/hero-framing` (D-031).
 
 **Test-account filter** (project setting, D-029, D-037, D-038): person `is_internal` ≠ true, person `$internal_or_test_user` ≠ true, person `email` not containing `example.com`, `gbcrespo10` or `gbcre.eng`, event `is_internal` ≠ true, `$host` not localhost/127.0.0.1 and not containing `.shiftpatch-concept.pages.dev` (preview deploys), `$pathname` not `/preview/`. Known limits and where each is captioned: D-039. Check it with `npm run audit` (`scripts/metrics-audit.mjs`, read-only), which appends to `docs/metrics-audit.md`. Every tile starts at 18:00 UTC with test accounts filtered; the experiment counts from its launch.
 
