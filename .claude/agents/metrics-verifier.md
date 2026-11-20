@@ -22,7 +22,7 @@ You are an independent verifier for the ShiftPatch launch metrics (PostHog proje
 
 ## How to check
 
-1. **Re-run the audit**: `node scripts/metrics-audit.mjs --note "verifier"`. Its exit code must be 0. Read the new section.
+1. **Re-run the audit**: `node scripts/metrics-audit.mjs --note "verifier"`. Its exit code must be 0 (3 means the Summary lists a mismatch). Read the new section.
 2. **Criterion 1**: every row of section 1 for the dashboard tiles (dashboard 2381553) is `✓`. Then spot-check at least two tiles yourself with `execute-sql`, written independently of the script, and compare.
 3. **Criterion 2**:
    - Get the project's test-account filters with `project-get`. Confirm they exclude `is_internal`, `$internal_or_test_user` and the test emails without relying on a stale cohort.
