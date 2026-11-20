@@ -14,19 +14,19 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 | Event | Fires when | Where | Properties |
 | :--- | :--- | :--- | :--- |
-| `landing_page_viewed` | The landing page (`/`) loads and the variant is known | browser | `hero_variant`, utm_* |
+| `landing_page_viewed` | The landing page (`/`) is actually seen (not prerendering, not a hidden or background tab) and the variant is known. Since 2026-11-20 13:51 UTC (D-035); before that it fired on load | browser | `hero_variant`, utm_* |
 | `hero_cta_clicked` | "Join the early list" button in the hero is clicked | browser | `hero_variant` |
 | `signup_form_started` | First input or change in the email or role field (once per page load) | browser | `hero_variant`, `field` (`email` or `role`) |
 | `signup_form_submitted` | The signup form passes validation. **Primary A/B metric** (filtered to `is_buyer_role = true`, D-009) | browser | `role`, `is_buyer_role`, `hero_variant` |
 | `cookie_banner_answered` | Accept or No thanks clicked on the consent banner | browser | `choice` (`accepted` or `declined`) |
-| `channel_link_clicked` | Someone opens a tracked `/go/<channel>` link, before the redirect | server (Pages Function) | `channel`, `utm_source`, `utm_medium`, `utm_campaign` |
+| `channel_link_clicked` | Someone opens a tracked `/go/<channel>` link, before the redirect. Since 2026-11-20 13:51 UTC, prefetches and link-preview bots get the redirect but no event (D-033) | server (Pages Function) | `channel`, `utm_source`, `utm_medium`, `utm_campaign` |
 
 ## PostHog built-in events (names set by PostHog)
 
 | Event | Used for |
 | :--- | :--- |
-| `$pageview` | Every page view, sent automatically |
-| `$feature_flag_called` | Experiment exposure for flag `hero-framing` |
+| `$pageview` | Every page view. Since D-035 sent by our code (not automatically) once the page is actually seen; `$pageleave` only after that |
+| `$feature_flag_called` | Experiment exposure for flag `hero-framing`, sent by posthog-js once the page is seen (D-035). PostHog derives `$experiment_exposure` from it on the server; the experiment reads `$experiment_exposure` |
 | `$identify` | Sent by `identify()` at signup (D-016) |
 | `survey shown` / `survey sent` | The volume question (API-mode survey, D-017) and the feedback widget |
 | `$autocapture`, `$snapshot` (replay, only after consent) | Background context, not used in hypotheses |
@@ -67,7 +67,7 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 - **Analysis window starts 2026-11-19 18:00 UTC (15:00 BRT)**, the launch time (D-025, replacing D-021's 15:00 UTC). Anything earlier is testing. Use this as `date_from` in every insight.
 - **Variant source of truth: `hero_variant`** (D-022). Don't break anything down by `$feature/hero-framing`: it can flip after Accept or `identify()`. Exposures and the experiment are unaffected.
-- **`$pageview` has no `hero_variant`**, because it fires before the flag answers. Use `landing_page_viewed` for anything split by variant (D-022).
+- **Don't split `$pageview` by `hero_variant`.** Before D-035 it never had it (it fired before the flag answered); since D-035 it has it only when the flag answered before the page was seen. Use `landing_page_viewed` for anything split by variant (D-022), and only events that carry `$feature/hero-framing` (D-031).
 - **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). A per-person funnel undercounts visitors who accept cookies, because Accept moves them to a new person (D-022).
 
 ### Saved insights (all from 2026-11-19 18:00 UTC, test accounts filtered)
@@ -81,8 +81,11 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 | A/B: buyer-signup rate per visitor (by hero_variant) | `oMvaY0hy` | A/B cross-check |
 | Volume question answers (pricing input) | `lQ1PbGvG` | D-004/D-005 |
 | Channels: traffic (visitors by utm_source) | `dBS4IKQb` | step 6 dashboard |
+| Channels: funnel visit → any signup → volume answer (by utm_source) | `dRTNVtm9` | step 8 dashboard (D-036): shows the funnel works; not the headline |
 
-**Dashboard "ShiftPatch launch"** (id 2381553, step 6c, D-025 layout "A/B first"): experiment 612484 results (full width), then `KK0a37NQ` next to `opzPWguM`, then `dBS4IKQb` next to `ZS0Uhz2p`. Every tile starts at 18:00 UTC with test accounts filtered; the experiment counts from its launch.
+**Dashboard "ShiftPatch launch"** (id 2381553, step 6c, D-025 layout "A/B first", D-036): experiment 612484 results (full width), then `KK0a37NQ`, `dRTNVtm9` and `opzPWguM`, then `dBS4IKQb` next to `ZS0Uhz2p`. Funnel step 1 is the action "Landed" (D-030). `opzPWguM`, `dBS4IKQb` and `ZS0Uhz2p` exclude `utm_source = welcome_email` (D-034); `oMvaY0hy` counts only events with `$feature/hero-framing` (D-031).
+
+**Test-account filter** (project setting, D-029, D-037, D-038): person `is_internal` ≠ true, person `$internal_or_test_user` ≠ true, person `email` not containing `example.com`, `gbcrespo10` or `gbcre.eng`, event `is_internal` ≠ true, `$host` not localhost/127.0.0.1 and not containing `.shiftpatch-concept.pages.dev` (preview deploys), `$pathname` not `/preview/`. Known limits and where each is captioned: D-039. Check it with `npm run audit` (`scripts/metrics-audit.mjs`, read-only), which appends to `docs/metrics-audit.md`. Every tile starts at 18:00 UTC with test accounts filtered; the experiment counts from its launch.
 
 - Flag `hero-framing`: `control` = Variant A (money), `time` = Variant B (time), 50/50.
 - Experiment "Hero framing: money vs time". Primary metric: `signup_form_submitted` where `is_buyer_role = true`. Secondary metrics: all `signup_form_submitted`, and `survey sent` for the volume question.

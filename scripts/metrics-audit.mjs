@@ -15,6 +15,8 @@
 //   node scripts/metrics-audit.mjs --note "after D-029"
 //   node scripts/metrics-audit.mjs --dry             print only, write nothing
 //
+// Exit code: 0 = clean, 3 = something in the Summary needs attention, 1/2 = error.
+//
 // Needs POSTHOG_PERSONAL_API_KEY (read scopes: query, insight, dashboard,
 // experiment) in the environment or in .env (gitignored). Output carries
 // person IDs only, never emails or distinct IDs.
@@ -79,14 +81,15 @@ async function hogql(sql) {
 	return j.results.map((row) => Object.fromEntries(j.columns.map((c, i) => [c, row[i]])));
 }
 
-// ---- What counts as test traffic (D-029, plus localhost and /preview/) ------
+// ---- What counts as test traffic (D-029, D-037, D-038, localhost, /preview/) --
 const isTrue = (expr) => `ifNull(lower(toString(${expr})) = 'true', 0)`;
 const REASONS = {
 	internal_person: isTrue('person.properties.is_internal'),
 	test_user: isTrue('person.properties.$internal_or_test_user'),
 	internal_event: isTrue('properties.is_internal'),
-	test_email: `(ifNull(toString(person.properties.email), '') ILIKE '%example.com%' OR ifNull(toString(person.properties.email), '') ILIKE '%gbcrespo10%')`,
+	test_email: `(ifNull(toString(person.properties.email), '') ILIKE '%example.com%' OR ifNull(toString(person.properties.email), '') ILIKE '%gbcrespo10%' OR ifNull(toString(person.properties.email), '') ILIKE '%gbcre.eng%')`,
 	localhost: `(ifNull(toString(properties.$host), '') ILIKE '%localhost%' OR ifNull(toString(properties.$host), '') ILIKE '%127.0.0.1%')`,
+	preview_host: `ifNull(toString(properties.$host), '') ILIKE '%.shiftpatch-concept.pages.dev%'`, // D-038
 	preview: `ifNull(toString(properties.$pathname), '') ILIKE '%/preview/%'`,
 };
 
@@ -500,7 +503,9 @@ LIMIT 1000`);
 	const through = leaks.filter((l) => !Number(l.ev_prop_internal));
 	const tileLeaks = through.filter((l) => TILE_EVENTS.includes(l.event));
 	md.push(`Caught anyway by the event condition \`is_internal\` (D-037): ${leaks.length - through.length}. Getting through both: ${through.length} (${tileLeaks.length} on a tile event).`, '');
-	if (through.length) mismatches.push(`internal events that pass the whole test filter: ${through.length} (${tileLeaks.length} on a tile event)`);
+	// Only a leak onto a tile event changes a number; the rest are listed above
+	// and accepted (D-037): $opt_in from internal marking, old-code $pageview.
+	if (tileLeaks.length) mismatches.push(`internal events that pass the whole test filter on a tile event: ${tileLeaks.length}`);
 	metrics['check|filter_leak_events'] = leaks.length;
 	metrics['check|filter_leak_through_both'] = through.length;
 	metrics['check|filter_leak_tile_events'] = tileLeaks.length;
@@ -567,6 +572,8 @@ GROUP BY t_internal, t_test LIMIT 100`);
 	md.push(`<!-- audit-json ${JSON.stringify({ runAt: fmtTime(runAt), note: NOTE, metrics })} -->`, '', '---', '');
 
 	const section = md.join('\n');
+	// Exit 3 when anything needs attention, so a mismatch can't hide behind exit 0.
+	if (mismatches.length) process.exitCode = 3;
 	if (DRY) { console.log(section); return; }
 	const header = '# Metrics audit\n\nAppended by `scripts/metrics-audit.mjs` (read-only; see `.claude/agents/metrics-auditor.md`). Newest run at the bottom. Person IDs only, never emails.\n\n';
 	writeFileSync(OUT, (prevText || header) + section);

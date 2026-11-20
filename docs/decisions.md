@@ -371,6 +371,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Decision:** read the `hero-framing` flag on load with `send_event: false`, so the headline renders exactly as today. Once the page is really visible (`document.prerendering` is false and `visibilityState` is `visible`, or the first `prerenderingchange`/`visibilitychange` to visible), call `getFeatureFlag('hero-framing')` once more so posthog-js itself sends the same `$feature_flag_called` it sends today, with all its properties, once per page load. PostHog derives `$experiment_exposure` from it on the server: the SDK doesn't send that event. `landing_page_viewed` and `$pageview` are sent at that same moment. Automatic page views are turned off, and `capture_pageleave: true` is set so `$pageleave` keeps working. No UX change: same render timing, headline, banner, surveys and replay. No event names change.
 - **Test:** a background tab sends no `landing_page_viewed`, `$pageview` or `$feature_flag_called` until it's focused. `?internal=1` visits still send `$opt_in` and `$set` right away (internal marking, unchanged). The reference and test visits use fresh incognito windows, because the SDK reports a flag only once per browser.
 - **Reason:** prefetch and preview loads inflate visitors and exposures.
+- **Validated and shipped:** preview tests by the owner (`?internal=1`, 2026-11-20 13:30–13:37 UTC). A background tab sent nothing but the internal-marking `$opt_in`/`$set` for 40 s, then `$pageview`, `$feature_flag_called`, `$experiment_exposure` and `landing_page_viewed` within 5 ms of focus. Normal loads in both variants sent each once, with no headline delay or flicker. All 13 `$feature_flag*` properties matched the old-code reference visit. Merged to `main` and live from about **2026-11-20 13:51 UTC (10:51 BRT)**. Side effects: `$pageview` now carries `is_internal` on internal visits (the old code sent it before), and an exposure sent late also carries `hero_variant`.
 
 ## D-036: Show "All signups" on the dashboard; buyer signups stay the headline
 
@@ -387,3 +388,33 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Decision:** add the event-property condition `is_internal` is not `true` to the project test-account filter, next to the D-029 person conditions.
 - **Why it's needed:** with person-on-events, the person conditions read the person's properties *as they were when the event was captured*. The owner's `$pageview` at 2026-11-19 19:46:01 UTC was captured before `is_internal` reached the profile, so D-029 alone let it through. Every event from `?internal=1` carries `is_internal` itself (a super property), so this catches it. No tile used that event, so tile numbers don't move.
 - **Reason:** the smallest fix that closes the gap; found by the step 8 audit (check 6a).
+- **Known limit, accepted:** a few internal events still pass the whole filter, because they carry no internal flag at all when sent. These are the `$opt_in` that `?internal=1` sends before `is_internal` is registered (opting in resets the SDK's properties), and old-code `$pageview`s sent before D-035. None is a tile event, so no tile, experiment or survey number includes them. They can show in Web analytics. The audit lists them (check 6a) and flags only a leak onto a tile event.
+
+## D-038: Step 8 cleanup approved; two more test-filter conditions
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Cleanup (D-032):** delete 13 of the 16 profiles in `docs/cleanup-list.md`, rows 1–10, 12, 15 and 16, with their events and recordings. Rows 11, 13 and 14 stay: these are the provider-test profiles D-025 kept. The owner's 4 step 8 test profiles (internal, events after launch) also stay.
+- **Filter:** add two conditions to the project test-account filter:
+  - `$host` not containing `.shiftpatch-concept.pages.dev`. The leading dot matches preview-deploy subdomains only, never the live host. This excludes visits to Cloudflare preview URLs, like the owner's `$pageview` on `f6db5f66…`.
+  - person `email` not containing `gbcre.eng`, which covers the owner's Hotmail test address that D-029 missed.
+- **Reason:** the owner approved the list without the D-025 rows, and closed both gaps the audit found.
+
+## D-039: Register of known limits (step 8 verifier)
+
+- **Date:** 2026-11-20
+- **Decided by:** Claude's default (documentation only, no number or setting changes). The owner can override it.
+- **Why:** the step 8 verifier found limits with no entry of their own, or no caption on a tile they affect. Every known limit and where it's stated:
+
+| Limit | Decision | Stated on |
+| :--- | :--- | :--- |
+| Accepting cookies splits a visitor: counted twice at funnel step 1, and 2 exposures | D-023, D-030, D-031 | experiment, `KK0a37NQ`, `dRTNVtm9`, `opzPWguM`, `d9eeKWIG` |
+| Prefetch, preview and background loads counted before 2026-11-20 13:51 UTC; iPhone long-press previews still count as clicks | D-026, D-033, D-035 | experiment, `dBS4IKQb`, `ZS0Uhz2p` |
+| Quick iOS bounces can lose `landing_page_viewed` and the exposure | D-026 | experiment, `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9` |
+| Flag-timeout fallbacks show A with no exposure | D-031 | experiment, `oMvaY0hy` |
+| Pre-launch survey test answers that can't be deleted | D-032 | `lQ1PbGvG` |
+| `welcome_email` isn't a channel | D-034 | `opzPWguM`, `dBS4IKQb`, `ZS0Uhz2p` (excluded); `KK0a37NQ`, `dRTNVtm9` (captioned) |
+| **Unattributed direct visit** `836fe88c…` (2026-11-19 19:14 UTC, Chrome on Linux), possibly the owner, unconfirmed. Labeled and kept; it's the "(none)" visitor | this entry | `dBS4IKQb`, `opzPWguM`, `KK0a37NQ`, `dRTNVtm9` |
+| **Decliners' email events can't be joined** to their visit, channel or variant | D-026 finding 1 | no tile uses email events, so the dashboard description says it. D-034's "email funnel" isn't a saved insight: `welcome_email` visits stay in the two per-person funnels, and the memo reports email engagement as totals |
+| **Small sample: directional only, no significance** | this entry (and D-023) | dashboard description, experiment and every tile caption |
+| Internal `$opt_in` and old-code `$pageview` pass the test filter (no tile event) | D-037 | audit check 6a (not on any tile) |
