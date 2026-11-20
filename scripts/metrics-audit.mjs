@@ -440,9 +440,11 @@ async function main() {
 	metrics['test|events'] = dirty.length;
 
 	const views = clean.filter((e) => e.event === 'landing_page_viewed' || e.event === '$pageview');
-	const unattributed = [...new Set(views.filter((e) => !e.utm_source).map((e) => e.pid))];
-	md.push('**Unattributed visits** (clean page views with no utm_source):', '');
-	md.push(table(['Person', 'Label', 'First view', 'Browser / OS'], unattributed.map((pid) => { const f = views.find((e) => e.pid === pid); return [pid, label(pid) || '**UNLABELED**', fmtTime(f.t), `${f.browser ?? '?'} / ${f.os ?? '?'}`]; })), '');
+	// A person already excluded above isn't listed again, even if one of their
+	// events (e.g. an old-code $pageview sent before is_internal) passes.
+	const unattributed = [...new Set(views.filter((e) => !e.utm_source && !dirtyBy.has(e.pid)).map((e) => e.pid))];
+	md.push('**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):', '');
+	md.push(table(['Person', 'Label', 'First view', 'Host', 'Browser / OS'], unattributed.map((pid) => { const f = views.find((e) => e.pid === pid); return [pid, label(pid) || '**UNLABELED**', fmtTime(f.t), f.host ?? '?', `${f.browser ?? '?'} / ${f.os ?? '?'}`]; })), '');
 	metrics['unattributed|persons'] = unattributed.length;
 	const unlabeled = unattributed.filter((pid) => !label(pid));
 	if (unlabeled.length) mismatches.push(`unlabeled unattributed visits: ${unlabeled.join(', ')}`);
@@ -515,11 +517,13 @@ GROUP BY t_internal, t_test LIMIT 100`);
 
 	// c) Every clean landing_page_viewed that followed a flag answer must carry
 	// $feature/hero-framing (oMvaY0hy relies on it; re-checked after D-035).
-	const answered = clean.filter((e) => e.event === '$feature_flag_called' && e.feature_flag === FLAG && e.flag_response);
-	const pageViews = clean.filter((e) => e.event === 'landing_page_viewed');
+	// All events, internal included: this checks the code, and the owner's
+	// ?internal=1 test visits are the only post-change loads at first.
+	const answered = events.filter((e) => e.event === '$feature_flag_called' && e.feature_flag === FLAG && e.flag_response);
+	const pageViews = events.filter((e) => e.event === 'landing_page_viewed');
 	const shouldHave = pageViews.filter((v) => answered.some((a) => a.pid === v.pid && Math.abs(a.t - v.t) <= 60e3));
 	const missing = shouldHave.filter((v) => !v.has_flag_prop);
-	md.push(`**c) \`$feature/hero-framing\` on page views:** ${pageViews.filter((v) => v.has_flag_prop).length} of ${pageViews.length} clean \`landing_page_viewed\` carry it. ${shouldHave.length} followed a flag answer within 60 s; ${missing.length} of those are missing it${missing.length ? ` (${missing.map((v) => `${v.pid} at ${fmtTime(v.t)}`).join(', ')})` : ''}.`, '');
+	md.push(`**c) \`$feature/hero-framing\` on page views:** ${pageViews.filter((v) => v.has_flag_prop).length} of ${pageViews.length} \`landing_page_viewed\` (internal included) carry it. ${shouldHave.length} followed a flag answer within 60 s; ${missing.length} of those are missing it${missing.length ? ` (${missing.map((v) => `${v.pid} at ${fmtTime(v.t)}`).join(', ')})` : ''}.`, '');
 	if (missing.length) mismatches.push(`landing_page_viewed without $feature/hero-framing after a flag answer: ${missing.length}`);
 	metrics['check|views_missing_flag_prop'] = missing.length;
 
