@@ -39,7 +39,7 @@ const EXPERIMENT_START = '2026-11-19 17:48:18'; // UTC, 14:48 BRT (D-026)
 const INSIGHT_START = '2026-11-19 18:00:00'; // UTC, 15:00 BRT (D-025)
 // D-064: when the banner-free, local-storage tracking went live (UTC). Empty
 // until deploy; once set, check 6e watches for consent-era behaviour after it.
-const SWITCH_AT = '';
+const SWITCH_AT = '2026-11-21 21:58:04';
 const SURVEY_ID = '01a1ef17-b69e-0000-336f-3ef067316d59';
 const SURVEY_ANSWER = '$survey_response_dc9030ae-22f8-4519-a037-86d6b878a113';
 // Saved insights the memo reads that aren't dashboard tiles.
