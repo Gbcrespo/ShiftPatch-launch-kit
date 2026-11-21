@@ -322,3 +322,7 @@ output files: prospects-round6.csv (header only), prospects-round6-log.md
   - The memo's A/B read date is unknown, so the schedule is relative, with an example only.
   - The consent-bar reading is unconfirmed.
 - **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\paid-campaign-spec.md
+
+## Repo cleanup (2026-11-21, main session, D-059)
+
+- **Removed and moved:** the video project (154 files, without the HyperFrames caches) and the final `video.mp4` moved out of the repo folder to `%USERPROFILE%\Downloads\ShiftPatch-video\`, hash-checked. Removed `.vscode/`, `docs/.gitkeep` and `functions/.gitkeep`, and dropped the unused `isBuyerRole` export. Replaced the owner's personal test addresses in `decisions.md` and `step-5-notes.md` with placeholders. The built site is byte-identical to main's, and the audit showed no tile move.
