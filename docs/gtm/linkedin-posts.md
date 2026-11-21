@@ -155,7 +155,7 @@ Where the idea is written down: https://shiftpatch-concept.pages.dev/go/linkedin
 
 Last one in this round, and the one I'm least sure about.
 
-I have a picture in my head of a manager working down a list of names to fill an open shift. I haven't checked that picture against anything, and I can't point to a source for it.
+I have a picture in my head of a manager working down a list of names to fill an open shift. That's a hunch, not something I've checked yet.
 
 So: is that actually how it goes where you work? Or is it a text thread, a scheduling system, a float pool office, something else entirely? If my picture is wrong, I'd rather know.
 

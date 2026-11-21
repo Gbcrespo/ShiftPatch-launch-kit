@@ -636,7 +636,7 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
   - F2: add a header note to the outreach file saying the "how it would work" sentence is shared on purpose.
   - F3: say why Florida in `target-customer.md`, and say who Juan is in D-015.
   - F7: add a README pointer to the transcripts and the video.
-  - F5: reword post 6's "I got that picture from conversation". The owner did not have those conversations, so it now reads "I haven't checked that picture against anything, and I can't point to a source for it."
+  - F5: reword post 6's "I got that picture from conversation". The owner did not have those conversations, so it now reads "That's a hunch, not something I've checked yet." (owner's wording, replacing the evaluator's suggested line).
 - **Not fixed:**
   - F4: the page's "one question" vs the five-question email survey becomes a memo limit, so the live page doesn't change mid-experiment.
   - F6: the hashtags stay.
