@@ -87,9 +87,10 @@ Events that aren't funnel stages, and where they're shown instead:
 
 | Insight | Short id | For |
 | :--- | :--- | :--- |
-| Channels: signup rate per visitor (all roles and buyers) | `opzPWguM` | H1–H3 headline; dashboard (D-042): visitors, all and buyer signups, hero clicks, signups ÷ visitors |
-| Funnel: channel → signup → welcome email (by utm_source) | `d1JCOgLG` | dashboard stage funnel (D-040) |
-| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | saved, off the dashboard since D-040 |
+| Channels: visitors → signups → buyers | `9s0dwQbs` | H1–H3 rates; dashboard channel table (D-060): visitors, all signups, buyer-role signups and both rates per `utm_source`. SQL (HogQL) table: it excludes only `is_internal` persons and events, not the full project test filter |
+| Channels: signup rate per visitor (all roles and buyers) | `opzPWguM` | saved, off the dashboard since D-060 (was the D-042 channel table) |
+| Funnel: channel → signup → welcome email (by utm_source) | `d1JCOgLG` | dashboard stage funnel (D-040); H1–H3 stages (D-061) |
+| Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | saved, off the dashboard since D-040; H1 and H3 survey step (D-061) |
 | Channels: link clicks (by channel) | `ZS0Uhz2p` | H1–H3 clicks |
 | Signups by role (by utm_source) | `d9eeKWIG` | H2 |
 | A/B: buyer-signup rate per visitor (by hero_variant) | `oMvaY0hy` | A/B cross-check |
@@ -97,7 +98,7 @@ Events that aren't funnel stages, and where they're shown instead:
 | Channels: traffic (visitors by utm_source) | `dBS4IKQb` | step 6 dashboard |
 | Channels: funnel visit → any signup → volume answer (by utm_source) | `dRTNVtm9` | saved, off the dashboard since D-040 |
 
-**Dashboard "ShiftPatch launch"** (id 2381553, D-040 to D-044): it fits on one screen. Row 1: the stage funnel `d1JCOgLG` next to the experiment 612484 results. Row 2: the channel table `opzPWguM`, then traffic `dBS4IKQb` and link clicks `ZS0Uhz2p`. Each tile has a one-sentence caption, and the known limits are listed in the dashboard description (D-043). `opzPWguM`, `dBS4IKQb` and `ZS0Uhz2p` exclude `utm_source = welcome_email` (D-034). `oMvaY0hy` counts only events with `$feature/hero-framing` (D-031).
+**Dashboard "ShiftPatch launch"** (id 2381553, D-040 to D-044): it fits on one screen. Row 1: the stage funnel `d1JCOgLG` next to the experiment 612484 results. Row 2: the channel table `9s0dwQbs` (D-060), then traffic `dBS4IKQb` and link clicks `ZS0Uhz2p`. Each tile except `9s0dwQbs` has a one-sentence caption, and the known limits are listed in the dashboard description (D-043). `9s0dwQbs`, `dBS4IKQb` and `ZS0Uhz2p` exclude `utm_source = welcome_email` (D-034). `oMvaY0hy` counts only events with `$feature/hero-framing` (D-031).
 
 **Test-account filter** (project setting, D-029, D-037, D-038): person `is_internal` ≠ true, person `$internal_or_test_user` ≠ true, person `email` not containing `example.com`, `gbcrespo10` or `gbcre.eng`, event `is_internal` ≠ true, `$host` not localhost/127.0.0.1 and not containing `.shiftpatch-concept.pages.dev` (preview deploys), `$pathname` not `/preview/`. Known limits and where each is captioned: D-039. Check it with `npm run audit` (`scripts/metrics-audit.mjs`, read-only), which appends to `docs/metrics-audit.md`. Every tile starts at 18:00 UTC with test accounts filtered; the experiment counts from its launch.
 

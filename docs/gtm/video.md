@@ -1,13 +1,14 @@
 # Promo video
 
-Status: rendered, not published. ShiftPatch is a pre-launch concept, and nothing is built. Every app screen in the video carries a "Concept" label, and the reveal and end card carry the "Pre-launch concept" pill (the scope promised to Designli: clearly labeled concept mockups).
+Status: rendered, not published. The final MP4 is delivered with the submission email. ShiftPatch is a pre-launch concept, and nothing is built. Every app screen in the video carries a "Concept" label, and the reveal and end card carry the "Pre-launch concept" pill (the scope promised to Designli: clearly labeled concept mockups).
 
 ## The file
-- **Final file:** `../shiftpatch-promo-video/renders/video.mp4`, voiceover with no captions (D-051). A captioned version is kept as `renders/video-captioned.mp4`. Both sit in the sibling video project outside this repo, so they aren't in git until the owner decides (D-052, pending).
+- **Final file:** `video.mp4`, 75.0 s, voiceover with no captions (D-051). It's delivered with the submission email, not through this repo.
+- **Where the files live:** outside this repo, in the owner's local folder `%USERPROFILE%\Downloads\ShiftPatch-video\` (D-059). The final cut is `renders/video.mp4`. A captioned version is `renders/video-captioned.mp4`, and three earlier test renders sit beside them. No video, render or audio file is in git, and `.gitignore` keeps them out.
 - **Format:** 75.0 s (target 60–90), 1920×1080, 30 fps, H.264 + AAC, 4.4 MB.
 - **Audio, measured but not heard:** −14.0 LUFS integrated, −1.1 dBFS peak.
 - **Tool:** HeyGen HyperFrames, CLI 0.9.72, with the `hyperframes` and `media-use` skills (D-046). It was rendered locally on the Free plan. No credits were spent and no card was added.
-- **Project:** `../shiftpatch-promo-video/` holds BRIEF.md, SPEC.md, STORYBOARD.md, SCRIPT.md, STORYLINES.md, BUILD.md and REVIEW.md, plus `index.html` and `compositions/`. Re-render it with the HyperFrames CLI.
+- **Project:** `ShiftPatch-video\` holds BRIEF.md, SPEC.md, STORYBOARD.md, SCRIPT.md, STORYLINES.md, BUILD.md and REVIEW.md, plus `index.html`, `compositions\`, `assets\` and `snapshots\`. Re-render it with the HyperFrames CLI. The HyperFrames caches were not copied; the CLI rebuilds them.
 - **Live site:** never loaded. Nothing was captured from a URL, and the only preview was the local Studio on localhost.
 
 ## What it says (voiceover and captions)
@@ -44,4 +45,4 @@ Agent D's script was never written. This file didn't exist before this step, so 
   - The payoff board at 55–62 s now carries a Concept label.
   - The "Pre-launch concept" pill lands with the wordmark.
   - Caption line breaks were fixed.
-  - The owner kept the remaining copy and polish notes as they are (see `../shiftpatch-promo-video/REVIEW.md`).
+  - The owner kept the remaining copy and polish notes as they are (see `REVIEW.md` in the video folder).

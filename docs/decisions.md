@@ -283,7 +283,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Date:** 2026-11-19
 - **Decided by:** project owner
 - **Launch time:** the analysis window now starts at **2026-11-19 15:00 BRT (18:00 UTC)**. This replaces D-021's 12:00 BRT (15:00 UTC); the rest of D-021 stands. The experiment "Hero framing: money vs time" (612484) is launched at 15:00 BRT, right before the `personal_network` link is shared, and every insight uses `date_from = 2026-11-19T18:00:00Z`.
-- **6d test data:** the 18 listed test persons (step 4 review part D and step 5 test addresses) were deleted with their events and recordings. `gbcrespo10+test6@gmail.com` and `gbcre.eng+test1@hotmail.com` (5d provider tests on 2026-11-19) are kept. Like the step 6a test runs, they are dated before launch and excluded by the launch date and the test-account filter.
+- **6d test data:** the 18 listed test persons (step 4 review part D and step 5 test addresses) were deleted with their events and recordings. `<test address 1>` and `<test address 2>` (5d provider tests on 2026-11-19) are kept. Like the step 6a test runs, they are dated before launch and excluded by the launch date and the test-account filter.
 - **Dashboard:** layout Option 1, "A/B first": experiment results full width on top, then the signup funnel by channel next to the buyer-signup rate per channel, then traffic by channel next to link clicks.
 - **Step 6 plan:** approved as proposed (6a end-to-end runs on 4 `/go/` links before launch, 6b checklist, 6c dashboard, 6d exclusion by date with no further deletions).
 - **Reason:** the owner didn't give one ("not relevant").
@@ -483,6 +483,7 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **What:** seven iOS profiles came in through `/go/personal_network` on 2026-11-20 between 14:44 and 14:50 UTC: ad527ed3…, 56850f68…, 59492d76…, 87d66938…, c5c0d8d4…, 99ecd560… and 01e2abcf…. They were the owner testing on an iPhone without `?internal=1`. They aren't deleted or filtered, and they're labeled in `scripts/metrics-audit.labels.json`.
 - **Effect:** they're all of variant B's exposures so far, most of the A/B and channel signups, and most survey answers after launch. **The memo has to exclude them by hand.** Count only events before 2026-11-20 14:44 UTC, or leave out these person IDs.
 - **Reason:** the owner's call.
+- **Note (2026-11-21):** 01e2abcf… also has visits after the test window, on 2026-11-21 at 03:02 and 13:36 UTC, including its only experiment exposure (found in the review, `docs/review-2026-11-21.md`). The owner confirmed it's them: "same browser as my D-045 tests". It's an owner test, and the memo excludes all of its events. Because of these later visits, the time cut-off above doesn't cover it, so the memo must leave out the person IDs.
 
 ## D-046: The promo video is made with HyperFrames
 
@@ -599,3 +600,29 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **Decided by:** project owner ("Go with the suggestion")
 - **Decision:** beyond the CTA lines (D-053), the welcome email says "I'll send two short reminders" instead of "two short notes, each with one question". Follow-up 1's subject is "The 1-minute survey" and follow-up 2's is "Last note: the 1-minute survey". The 15-minute call ask is gone.
 - **Reason:** the old lines and subjects promised a question and a call that the emails no longer ask for.
+
+## D-059: Repo cleanup before submission
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** Repo cleanup before submission. Video files moved to a local folder outside the repo.
+  - The video project (154 files, without the regenerable HyperFrames caches) and the final `video.mp4` now live in `%USERPROFILE%\Downloads\ShiftPatch-video\`. Every file was hash-checked before the old folder beside the repo was removed. `.gitignore` keeps renders and media files out.
+  - Removed: `.vscode/` (Astro starter leftovers) and the `docs/` and `functions/` `.gitkeep` files. `isBuyerRole` is no longer exported (used only in its own file).
+  - The owner's personal test addresses in the docs are replaced by `<test address N>`. Older commits still contain them (history isn't rewritten).
+  - Kept: `docs/step-6-notes.md` (process evidence).
+- **Reason:** "Part of the clean up"
+
+## D-060: The dashboard's channel table is 9s0dwQbs
+
+- **Date:** 2026-11-21 (the tile was built on 2026-11-20 at 15:14 UTC; this logs it)
+- **Decided by:** project owner
+- **Decision:** the dashboard keeps the SQL table `9s0dwQbs` "Channels: visitors → signups → buyers" in row 2. `opzPWguM` (D-042) stays saved, off the dashboard, and isn't restored.
+  - Known differences from D-042: `9s0dwQbs` has no hero-clicks column and no caption yet. It excludes only `is_internal` persons and events, not the full project test filter, so a test email or a preview visit without `is_internal` would be counted. Its numbers match the other tiles on 2026-11-21 (review, `docs/review-2026-11-21.md`).
+- **Reason:** "I built it on purpose to make the dashboard more readable."
+
+## D-061: H1–H3 name their PostHog insights
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner (Agent 3's suggestion, with `9s0dwQbs` for rates)
+- **Decision:** in `docs/research/traction-channels.md`, H1–H3 say where their numbers live: `9s0dwQbs` for rates, `d1JCOgLG` for stages, `ZS0Uhz2p` for clicks, `d9eeKWIG` for H2's roles and `KK0a37NQ` for the survey step in H1 and H3. This replaces "the Funnel insight described in the shared notes".
+- **Reason:** the brief requires each hypothesis to say where its number lives in PostHog (review finding, `docs/review-2026-11-21.md`).

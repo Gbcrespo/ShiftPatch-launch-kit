@@ -24,18 +24,18 @@ Code: `functions/api/contact.ts`, `functions/email/[action].ts`, `functions/_sha
   - An unsigned POST to the `/exec` URL got `{"ok":false,"error":"bad_signature"}` back (through the 302 to `script.googleusercontent.com`), so the script was deployed, public and had a secret.
   - `/api/contact` returned 202, so Cloudflare had the URL.
 - **Cause:** the two `EMAIL_SECRET` values didn't match. Cloudflare ignores the script's reply, so this failed silently.
-- **Fix:** set a fresh secret on both sides, then retry the deployment. Afterwards `gbcrespo10+test4@gmail.com` got the welcome email, and `welcome_email_sent`, `_opened` and `_link_clicked` arrived on one person.
+- **Fix:** set a fresh secret on both sides, then retry the deployment. Afterwards `<test address 3>` got the welcome email, and `welcome_email_sent`, `_opened` and `_link_clicked` arrived on one person.
 
 ## Test addresses (remove in 6d)
 
 | Address | Used for | Date |
 | :--- | :--- | :--- |
 | `step5-localtest@example.com` | Local function tests (no real email sent; PostHog events only) | 2026-11-18 |
-| `gabriel+test1@gmail.com` | Browser signup before the fix (not in the Sheet, no email). **Not the owner's inbox**: plus-addressing delivers to `gabriel@gmail.com`. Never reuse it | 2026-11-18 |
-| `gbcrespo10+test1@gmail.com` | Browser signup (`?internal=1`) before the fix: PostHog only, not in the Sheet, no email | 2026-11-18 |
-| `gbcrespo10+test2@gmail.com` | Same as test1 | 2026-11-18 |
-| `gbcrespo10+test3@gmail.com` | Same as test1 | 2026-11-18 |
-| `gbcrespo10+test4@gmail.com` | Direct `/api/contact` call after the fix: in the Sheet, welcome received, 3 email events on one person. No browser signup, so there's no `signup_form_submitted` for it | 2026-11-18 |
+| `<test address 4>` | Browser signup before the fix (not in the Sheet, no email). **Not the owner's inbox**: plus-addressing delivers to `<test address 5>`. Never reuse it | 2026-11-18 |
+| `<test address 6>` | Browser signup (`?internal=1`) before the fix: PostHog only, not in the Sheet, no email | 2026-11-18 |
+| `<test address 7>` | Same as test1 | 2026-11-18 |
+| `<test address 8>` | Same as test1 | 2026-11-18 |
+| `<test address 3>` | Direct `/api/contact` call after the fix: in the Sheet, welcome received, 3 email events on one person. No browser signup, so there's no `signup_form_submitted` for it | 2026-11-18 |
 
 ## 5d status
 
