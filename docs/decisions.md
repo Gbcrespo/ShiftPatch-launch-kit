@@ -483,3 +483,68 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **What:** seven iOS profiles came in through `/go/personal_network` on 2026-11-20 between 14:44 and 14:50 UTC: ad527ed3…, 56850f68…, 59492d76…, 87d66938…, c5c0d8d4…, 99ecd560… and 01e2abcf…. They were the owner testing on an iPhone without `?internal=1`. They aren't deleted or filtered, and they're labeled in `scripts/metrics-audit.labels.json`.
 - **Effect:** they're all of variant B's exposures so far, most of the A/B and channel signups, and most survey answers after launch. **The memo has to exclude them by hand.** Count only events before 2026-11-20 14:44 UTC, or leave out these person IDs.
 - **Reason:** the owner's call.
+
+## D-046: The promo video is made with HyperFrames
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** the 60–90 second promo video is built with HeyGen's HyperFrames (the `hyperframes` skill, CLI 0.9.72), rendered locally for free, in a sibling folder outside the site repo (`../shiftpatch-promo-video`). Telemetry off. No capture of the live site; app screens are labeled "Concept" mockups built from `src/data/` copy and the site's own styles. Voice: a free voice only, else captions only. Music: free stock music only, else none. Agent D's `docs/gtm/video.md` was never written, so the brief starts fresh from `docs/research/target-customer.md` and `src/data/`.
+- **Reason:** "HyperFrames builds the video from HTML using the site's own brand styles, renders locally for free, and lets an agent build and review it frame by frame, so the video is reproducible and editable instead of a one-off export."
+- **Ruled out:** `product-launch-video`, a skill that doesn't exist in heygen-com/hyperframes.
+
+## D-047: Promo video storyline, link and voice
+
+- **Date:** 2026-11-20
+- **Decided by:** Claude, at the owner's request ("use your best judgment")
+- **Decision:**
+  - Storyline A, "Tonight's open shift": one open-shift card is carried through the landing page's three "How it would work" steps, verbatim (D-010).
+  - The end card shows the plain URL `shiftpatch-concept.pages.dev`, with no new `/go/` channel.
+  - The copy is first person, signed "Gabriel", like the LinkedIn posts. It ends on "We're testing this idea" and "Join the early list".
+  - No numbers on screen.
+- **Reason:**
+  - A is a situation every nurse manager knows, and it reuses only approved copy.
+  - A new tracked link would change the site and its events in a step meant to leave them alone.
+  - First person follows the copy-voice rule.
+  - Every sourced Florida figure is about cost, so it would tilt the hero A/B test (D-001).
+- **Trade-off:** visits from the video arrive as untagged direct traffic.
+
+## D-048: The promo video is a pre-launch teaser in the brand voice
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner
+- **Decision:** the video's voiceover is the brand "we", confident and persuasive. It doesn't say "I'm Gabriel", "nothing is built yet" or "what I don't know yet".
+  - It never says or implies ShiftPatch is available now.
+  - It never calls it an experiment or says it isn't available.
+  - It ends on "Join the early list". This replaces D-047's first person and the brief's "We're testing this idea" ending, for this video only.
+- **Kept:**
+  - Every app screen keeps its "Concept" label, and the "Pre-launch concept" pill stays (the Designli scope).
+  - How it works is introduced once with "Here's how it would work".
+  - No numbers, neutral pain (D-001), and no hype words.
+- **Reason:** "it shouldn't be me saying it's just an idea".
+
+## D-049: The promo video has no voiceover
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner ("No voice")
+- **Decision:** the video has no voiceover. The SCRIPT.md lines become the caption track, over on-screen titles and a music bed from HeyGen's free catalog.
+- **Reason:** HeyGen refused the voice on the Free plan ("a HyperFrames Pro feature; nothing was charged"), and the brief says no paid credits. The local and self-recorded options needed extra setup.
+- **Spent:** nothing. The project's credit limit stays at 0.
+
+## D-050: The promo video's voiceover is Kokoro "af_bella", run locally
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner ("Use Kokoro", "Go with Bella")
+- **Decision:** the voiceover is the SCRIPT.md lines read by Kokoro's `af_bella` voice. It runs on the owner's PC, free and with no account, in its own Python environment outside the repos (`../.kokoro-venv`). This replaces D-049's captions-only cut.
+  - The captions are retimed to the speech, using the pauses in each line.
+  - The music is lowered to sit under the voice.
+- **Reason:** the owner tested HeyGen's "free" voice again with the credit guard lifted for one line. HeyGen refused it: "This needs a HyperFrames plan". Nothing was charged.
+
+## D-051: The promo video ships without captions
+
+- **Date:** 2026-11-20
+- **Decided by:** project owner ("Remove the captions for this version")
+- **Decision:**
+  - `renders/video.mp4` has the voiceover and no captions.
+  - The caption track is hidden (`data-hidden` on its host in `index.html`), not deleted.
+  - The captioned render is kept as `renders/video-captioned.mp4`.
+- **Effect:** the brief's "captions on" no longer applies to this version.
