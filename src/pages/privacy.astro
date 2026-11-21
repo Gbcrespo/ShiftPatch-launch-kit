@@ -1,5 +1,5 @@
 ---
-// Privacy policy (D-002). Update the email-tool line once the tool is chosen.
+// Privacy policy (D-002, D-024, D-064).
 import Layout from '../layouts/Layout.astro';
 import TopBar from '../components/TopBar.astro';
 import Footer from '../components/Footer.astro';
@@ -48,12 +48,15 @@ const updated = '21 November 2026';
 			(country or city, worked out from your IP address).
 		</p>
 		<p>
-			By default this runs <strong>without cookies</strong>, and we can't recognise you if you
-			come back on a different day. If you accept cookies in the banner, PostHog also sets a
-			cookie so we can tell repeat visits apart, and records your session (mouse movement,
-			scrolling and clicks) so we can see where the page is confusing.
-			<strong>Session recordings hide everything typed into form fields.</strong> If you
-			decline, there are no cookies and no recordings.
+			We don't use cookies. To tell one visit from the next, PostHog keeps a random analytics ID
+			in your browser's local storage for this site. It isn't linked to your name or email unless
+			you join the list. If you arrive through one of our links, the click is counted on our
+			server and nothing is stored on your device.
+		</p>
+		<p>
+			PostHog also records your visit to this page (mouse movement, scrolling and clicks) so we
+			can see where the page is confusing.
+			<strong>Recordings hide everything typed into form fields.</strong>
 		</p>
 
 		<h3>Emails</h3>
@@ -83,7 +86,13 @@ const updated = '21 November 2026';
 
 		<h2>Your choices</h2>
 		<ul>
-			<li>Decline cookies in the banner. The page works the same either way.</li>
+			<li>
+				You can remove the analytics ID at any time by clearing this site's data in your browser.
+			</li>
+			<li>
+				You can stop analytics and recordings on this device with the button below. The page
+				works the same either way.
+			</li>
 			<li>Unsubscribe from any email using the link in it.</li>
 			<li>
 				Ask for a copy of your data, a correction, or deletion by emailing{' '}
@@ -91,11 +100,53 @@ const updated = '21 November 2026';
 				including the EU and Brazil.
 			</li>
 		</ul>
+
+		<p class="stop-analytics">
+			<button class="button button--quiet" type="button" data-stop-analytics>
+				Stop analytics on this device
+			</button>
+			<span class="stop-analytics__done" role="status" hidden>
+				Analytics and recordings are off on this device.
+			</span>
+		</p>
 	</main>
 	<Footer />
 </Layout>
 
+<script>
+	import { startAnalytics, stopAnalyticsOnThisDevice, analyticsStopped } from '../lib/analytics';
+
+	startAnalytics('other');
+	const button = document.querySelector<HTMLButtonElement>('[data-stop-analytics]');
+	const done = document.querySelector<HTMLElement>('.stop-analytics__done');
+	const showStopped = () => {
+		if (button) button.hidden = true;
+		if (done) done.hidden = false;
+	};
+	if (analyticsStopped()) showStopped();
+	button?.addEventListener('click', () => {
+		stopAnalyticsOnThisDevice();
+		showStopped();
+	});
+</script>
+
 <style>
+	.stop-analytics {
+		margin-top: 1.5rem;
+	}
+
+	/* A quiet, outlined button: a choice, not a call to action. */
+	.button--quiet {
+		background: transparent;
+		color: var(--teal-dark);
+		box-shadow: inset 0 0 0 1px var(--teal);
+	}
+
+	.button--quiet:hover {
+		background: var(--teal);
+		color: #fff;
+	}
+
 	.policy {
 		max-width: calc(var(--measure) + 2 * var(--gutter));
 		padding-block: 2.5rem 3rem;

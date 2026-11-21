@@ -2,9 +2,11 @@
 // `channel_link_clicked` to PostHog, then redirects to the landing page with
 // UTM tags. One entry per channel the owner picked, plus personal_network.
 //
-// The event is cookieless (no cookie is read or set). It carries the visitor's
-// IP and user agent, so PostHog hashes it to the same daily person as the
-// landing visit that follows (docs/tracking-plan.md, "Identity").
+// The event is sent from the server and stores nothing on the visitor's device
+// (no cookie is read or set). It uses PostHog's server-side cookieless hash,
+// which needs the project's cookieless setting to stay on. Since D-064 the page
+// keeps its own ID in local storage, so a click can't be joined to the visit
+// that follows; link clicks are reported on their own (D-022).
 
 const TOKEN = 'phc_w5EPh6vnwRLUWfxVBLPytjzNXCU4Ju3xYrx5SCj8FxeA';
 const CAPTURE_URL = 'https://us.i.posthog.com/i/v0/e/';

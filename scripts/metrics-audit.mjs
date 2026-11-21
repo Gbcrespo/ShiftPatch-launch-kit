@@ -37,6 +37,9 @@ const EXPERIMENT_ID = 612484;
 const FLAG = 'hero-framing';
 const EXPERIMENT_START = '2026-11-19 17:48:18'; // UTC, 14:48 BRT (D-026)
 const INSIGHT_START = '2026-11-19 18:00:00'; // UTC, 15:00 BRT (D-025)
+// D-064: when the banner-free, local-storage tracking went live (UTC). Empty
+// until deploy; once set, check 6e watches for consent-era behaviour after it.
+const SWITCH_AT = '';
 const SURVEY_ID = '01a1ef17-b69e-0000-336f-3ef067316d59';
 const SURVEY_ANSWER = '$survey_response_dc9030ae-22f8-4519-a037-86d6b878a113';
 // Saved insights the memo reads that aren't dashboard tiles.
@@ -125,6 +128,7 @@ SELECT
   toString(properties.\`${SURVEY_ANSWER}\`) AS answer,
   toString(properties.$browser) AS browser, toString(properties.$os) AS os,
   toString(properties.$host) AS host, toString(properties.$lib) AS lib,
+  ${isTrue('properties.$cookieless_mode')} AS cookieless,
   ${reasonCols}
 FROM events
 WHERE timestamp >= toDateTime('${EXPERIMENT_START}', 'UTC')
@@ -141,6 +145,7 @@ LIMIT 50000`);
 		e.buyer = Number(e.buyer) === 1;
 		e.resent = Number(e.resent) === 1;
 		e.has_flag_prop = Number(e.has_flag_prop) === 1;
+		e.cookieless = Number(e.cookieless) === 1;
 	}
 	return rows;
 }
@@ -194,6 +199,7 @@ function funnel(ev, isStep2) {
 // come after the previous one and within `windowMs` of step 1. Breakdown is the
 // utm_source of the step 1 event (PostHog "attributed to step 1", D-040), or
 // none when the tile has no breakdown (every row then lands under "(none)").
+// cookie_banner_answered stays in "Landed" for past data; it stops firing at D-064.
 const isLanded = (e) => e.event === 'landing_page_viewed' || e.event === 'cookie_banner_answered';
 function stageFunnel(ev, steps, windowMs, { breakdown = true } = {}) {
 	const from = utc(INSIGHT_START);
@@ -650,6 +656,27 @@ GROUP BY t_internal, t_test LIMIT 100`);
 	md.push(`**c) \`$feature/hero-framing\` on page views:** ${pageViews.filter((v) => v.has_flag_prop).length} of ${pageViews.length} \`landing_page_viewed\` (internal included) carry it. ${shouldHave.length} followed a flag answer within 60 s; ${missing.length} of those are missing it${missing.length ? ` (${missing.map((v) => `${v.pid} at ${fmtTime(v.t)}`).join(', ')})` : ''}.`, '');
 	if (missing.length) mismatches.push(`landing_page_viewed without $feature/hero-framing after a flag answer: ${missing.length}`);
 	metrics['check|views_missing_flag_prop'] = missing.length;
+
+	// e) D-064 regression: after the switch, no browser event should be in
+	// cookieless mode (only the /go/ server event may be), no banner answer
+	// should arrive, and nobody should be exposed to both variants.
+	if (SWITCH_AT) {
+		const after = clean.filter((e) => e.t >= utc(SWITCH_AT));
+		const browserCookieless = after.filter((e) => e.cookieless && e.event !== 'channel_link_clicked');
+		const banner = after.filter((e) => e.event === 'cookie_banner_answered');
+		const variants = new Map();
+		for (const e of after.filter((x) => x.event === '$experiment_exposure' && x.flag_response)) (variants.get(e.pid) ?? variants.set(e.pid, new Set()).get(e.pid)).add(e.flag_response);
+		const both = [...variants].filter(([, v]) => v.size > 1).map(([pid]) => pid);
+		md.push(`**e) After the D-064 switch (${SWITCH_AT} UTC):** browser events in cookieless mode: ${browserCookieless.length}; \`cookie_banner_answered\`: ${banner.length}; persons exposed to both variants: ${both.length}${both.length ? ` (${both.join(', ')})` : ''}.`, '');
+		if (browserCookieless.length) mismatches.push(`D-064: ${browserCookieless.length} browser events in cookieless mode after the switch`);
+		if (banner.length) mismatches.push(`D-064: ${banner.length} cookie_banner_answered after the switch`);
+		if (both.length) mismatches.push(`D-064: persons exposed to both variants after the switch: ${both.join(', ')}`);
+		metrics['check|d064_cookieless_browser_events'] = browserCookieless.length;
+		metrics['check|d064_banner_answers'] = banner.length;
+		metrics['check|d064_both_variants'] = both.length;
+	} else {
+		md.push('**e) D-064 switch:** not deployed yet (`SWITCH_AT` is empty), so nothing to check.', '');
+	}
 
 	// d) Hygiene: key source, gitignore, no emails in the labels or this doc.
 	const { execFileSync } = await import('node:child_process');
