@@ -112,6 +112,6 @@ Ready to paste, in the owner's voice.
   - F3: why Florida, and who Juan is.
   - F7: README pointer.
 - **Skipped:** F4 (now a memo limit) and F6 (hashtags kept).
-- **Pending owner input:** F5, post 6's "from conversation".
+- **F5, post 6's "from conversation":** fixed. The owner did not have those conversations, so the line was reworded (D-062).
 - **Owner calls kept as they are:** post count, both hero lines, video lines. The hero memo limit is reworded to cover both lines.
 

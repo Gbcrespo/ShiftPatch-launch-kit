@@ -631,15 +631,15 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 
 - **Date:** 2026-11-21
 - **Decided by:** project owner (from the asset review, `docs/reviews/assets-review.md`)
-- **Decision:** apply four fixes:
+- **Decision:** apply five fixes:
   - F1: give posts 1, 2 and 5 their own graphic (`post01.png`, `post02.png`, `post05.png`), each headlined with that post's own question.
   - F2: add a header note to the outreach file saying the "how it would work" sentence is shared on purpose.
   - F3: say why Florida in `target-customer.md`, and say who Juan is in D-015.
   - F7: add a README pointer to the transcripts and the video.
+  - F5: reword post 6's "I got that picture from conversation". The owner did not have those conversations, so it now reads "I haven't checked that picture against anything, and I can't point to a source for it."
 - **Not fixed:**
   - F4: the page's "one question" vs the five-question email survey becomes a memo limit, so the live page doesn't change mid-experiment.
   - F6: the hashtags stay.
-  - F5 (post 6's "from conversation") waits for the owner.
 - **Owner calls kept:** post count (D-027), both hero lines (D-010), video lines (D-048).
   - New memo limit: both hero lines state an unsourced pain as fact, and the next version would phrase it as a question.
 - **Reason:** fix only what a reviewer would mark down and can be done before the 22 Nov submission. Everything else is stated honestly in the memo or the email.
