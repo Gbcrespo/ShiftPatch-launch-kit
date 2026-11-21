@@ -1,8 +1,11 @@
-// PostHog setup (D-002, D-016, D-017, D-018). Event names: docs/tracking-plan.md.
+// PostHog setup (D-016, D-017, D-018, D-064). Event names: docs/tracking-plan.md.
 //
-// Consent model (D-002): every visitor is counted without cookies (PostHog
-// cookieless mode) until they choose. "Accept" switches to cookies and turns on
-// session replay with all inputs masked. "No thanks" stays cookieless.
+// Tracking model (D-064): no cookies and no consent banner. PostHog keeps one
+// random ID in local storage (`persistence: 'localStorage'`), so a visitor is
+// one person from the first event, and identify() at signup links that ID to
+// the email. Session replay runs with every input masked. A visitor can stop
+// analytics on their device from the privacy page; anyone who chose "No
+// thanks" under the old banner (D-002) keeps that choice.
 import posthog from 'posthog-js';
 import { analyticsConfig, buyerRoles } from '../data/analytics';
 import type { Variant } from '../data/hero';
@@ -15,16 +18,15 @@ export function startAnalytics(page: Page): typeof posthog {
 	if (started) return posthog;
 	started = true;
 
+	clearConsentEraCookie();
 	posthog.init(analyticsConfig.token, {
 		api_host: '/sp',
 		ui_host: 'https://us.posthog.com',
 		defaults: '2026-08-30',
-		// Cookieless for everyone until they accept (D-002).
-		cookieless_mode: 'on_reject',
-		opt_out_capturing_by_default: true,
+		// Everything in local storage, nothing in a cookie (D-064).
+		persistence: 'localStorage',
 		person_profiles: 'identified_only',
-		// Replay only after consent, never with typed text.
-		disable_session_recording: true,
+		// Replay never captures typed text.
 		session_recording: { maskAllInputs: true },
 		// Page views are sent by hand once the page is really visible (D-035),
 		// so prefetched, prerendered and background-tab loads don't count.
@@ -38,16 +40,26 @@ export function startAnalytics(page: Page): typeof posthog {
 	// filter only reliably excludes people marked internal (verified in step 4).
 	const isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 	if (isLocal || new URLSearchParams(location.search).get('internal') === '1') markInternal();
-	// Register after any opt-in above: opting in resets the SDK's properties.
 	registerUtms();
-	if (page === 'preview') keep({ is_preview: true });
-	if (posthog.get_explicit_consent_status() === 'granted') posthog.startSessionRecording();
+	if (page === 'preview') posthog.register({ is_preview: true });
 	whenVisible(() => {
 		posthog.capture('$pageview');
 		posthog.set_config({ capture_pageleave: true });
 	});
 
 	return posthog;
+}
+
+// Before D-064, visitors who accepted cookies got PostHog's first-party
+// cookie. Delete it once, so "no cookies" is true for returning visitors too.
+// PostHog already keeps the same ID in local storage, so the visitor stays the
+// same person.
+function clearConsentEraCookie() {
+	const name = `ph_${analyticsConfig.token}_posthog`;
+	if (!document.cookie.includes(name)) return;
+	const gone = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+	document.cookie = gone;
+	document.cookie = `${gone}; domain=${location.hostname}`;
 }
 
 // Runs callbacks, in order, once the page is really seen (D-035): not while
@@ -79,67 +91,23 @@ export function whenVisible(fn: () => void) {
 	flushVisible();
 }
 
-export function consentStatus() {
-	return posthog.get_explicit_consent_status();
-}
-
-// What this page load has registered, so it survives the identity reset that
-// posthog-js does when a cookieless visitor opts in.
-const kept: Record<string, unknown> = {};
-let exposedFlagValue: string | null = null;
-// True once this page load's exposure has gone out (D-035).
-let exposureSent = false;
-
-function keep(properties: Record<string, unknown>) {
-	Object.assign(kept, properties);
-	posthog.register(properties);
-}
-
-export function answerConsent(choice: 'accepted' | 'declined') {
-	if (choice === 'accepted') {
-		// Opting in replaces the cookieless ID with a new one (posthog-js resets
-		// to avoid mixing identities). Re-register this page's properties, and
-		// re-send the exposure with the variant the visitor actually saw, so the
-		// experiment credits their later signup to the right arm.
-		posthog.opt_in_capturing();
-		posthog.register(kept);
-		if (exposedFlagValue && exposureSent) {
-			// Pin the flag to what was shown, so the new ID's own evaluation can't
-			// stamp a different variant on later events (stored only with consent).
-			posthog.featureFlags.overrideFeatureFlags({
-				flags: { [analyticsConfig.flagKey]: exposedFlagValue },
-			});
-			posthog.capture('$feature_flag_called', {
-				$feature_flag: analyticsConfig.flagKey,
-				$feature_flag_response: exposedFlagValue,
-				exposure_resent_after_consent: true,
-			});
-		}
-		posthog.startSessionRecording();
-	} else {
-		posthog.opt_out_capturing();
-	}
-	posthog.capture('cookie_banner_answered', { choice });
-}
-
 /** Resolve the hero variant from the `hero-framing` flag (D-018). */
 export function resolveHeroVariant(onVariant: (v: Variant) => void, timeoutMs = 2500) {
 	let done = false;
 	const finish = (v: Variant) => {
 		if (done) return;
 		done = true;
-		keep({ hero_variant: v });
+		posthog.register({ hero_variant: v });
 		onVariant(v);
 	};
 	posthog.onFeatureFlags(() => {
-		// Flags reload after identify or consent; the variant is fixed once shown.
+		// Flags reload after identify; the variant is fixed once shown.
 		if (done) return;
 		// Read the variant now, without the exposure, so the headline renders
 		// exactly as before (D-035).
 		const flag = posthog.getFeatureFlag(analyticsConfig.flagKey, { send_event: false });
 		if (flag === 'control' || flag === analyticsConfig.testVariant) {
-			exposedFlagValue = flag;
-			keep({ [`$feature/${analyticsConfig.flagKey}`]: flag });
+			posthog.register({ [`$feature/${analyticsConfig.flagKey}`]: flag });
 			// Once the page is seen, read the flag again with the event on: the
 			// SDK sends the same $feature_flag_called it always has, with all its
 			// properties, and PostHog derives $experiment_exposure from it. Only
@@ -148,7 +116,6 @@ export function resolveHeroVariant(onVariant: (v: Variant) => void, timeoutMs = 
 				const key = analyticsConfig.flagKey;
 				if (posthog.getFeatureFlag(key, { send_event: false }) !== flag) return;
 				posthog.getFeatureFlag(key);
-				exposureSent = true;
 			});
 			finish(flag === 'control' ? 'a' : 'b');
 		}
@@ -159,7 +126,7 @@ export function resolveHeroVariant(onVariant: (v: Variant) => void, timeoutMs = 
 }
 
 export function registerProps(properties: Record<string, unknown>) {
-	keep(properties);
+	posthog.register(properties);
 }
 
 export function track(event: string, properties: Record<string, unknown> = {}) {
@@ -171,22 +138,14 @@ function isBuyerRole(role: string) {
 }
 
 /**
- * Signup (D-016). With cookies accepted: identify() by lowercased email, so
- * later email events join this person. Without consent the SDK can't identify
- * a cookieless visitor (verified in the step 4 spike: no $identify, and it
- * resets in-memory state), so the D-016 fallback applies: the signup event
- * sets email and role as person properties on the cookieless person.
+ * Signup (D-016, D-064): send the signup, then identify() by lowercased email,
+ * so this visit and the later email events are one person.
  */
 export function identifySignup(rawEmail: string, role: string) {
 	const email = rawEmail.trim().toLowerCase();
 	const person = { email, role, is_buyer_role: isBuyerRole(role) };
-	const consented = posthog.get_explicit_consent_status() === 'granted';
-	posthog.capture(
-		'signup_form_submitted',
-		{ role, is_buyer_role: person.is_buyer_role },
-		consented ? undefined : { $set: person },
-	);
-	if (consented) posthog.identify(email, person);
+	posthog.capture('signup_form_submitted', { role, is_buyer_role: person.is_buyer_role });
+	posthog.identify(email, person);
 }
 
 /** API-mode survey (D-017): our own UI, PostHog's survey events. */
@@ -206,13 +165,16 @@ export function surveySent(answer: string) {
 		$survey_questions: [{ id: volumeQuestionId, question: volumeQuestion }],
 		[`$survey_response_${volumeQuestionId}`]: answer,
 	});
-	// posthog-js marks the survey as seen in localStorage. Without consent we
-	// store nothing on the device (D-002), and our own UI doesn't need the mark.
-	if (posthog.get_explicit_consent_status() !== 'granted') {
-		try {
-			localStorage.removeItem(`seenSurvey_${volumeSurveyId}`);
-		} catch {}
-	}
+}
+
+/** Privacy page button (D-064): stop analytics and replay on this device. */
+export function stopAnalyticsOnThisDevice() {
+	posthog.stopSessionRecording();
+	posthog.opt_out_capturing();
+}
+
+export function analyticsStopped() {
+	return posthog.has_opted_out_capturing();
 }
 
 function registerUtms() {
@@ -222,13 +184,12 @@ function registerUtms() {
 		const value = params.get(key);
 		if (value) utms[key] = value;
 	}
-	if (Object.keys(utms).length) keep(utms);
+	if (Object.keys(utms).length) posthog.register(utms);
 }
 
-/** Owner's own devices (4f). Visiting /?internal=1 counts as accepting cookies. */
+/** Owner's own devices (4f): /?internal=1 marks this device as internal. */
 function markInternal() {
-	if (posthog.get_explicit_consent_status() !== 'granted') posthog.opt_in_capturing();
-	keep({ is_internal: true });
+	posthog.register({ is_internal: true });
 	posthog.setPersonProperties({ is_internal: true });
 	posthog.setInternalOrTestUser();
 }

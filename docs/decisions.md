@@ -16,6 +16,8 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 
 ## D-002: Privacy policy, consent, and retention
 
+> **Superseded by D-064** (2026-11-21): no consent banner; PostHog keeps one ID in local storage, no cookies. The text below is kept as the record.
+
 - **Date:** 2026-11-17
 - **Decided by:** project owner
 - **Policy discloses:** form fields, PostHog analytics, session replay with masked inputs, the email tool, purpose, retention and deletion, and the ShiftPatch Gmail as contact.
@@ -248,6 +250,8 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 
 ## D-023: Known limitation: accepting cookies splits a visitor into two people
 
+> **Superseded by D-064** (2026-11-21): no consent banner; PostHog keeps one ID in local storage, no cookies. The text below is kept as the record.
+
 - **Date:** 2026-11-18
 - **Decided by:** project owner
 - **Known limitation:** accepting cookies gives the visitor a new PostHog ID, so pre-consent events and post-consent events land on two people. `alias()` can't merge them in cookieless mode.
@@ -290,6 +294,8 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 
 ## D-026: Step 6a findings; experiment launched
 
+> **Superseded by D-064** (2026-11-21): no consent banner; PostHog keeps one ID in local storage, no cookies. The text below is kept as the record.
+
 - **Date:** 2026-11-19
 - **Decided by:** project owner
 - **Launch:** experiment 612484 was launched on the owner's "go". PostHog set its start to **2026-11-19 17:48:18 UTC** (14:48 BRT), about 12 minutes before the D-025 time. The saved insights still start at 18:00 UTC. The `personal_network` link is shared at or after 15:00 BRT, so no real visit falls between the two.
@@ -329,6 +335,8 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Reason:** the cohort was stale (11 members, last recalculated 2026-11-19 17:00 UTC; the owner's profile was created at 19:46), which let the owner's visits into every tile.
 
 ## D-030: Funnel first step is the action "Landed"
+
+> **Superseded by D-064** (2026-11-21): no consent banner; PostHog keeps one ID in local storage, no cookies. The text below is kept as the record.
 
 - **Date:** 2026-11-20
 - **Decided by:** project owner
@@ -671,3 +679,22 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
   - Experiment: control 3 / time 7 exposed (signups 2 vs 5, buyers 1 vs 0). The 10 exposed people are the same 10 people as the visitors (checked person by person), and the experiment's 7 signups match the dashboard's.
 - **Signups vs emails (owner-confirmed):** people = PostHog persons (7); list size = distinct emails (8, one person tested with a second address). The same friend signed up twice, using a second address to test the form. The channel table's description says so.
 - **Superseded:** the first version of this entry excluded five non-owner signups as owner tests. Replaced by the above.
+
+## D-064: No consent banner; PostHog keeps one ID in local storage, no cookies
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** remove the cookie banner and the consent gating. PostHog runs for every visitor with `persistence: 'localStorage'`, so there are no cookies and no cookieless mode in the browser, and each visitor is one ID from the first event. PostHog's docs say `"localStorage"` "stores everything in localStorage", while the default `"localStorage+cookie"` adds the `ph_<token>_posthog` cookie (https://posthog.com/docs/libraries/js/persistence).
+  - Session replay runs for everyone, with `maskAllInputs: true`.
+  - `?internal=1` still marks the owner as internal.
+  - `identify(email)` runs at every signup.
+  - Every event name stays. `cookie_banner_answered` stops firing because the banner is gone, and its past data stays.
+  - A consent-era `ph_<token>_posthog` cookie left on a returning visitor's browser is deleted once.
+  - Visitors who chose "No thanks" before keep that choice: PostHog's stored opt-out stays, so they aren't tracked.
+  - The privacy page gets a "Stop analytics on this device" button, which calls PostHog's opt-out, and an honest tracking section.
+  - `/go/` link clicks stay server-side events that store nothing on the device. They still rely on the project's cookieless setting, which stays on.
+- **Not changed:** the experiment, its flag and metrics, the test-account filter, funnel step 1 (the "Landed" action), and past data.
+- **Supersedes:** D-002 (consent model), D-023 (the cookie split), D-026 finding 1 (decliners can't be joined), D-030 (the reason "Landed" includes `cookie_banner_answered`; the action itself stays for past data).
+- **Switch time:** to be recorded at deploy.
+- **Reason:** the consent split made one visitor two people (D-063 had to merge six pairs by hand). With one stored ID, one visitor is one person from the first event.
+- **Privacy note (Claude's flag, owner decided):** local storage counts as "cookies or similar technology" under EU rules, and Brazil's LGPD covers this data too. The opt-out button keeps a real choice without a banner.

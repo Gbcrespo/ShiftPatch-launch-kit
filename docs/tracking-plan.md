@@ -8,14 +8,14 @@ PostHog project: ShiftPatch (US, project 741778). Events go through our own prox
 
 ## Funnel
 
-The dashboard's stage funnel (insight `d1JCOgLG`, D-040). It counts people, in order, within a 7-day window from step 1, from 2026-11-19 18:00 UTC. It's broken down by the `utm_source` of step 1.
+The dashboard's stage funnel (insight `d1JCOgLG`, D-040). It counts people, in order, within a 7-day window from step 1, from 2026-11-19 18:00 UTC. It shows totals, with no breakdown. Step 1 leaves out `utm_source = welcome_email` (D-063).
 
 | # | Stage | Event | Notes |
 | :--- | :--- | :--- | :--- |
-| 1 | Landed | action "Landed" (492050) = `landing_page_viewed` OR `cookie_banner_answered` | A visitor who accepts cookies counts twice here (D-030) |
+| 1 | Landed | action "Landed" (492050) = `landing_page_viewed` OR `cookie_banner_answered` | Before D-064, a visitor who accepted cookies could count twice here (D-030; the six such pairs were merged in D-063). Since D-064 there is no banner, so only `landing_page_viewed` adds new people; the action is kept for past data |
 | 2 | Form started | `signup_form_started` | |
 | 3 | Signed up (all roles) | `signup_form_submitted` | Buyer roles are split out in the channel table and the experiment |
-| 4 | Welcome email opened | `welcome_email_opened` | Joins only for visitors who accepted cookies (D-026). Can be an automatic open (Apple Mail, Gmail image proxy) |
+| 4 | Welcome email opened | `welcome_email_opened` | Joins every signup since D-064 (before, only visitors who accepted cookies, D-026). Can be an automatic open (Apple Mail, Gmail image proxy) |
 | 5 | Email link clicked | `welcome_email_link_clicked` | |
 
 Events that aren't funnel stages, and where they're shown instead:
@@ -31,7 +31,7 @@ Events that aren't funnel stages, and where they're shown instead:
 | `hero_cta_clicked` | "Join the early list" button in the hero is clicked | browser | `hero_variant` |
 | `signup_form_started` | First input or change in the email or role field (once per page load) | browser | `hero_variant`, `field` (`email` or `role`) |
 | `signup_form_submitted` | The signup form passes validation. **Primary A/B metric** (filtered to `is_buyer_role = true`, D-009) | browser | `role`, `is_buyer_role`, `hero_variant` |
-| `cookie_banner_answered` | Accept or No thanks clicked on the consent banner | browser | `choice` (`accepted` or `declined`) |
+| `cookie_banner_answered` | **Retired by D-064** (banner removed); past data only. Was: Accept or No thanks clicked on the consent banner | browser | `choice` (`accepted` or `declined`) |
 | `channel_link_clicked` | Someone opens a tracked `/go/<channel>` link, before the redirect. Since 2026-11-20 13:51 UTC, prefetches and link-preview bots get the redirect but no event (D-033) | server (Pages Function) | `channel`, `utm_source`, `utm_medium`, `utm_campaign` |
 
 ## PostHog built-in events (names set by PostHog)
@@ -42,7 +42,7 @@ Events that aren't funnel stages, and where they're shown instead:
 | `$feature_flag_called` | Experiment exposure for flag `hero-framing`, sent by posthog-js once the page is seen (D-035). PostHog derives `$experiment_exposure` from it on the server; the experiment reads `$experiment_exposure` |
 | `$identify` | Sent by `identify()` at signup (D-016) |
 | `survey shown` / `survey sent` | The volume question (API-mode survey, D-017) and the feedback widget |
-| `$autocapture`, `$snapshot` (replay, only after consent) | Background context, not used in hypotheses |
+| `$autocapture`, `$snapshot` (replay for every visitor since D-064, inputs masked) | Background context, not used in hypotheses |
 
 ## Properties on every event (super properties)
 
@@ -52,7 +52,7 @@ Events that aren't funnel stages, and where they're shown instead:
 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` | from the URL | Set when the visit arrives with UTM tags (e.g. from `/go/<channel>`) |
 | `is_preview` | `true` | Only on `/preview/a` and `/preview/b`, which are excluded from analysis |
 | `is_internal` | `true` | Only on the owner's own devices (`/?internal=1`), excluded by the test-account filter |
-| `$feature/hero-framing` | `control` / `time` | Set by PostHog when the flag is read; we re-register it after consent (see Identity) |
+| `$feature/hero-framing` | `control` / `time` | Set by PostHog when the flag is read |
 
 ## Survey properties (PostHog's names)
 
@@ -62,11 +62,13 @@ Events that aren't funnel stages, and where they're shown instead:
 | `$survey_response_dc9030ae-22f8-4519-a037-86d6b878a113` | `survey sent` | The volume answer (one of the six D-004 labels). Break `survey sent` down by this property to see answers |
 | `$survey_submission_id`, `$survey_completed`, `$survey_questions` | `survey sent` | Required by PostHog's API-survey contract |
 
-## Identity (verified in step 4)
+## Identity (D-064)
 
-- **No choice yet, or "No thanks":** PostHog cookieless mode. The person is a server-side daily hash of IP, user agent and host (`distinct_id` starts with `cookieless_`). Nothing is stored on the device except posthog-js's consent marker. `identify()` doesn't work here, so `signup_form_submitted` sets `email`, `role` and `is_buyer_role` as person properties instead (D-016 fallback).
-- **"Accept":** posthog-js swaps the cookieless ID for a new cookie ID. We re-register `hero_variant`, `$feature/hero-framing` and the UTM tags, and re-send one `$feature_flag_called` (with `exposure_resent_after_consent: true`) for the variant the visitor actually saw. At signup, `identify(email)` runs.
-- **`channel_link_clicked`** is sent by the server (the `/go/<channel>` function) as a cookieless event with the visitor's IP and user agent, so PostHog hashes it to the same daily person as the landing visit that follows. It can be a funnel step only for visitors who haven't accepted cookies before the click; read it on its own (Trends, broken down by `channel`) for anything else.
+- **Every visitor:** posthog-js keeps one random ID in local storage (`persistence: 'localStorage'`), with no cookie and no cookieless mode. A visitor is one person from the first event, and `identify(email)` at signup links that ID to the email, so landing, signup and the welcome emails are one person.
+- **Opt-out:** the privacy page's "Stop analytics on this device" button calls `opt_out_capturing()`. Visitors who chose "No thanks" under the old banner (D-002) keep that opt-out and aren't tracked.
+- **Consent-era cookie:** a leftover `ph_<token>_posthog` cookie is deleted once on the next visit. The same ID is already in local storage.
+- **`channel_link_clicked`** is still sent by the server (the `/go/<channel>` function) as a cookieless event. It stores nothing on the device, and it can't be joined to the visit that follows, so read it on its own (Trends, broken down by `channel`).
+- **Before D-064 (history):** visitors were counted cookieless until they chose. "Accept" swapped the cookieless ID for a cookie ID, which split one visitor into two people (D-023, D-030), and we re-sent the exposure with `exposure_resent_after_consent: true`. D-063 merged the six split pairs.
 
 ## Person properties
 
@@ -79,15 +81,15 @@ Events that aren't funnel stages, and where they're shown instead:
 ## Feature flag and experiment
 
 - **Analysis window starts 2026-11-19 18:00 UTC (15:00 BRT)**, the launch time (D-025, replacing D-021's 15:00 UTC). Anything earlier is testing. Use this as `date_from` in every insight.
-- **Variant source of truth: `hero_variant`** (D-022). Don't break anything down by `$feature/hero-framing`: it can flip after Accept or `identify()`. Exposures and the experiment are unaffected.
+- **Variant source of truth: `hero_variant`** (D-022). Don't break anything down by `$feature/hero-framing`: it can flip after `identify()` (and, before D-064, after Accept). Exposures and the experiment are unaffected.
 - **Don't split `$pageview` by `hero_variant`.** Before D-035 it never had it (it fired before the flag answered); since D-035 it has it only when the flag answered before the page was seen. Use `landing_page_viewed` for anything split by variant (D-022), and only events that carry `$feature/hero-framing` (D-031).
-- **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). Accept moves a visitor to a new person (D-022, D-023). Since D-030 the per-person funnels start at "Landed", so a visitor who accepts is counted twice at step 1 instead of being dropped.
+- **Channel numbers:** rates computed from unique people per event, by `utm_source` (buyer-role signups ÷ visitors). Since D-064 a visitor is one person throughout. Before it, Accept moved a visitor to a new person (D-022, D-023); D-030 started the funnels at "Landed" and D-063 merged the split pairs.
 
 ### Saved insights (all from 2026-11-19 18:00 UTC, test accounts filtered)
 
 | Insight | Short id | For |
 | :--- | :--- | :--- |
-| Channels: visitors → signups → buyers | `9s0dwQbs` | H1–H3 rates; dashboard channel table (D-060): visitors, all signups, buyer-role signups and both rates per `utm_source`. SQL (HogQL) table: it excludes only `is_internal` persons and events, not the full project test filter |
+| Channels: visitors → signups → buyers | `9s0dwQbs` | H1–H3 rates; dashboard channel table (D-060): visitors, all signups, buyer-role signups and both rates per `utm_source`. SQL (HogQL) table: it excludes `is_internal` persons and events, cohort 747567 and the two automated visits (D-063), not every project test-filter condition |
 | Channels: signup rate per visitor (all roles and buyers) | `opzPWguM` | saved, off the dashboard since D-060 (was the D-042 channel table) |
 | Funnel: channel → signup → welcome email (by utm_source) | `d1JCOgLG` | dashboard stage funnel (D-040); H1–H3 stages (D-061) |
 | Channels: funnel visit → buyer signup → volume answer (by utm_source) | `KK0a37NQ` | saved, off the dashboard since D-040; H1 and H3 survey step (D-061) |

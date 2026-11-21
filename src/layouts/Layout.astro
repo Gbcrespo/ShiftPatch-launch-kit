@@ -2,7 +2,6 @@
 import '@fontsource/source-serif-4/600.css';
 import '@fontsource/source-sans-3/400.css';
 import '@fontsource/source-sans-3/600.css';
-import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
 	title: string;
@@ -29,7 +28,13 @@ const { title, description, noindex = false, analytics = 'other' } = Astro.props
 	<body data-analytics={analytics}>
 		<a class="skip-link" href="#main">Skip to content</a>
 		<slot />
-		<ConsentBanner />
+		<script>
+			// Every page starts analytics (D-064: no banner, no cookies).
+			import { startAnalytics } from '../lib/analytics';
+
+			const page = (document.body.dataset.analytics ?? 'other') as 'landing' | 'preview' | 'other';
+			startAnalytics(page);
+		</script>
 	</body>
 </html>
 
