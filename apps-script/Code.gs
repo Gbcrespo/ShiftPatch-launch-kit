@@ -25,6 +25,7 @@ var HEADERS = ['signed_up_at', 'email', 'role', 'hero_variant', 'status', 'welco
 // ---------------------------------------------------------------------------
 // Email copy: DRAFT, needs the owner's approval before setup() is run.
 // {{name}} = SIGNER_NAME. {{how_link}} and {{unsubscribe_link}} are filled in per contact.
+// {{how_link}} is the tracked survey link (/email/click -> Google Form) in all three emails (D-052, D-053).
 // ---------------------------------------------------------------------------
 var COPY = {
   welcome: {
@@ -36,35 +37,37 @@ var COPY = {
       '',
       'The idea is simple. When a shift opens up at the last minute, the manager posts it once, and it goes to your own staff and float-pool nurses who\'ve said they\'d like extra hours. One of them picks it up, and the manager can see who\'s covering.',
       '',
-      'If you want the slightly longer version, it\'s here: {{how_link}}',
+      'One favor, if you have a minute: I\'ve put five multiple-choice questions about short-notice shifts into a short survey. It takes about a minute, and your answers tell me whether this idea is worth building: {{how_link}}',
       '',
-      'Over the next few hours I\'ll send two short notes, each with one question. Reply whenever you like. It comes straight to me.',
+      'Over the next few hours I\'ll send two short reminders. Reply whenever you like. It comes straight to me.',
       '',
       '{{name}}',
       'ShiftPatch (a pre-launch concept)',
     ],
   },
   followUp1: {
-    subject: 'One question about last-minute shifts',
+    subject: 'The 1-minute survey',
     body: [
       'Hi again,',
       '',
-      'One question, if you have a minute: think of the last time a shift opened up at short notice. How did it get filled, and how long did it take?',
+      'In case the first email got buried: the five-question survey is still open. It\'s multiple choice and takes about a minute: {{how_link}}',
       '',
-      'Just hit reply. A sentence or two is plenty.',
+      'If you\'ve already filled it in, thank you. You can ignore this one.',
       '',
       '{{name}}',
       'ShiftPatch (a pre-launch concept)',
     ],
   },
   followUp2: {
-    subject: 'Would 15 minutes be possible?',
+    subject: 'Last note: the 1-minute survey',
     body: [
       'Hi,',
       '',
       'Last note from me. I\'m talking to people who deal with short-notice shifts, to find out whether ShiftPatch is worth building at all.',
       '',
-      'Would you be open to a 15-minute call sometime in the next two weeks? Reply with a time that suits you, or just "no thanks" and I won\'t ask again.',
+      'If you haven\'t had a chance yet, the survey is five multiple-choice questions and takes about a minute: {{how_link}}',
+      '',
+      'If you\'d rather not, that\'s fine. I won\'t ask again.',
       '',
       '{{name}}',
       'ShiftPatch (a pre-launch concept)',
@@ -195,7 +198,7 @@ function send_(email, step) {
   // HTML part that reads like plain text, with short link text.
   // Only the welcome email carries the open pixel.
   var a = function (url, text) { return '<a href="' + url + '" style="color:#24564f">' + text + '</a>'; };
-  var htmlVars = { name: escape_(name), how_link: a(howUrl, 'How it would work'), unsubscribe_link: a(unsubUrl, 'Unsubscribe') };
+  var htmlVars = { name: escape_(name), how_link: a(howUrl, 'Take the survey (about a minute)'), unsubscribe_link: a(unsubUrl, 'Unsubscribe') };
   var html = '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#222">' +
     source.map(function (line) { return line ? '<p style="margin:0 0 4px">' + fill_(escape_(line), htmlVars) + '</p>' : '<br>'; }).join('') +
     (step === 'welcome' ? '<img src="' + link('open') + '" width="1" height="1" alt="" style="display:block;border:0">' : '') +
