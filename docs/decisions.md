@@ -610,3 +610,18 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
   - The owner's personal test addresses in the docs are replaced by `<test address N>`. Older commits still contain them (history isn't rewritten).
   - Kept: `docs/step-6-notes.md` (process evidence).
 - **Reason:** "Part of the clean up"
+
+## D-060: The dashboard's channel table is 9s0dwQbs
+
+- **Date:** 2026-11-21 (the tile was built on 2026-11-20 at 15:14 UTC; this logs it)
+- **Decided by:** project owner
+- **Decision:** the dashboard keeps the SQL table `9s0dwQbs` "Channels: visitors → signups → buyers" in row 2. `opzPWguM` (D-042) stays saved, off the dashboard, and isn't restored.
+  - Known differences from D-042: `9s0dwQbs` has no hero-clicks column and no caption yet. It excludes only `is_internal` persons and events, not the full project test filter, so a test email or a preview visit without `is_internal` would be counted. Its numbers match the other tiles on 2026-11-21 (review, `docs/review-2026-11-21.md`).
+- **Reason:** "I built it on purpose to make the dashboard more readable."
+
+## D-061: H1–H3 name their PostHog insights
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner (Agent 3's suggestion, with `9s0dwQbs` for rates)
+- **Decision:** in `docs/research/traction-channels.md`, H1–H3 say where their numbers live: `9s0dwQbs` for rates, `d1JCOgLG` for stages, `ZS0Uhz2p` for clicks, `d9eeKWIG` for H2's roles and `KK0a37NQ` for the survey step in H1 and H3. This replaces "the Funnel insight described in the shared notes".
+- **Reason:** the brief requires each hypothesis to say where its number lives in PostHog (review finding, `docs/review-2026-11-21.md`).

@@ -326,3 +326,13 @@ output files: prospects-round6.csv (header only), prospects-round6-log.md
 ## Repo cleanup (2026-11-21, main session, D-059)
 
 - **Removed and moved:** the video project (154 files, without the HyperFrames caches) and the final `video.mp4` moved out of the repo folder to `%USERPROFILE%\Downloads\ShiftPatch-video\`, hash-checked. Removed `.vscode/`, `docs/.gitkeep` and `functions/.gitkeep`, and dropped the unused `isBuyerRole` export. Replaced the owner's personal test addresses in `decisions.md` and `step-5-notes.md` with placeholders. The built site is byte-identical to main's, and the audit showed no tile move.
+
+## Dashboard and funnel review (2026-11-21, about 16:00–16:40 UTC, read-only)
+
+Output: `docs/review-2026-11-21.md`. All three agents were read-only. In PostHog they used only get/list calls, `read-data-schema`, SELECT-only SQL and unsaved `query-funnel`/`query-trends` runs. No site, `/go/` or `/email/` URL was loaded, and no `.env` was read. Person IDs only. A check of `system.insights`, `system.experiments`, `system.actions`, `system.surveys`, `system.dashboards` and `system.feature_flags` afterwards found nothing created or changed since 15:55 UTC. Edits to an existing dashboard or flag aren't visible in those tables.
+
+| Agent | Model | Inputs | Method | Output |
+| :--- | :--- | :--- | :--- | :--- |
+| Agent 1, Data Analyst | sonnet | The challenge brief PDF (outside the repo), `grading-checklist.md`, `tracking-plan.md`, `decisions.md`, `CLAUDE.md`, `traction-channels.md`, the analytics and `/go/` source, PostHog project 741778 | Read dashboard 2381553's tiles, layout and captions, ran its insights and the experiment results, checked definitions with SQL, and cited PostHog's funnel docs. Labeled each point as established practice or opinion. Ran in parallel with Agent 2 and didn't see its report. It says it didn't read `decisions.md` or the source files. | Report to the main session |
+| Agent 2, Challenge reviewer | opus | Same inputs, plus the latest section of `metrics-audit.md` for comparison only | Graded each checklist item pass, fail or partial. Rebuilt the funnel per person with its own SQL, using the project test filter, and compared it with `d1JCOgLG`. Counted every event and channel click with its last-seen time, and checked the experiment, flag, surveys and replay settings. | Report to the main session |
+| Agent 3, Evaluator | opus | Agents 1 and 2's reports word for word, plus the same inputs | Weighed where the two agreed and conflicted, checked Agent 1's points against `decisions.md`, and re-ran each major issue in PostHog or the files. Rated each finding major, minor or skip, with effort, and marked what can't be fixed by tomorrow as a memo limitation. | `docs/review-2026-11-21.md` |
