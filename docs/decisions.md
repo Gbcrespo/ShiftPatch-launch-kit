@@ -283,7 +283,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Date:** 2026-11-19
 - **Decided by:** project owner
 - **Launch time:** the analysis window now starts at **2026-11-19 15:00 BRT (18:00 UTC)**. This replaces D-021's 12:00 BRT (15:00 UTC); the rest of D-021 stands. The experiment "Hero framing: money vs time" (612484) is launched at 15:00 BRT, right before the `personal_network` link is shared, and every insight uses `date_from = 2026-11-19T18:00:00Z`.
-- **6d test data:** the 18 listed test persons (step 4 review part D and step 5 test addresses) were deleted with their events and recordings. `gbcrespo10+test6@gmail.com` and `gbcre.eng+test1@hotmail.com` (5d provider tests on 2026-11-19) are kept. Like the step 6a test runs, they are dated before launch and excluded by the launch date and the test-account filter.
+- **6d test data:** the 18 listed test persons (step 4 review part D and step 5 test addresses) were deleted with their events and recordings. `<test address 1>` and `<test address 2>` (5d provider tests on 2026-11-19) are kept. Like the step 6a test runs, they are dated before launch and excluded by the launch date and the test-account filter.
 - **Dashboard:** layout Option 1, "A/B first": experiment results full width on top, then the signup funnel by channel next to the buyer-signup rate per channel, then traffic by channel next to link clicks.
 - **Step 6 plan:** approved as proposed (6a end-to-end runs on 4 `/go/` links before launch, 6b checklist, 6c dashboard, 6d exclusion by date with no further deletions).
 - **Reason:** the owner didn't give one ("not relevant").
@@ -599,3 +599,14 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **Decided by:** project owner ("Go with the suggestion")
 - **Decision:** beyond the CTA lines (D-053), the welcome email says "I'll send two short reminders" instead of "two short notes, each with one question". Follow-up 1's subject is "The 1-minute survey" and follow-up 2's is "Last note: the 1-minute survey". The 15-minute call ask is gone.
 - **Reason:** the old lines and subjects promised a question and a call that the emails no longer ask for.
+
+## D-059: Repo cleanup before submission
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** Repo cleanup before submission. Video files moved to a local folder outside the repo.
+  - The video project (154 files, without the regenerable HyperFrames caches) and the final `video.mp4` now live in `%USERPROFILE%\Downloads\ShiftPatch-video\`. Every file was hash-checked before the old folder beside the repo was removed. `.gitignore` keeps renders and media files out.
+  - Removed: `.vscode/` (Astro starter leftovers) and the `docs/` and `functions/` `.gitkeep` files. `isBuyerRole` is no longer exported (used only in its own file).
+  - The owner's personal test addresses in the docs are replaced by `<test address N>`. Older commits still contain them (history isn't rewritten).
+  - Kept: `docs/step-6-notes.md` (process evidence).
+- **Reason:** "Part of the clean up"

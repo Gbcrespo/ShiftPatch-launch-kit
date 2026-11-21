@@ -28,3 +28,12 @@ pnpm-debug.log*
 
 # local-only source documents (D-006): never commit
 docs/brief.pdf
+
+# promo video: the project, renders and audio live outside the repo (D-059)
+renders/
+*.mp4
+*.mov
+*.webm
+*.m4a
+*.wav
+*.mp3
