@@ -1,6 +1,6 @@
 # Prospect verification: all 30 prospects (2026-11-21)
 
-ShiftPatch is a pre-launch concept. This file checks the 30 prospects in `docs/research/prospects.csv` the way the hiring panel will spot-check 5: against public hospital directories and nursing registries, plus whether each row's evidence of the problem is still live. The checks were read-only. The owner then approved fixes 1–4 below, which were applied to `prospects.csv` (P07, P28, P29 and P30 only). `docs/gtm/outreach-messages.md` was not changed.
+ShiftPatch is a pre-launch concept. This file checks the 30 prospects in `docs/research/prospects.csv` the way the hiring panel will spot-check 5: against public hospital directories and nursing registries, plus whether each row's evidence of the problem is still live. The checks were read-only. The owner then approved fixes 1–5 below. Fixes 1–4 changed `prospects.csv` only (P07, P28, P29 and P30). Fix 5 (P10) changed `prospects.csv` and the fact sentence of P10's connection note.
 
 ## Method
 
@@ -19,9 +19,9 @@ ShiftPatch is a pre-launch concept. This file checks the 30 prospects in `docs/r
 
 | Status | Rows | Count |
 |---|---|---|
-| Pass | P01, P02, P05, P11, P12, P13, P15, P16, P17, P18, P19, P20, P22, P24, P25, P26, P27 | 17 |
+| Pass | P01, P02, P05, P10, P11, P12, P13, P15, P16, P17, P18, P19, P20, P22, P24, P25, P26, P27 | 18 |
 | Partial | P03, P07, P08, P14, P21, P23, P28, P30 | 8 |
-| Manual (evidence page blocked from automated fetch) | P04, P06, P09, P10 | 4 |
+| Manual (evidence page blocked from automated fetch) | P04, P06, P09 | 3 |
 | Fail | P29 | 1 |
 
 **Per check:**
@@ -31,7 +31,7 @@ ShiftPatch is a pre-launch concept. This file checks the 30 prospects in `docs/r
 | Directory (CMS) | 29 | 1 (P30) | 0 | 0 | 0 |
 | Role | 24 | 6 (P03, P07, P14, P23, P28, P29) | 0 | 0 | 0 |
 | Registry (MQA / Nursys) | 0 | 0 | 0 | 22 | 8 |
-| Evidence | 20 | 3 (P08, P21, P28) | 1 (P29) | 6 (P04, P06, P07, P09, P10, P14) | 0 |
+| Evidence | 21 | 3 (P08, P21, P28) | 1 (P29) | 5 (P04, P06, P07, P09, P14) | 0 |
 
 ## One row per prospect
 
@@ -48,7 +48,7 @@ Checked 2026-11-21. Directory = CMS name, city and state match the CSV for that 
 | P07 | Manatee Memorial Hospital, Bradenton | pass | partial: conflict (see fixes) | manual | manual (careerbuilder 403) | partial | srqmagazine.com SRQ Daily 2025-08-11 · scf.edu/news/2025/10/08/… · careerbuilder.com/job-details/rn-registered-nurse-resource-pool-float… |
 | P08 | Halifax Health, Daytona Beach | pass | pass | manual | partial: page 404, Wayback 2026-04-10 shows float pool and SeaPool but not "short-staffed" | partial | halifaxhealth.org/about-us/leadership/heidi-wright · halifaxhealth.org/float-and-seapool |
 | P09 | HCA Florida Lake Monroe Hospital, Sanford | pass (CMS: "Central Florida Lake Monroe Hospital") | pass | manual | manual (career.com blocked) | manual | hcafloridahealthcare.com/locations/lake-monroe-hospital/… · career.com/job/hca-florida-lake-monroe-hospital/registered-nurse-float-pool-prn/… |
-| P10 | HCA Florida Largo Hospital | pass | pass | manual | manual (career.com blocked; the outreach message cites this posting) | manual | hcafloridahealthcare.com/locations/largo-hospital/… · career.com/job/hca-florida-largo-hospital/registered-nurse-float-pool-med-surg/… |
+| P10 | HCA Florida Largo Hospital | pass | pass (leadership page live, confirmed by the owner 2026-11-21) | manual | pass (fix 5): WUSF 2025-01-17 names Largo as a slated demonstration site; the old posting is gone with no Wayback copy | pass | hcafloridahealthcare.com/locations/largo-hospital/… · wusf.org/health-news-florida/2025-01-17/florida-nurses-rally-for-improved-staffing… |
 | P11 | HCA Florida Largo Hospital | pass | pass | N/A (CFO) | pass (expired, loads) | pass | hcafloridahealthcare.com/locations/largo-hospital/about-us/leadership · career.com (same Largo float-pool posting) |
 | P12 | HCA Florida Oak Hill Hospital, Brooksville | pass | pass | manual | pass (expired, loads) | pass | hcafloridahealthcare.com/locations/oak-hill-hospital/… · career.com/job/hca-florida-oak-hill-hospital/rn-float-pool-med-surg-pcu/… |
 | P13 | DeSoto Memorial Hospital, Arcadia | pass | pass (single source, 2025-10-17; possible sale or lease) | N/A (CEO) | pass | pass | wusf.org/health-news-florida/2025-10-17/desoto-memorial-weighs-offers… |
@@ -92,7 +92,10 @@ Ordered by risk: most likely to be picked and failed by the panel first.
    - `name`, `title`, `role_source_url`: no change.
    - `notes`: replace the "Wilkens/Young unresolved" sentence with `Hospital's own leadership page still lists Katy Wilkens (appointed Nov 2023) but looks stale: SRQ Daily 2025-08-11 names Judy Young CNO; State College of Florida 2025-10-08 (https://www.scf.edu/news/2025/10/08/leading-hospital-nursing-staff-practice-and-care/) calls Manatee Memorial her "new CNO position". No 2026 confirmation found. Checked 2026-11-21.`
    - Outreach: P07 has no message.
-5. **No change, listed for the record:**
+5. **P10: evidence replaced (applied 2026-11-21, owner-approved).** The role was confirmed live by the owner. The career.com float-pool posting is gone, with no Wayback copy.
+   - `problem_evidence`, `problem_evidence_url`, `problem_evidence_date` now cite WUSF, 2025-01-17 (https://www.wusf.org/health-news-florida/2025-01-17/florida-nurses-rally-for-improved-staffing-health-insurance-and-ai-safeguards). The article says further demonstrations "were slated for" HCA Florida Largo Hospital, organized by National Nurses United; it doesn't say one took place there. `confidence` stays medium.
+   - Outreach: only P10's connection note changed. The fact sentence now reads "WUSF listed HCA Florida Largo as a planned site of the January 2025 statewide nurse staffing demonstrations." It's placed after the intro, because CLAUDE.md says never lead with a labor dispute (297 characters). The float-pool question that follows was kept as it was.
+6. **No change, listed for the record:**
    - P03 role: July 2025 sources only.
    - P08 evidence: the archived copy supports the float pool but not "short-staffed".
    - P14 and P23 role: smh.com didn't resolve.
@@ -120,7 +123,7 @@ No outreach message's cited fact was found to be false. P10's message cites a po
 | P14 | Lucas, Jean (also try Advanced Practice Registered Nurse) | | |
 
 **Evidence and role pages blocked from automated fetch** (open in a browser):
-- **P04, P06, P09, P10:** the row's career.com posting. P10 first, because its outreach message cites the posting.
+- **P04, P06, P09:** the row's career.com posting. (P10's posting was replaced by fix 5.)
 - **P07:** the CareerBuilder posting in the row, and the Manatee Memorial leadership page, which shows Wilkens or Young.
 - **P14:** the CareerBuilder posting (look for "Ultimate Float Team"), and https://www.smh.com/p.aspx?p=43 (Jean Lucas).
 - **P23:** https://www.smh.com/p.aspx?p=224 (Jen Rosati).
