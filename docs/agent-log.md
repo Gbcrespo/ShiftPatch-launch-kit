@@ -336,3 +336,17 @@ Output: `docs/review-2026-11-21.md`. All three agents were read-only. In PostHog
 | Agent 1, Data Analyst | sonnet | The challenge brief PDF (outside the repo), `grading-checklist.md`, `tracking-plan.md`, `decisions.md`, `CLAUDE.md`, `traction-channels.md`, the analytics and `/go/` source, PostHog project 741778 | Read dashboard 2381553's tiles, layout and captions, ran its insights and the experiment results, checked definitions with SQL, and cited PostHog's funnel docs. Labeled each point as established practice or opinion. Ran in parallel with Agent 2 and didn't see its report. It says it didn't read `decisions.md` or the source files. | Report to the main session |
 | Agent 2, Challenge reviewer | opus | Same inputs, plus the latest section of `metrics-audit.md` for comparison only | Graded each checklist item pass, fail or partial. Rebuilt the funnel per person with its own SQL, using the project test filter, and compared it with `d1JCOgLG`. Counted every event and channel click with its last-seen time, and checked the experiment, flag, surveys and replay settings. | Report to the main session |
 | Agent 3, Evaluator | opus | Agents 1 and 2's reports word for word, plus the same inputs | Weighed where the two agreed and conflicted, checked Agent 1's points against `decisions.md`, and re-ran each major issue in PostHog or the files. Rated each finding major, minor or skip, with effort, and marked what can't be fixed by tomorrow as a memo limitation. | `docs/review-2026-11-21.md` |
+
+## Prospect verification, all 30 rows (2026-11-21, read-only)
+
+Output: `docs/prospect-verification.md`. Nothing in `prospects.csv` or the outreach messages was changed; fixes await the owner.
+
+| Agent | Model | Rows | Sources | Method |
+| :--- | :--- | :--- | :--- | :--- |
+| Checker 1 | sonnet | P01–P10 | CMS Hospital General Information API (`xubh-q36u`, `curl -g`, operator `%3D`); each row's role and evidence URLs; Wayback; FL DOH MQA (form only) | Four checks per row (directory, role, registry, evidence). Its scratch file wasn't saved, so its results come from its final report. |
+| Checker 2 | sonnet | P11–P20 | As Checker 1, plus one web search (P14) | Same four checks; didn't see the earlier spot-checks. |
+| Checker 3 | sonnet | P21–P30 | As Checker 1, plus web-search summaries where a page couldn't be opened (marked) | Same four checks; didn't see the earlier spot-checks. |
+| Verifier | opus | all (planned) | — | Stopped by the owner before it wrote anything. Its last note: P07's only archived hospital page predates Young. |
+| Targeted re-check | sonnet | P07, P28, P29, P30 | CMS API (by city, name and ZIP), Wayback snapshot and availability API, jobs.leehealth.org, scf.edu, SRQ Daily | P30: Apopka has no CMS facility of its own (100007 = Orlando). P07: Young supported by 2025-08 and 2025-10 sources; the hospital page looks stale. P28: Wayback copy (2026-07-20) supports the claim. P29: no live or archived source, so evidence expired. |
+
+Result: 17 pass, 8 partial, 4 manual (job sites blocked automated fetch), 1 fail (P29 evidence). The registry is a manual check for all 22 nurse rows: the MQA lookup is an interactive form, and Nursys needs you to accept its terms and pass a CAPTCHA. Some hosts failed DNS or returned 403 from this machine; those are "couldn't verify", not "gone". No license numbers or personal contact details were recorded.
