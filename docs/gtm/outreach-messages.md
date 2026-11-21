@@ -57,18 +57,18 @@ Character counts below include spaces and the sign-off "Gabriel". The link is th
 
 ## 3. P10: Diane Conti, Chief Nursing Officer, HCA Florida Largo Hospital
 
-**Connection note** (291 characters)
+**Connection note** (297 characters)
 
-> Hi Diane, I came across HCA Florida Largo's Med Surg float pool opening from April, which is what made me write. I'm testing a pre-launch idea about filling short-notice nurse shifts. Nothing is built. I'd like to learn how float pools work in practice, if you're open to connecting. Gabriel
+> Hi Diane, I'm testing a pre-launch idea about filling short-notice nurse shifts. Nothing is built. WUSF listed HCA Florida Largo as a planned site of the January 2025 statewide nurse staffing demonstrations. I'd like to learn how float pools work in practice, if you're open to connecting. Gabriel
 
 **First message after the invite is accepted** (519 characters)
 
 > Hi Diane, thanks for connecting. I'm testing an idea and, to be clear, nothing is built. The thought is that an open shift would go to nurses on the hospital's own staff and float pool who've said they'd like extra hours. One takes it and the manager sees who's covering. I know little about how a float pool runs day to day, so I'm asking people who do. Is a pool usually enough when a unit is short, or do other things come into play? The page: https://shiftpatch-concept.pages.dev/go/direct_outreach?c=msg_v1 Gabriel
 
 - **Row:** P10
-- **Fact as cited:** HCA Florida Largo posted a 'Registered Nurse Float Pool Med Surg' opening on 2026-04-08 (closed 2026-05-22).
+- **Fact as cited:** WUSF (2025-01-17) listed HCA Florida Largo Hospital among the sites where further statewide nurse demonstrations for improved staffing were "slated" in January 2025 (not that one took place there). Placed after the intro, not first: CLAUDE.md, never lead with a labor dispute. Replaced the expired float-pool posting on 2026-11-21.
 - **CSV column:** problem_evidence
-- **Source URL:** https://www.career.com/job/hca-florida-largo-hospital/registered-nurse-float-pool-med-surg/j202604080858061808406
+- **Source URL:** https://www.wusf.org/health-news-florida/2025-01-17/florida-nurses-rally-for-improved-staffing-health-insurance-and-ai-safeguards
 
 ---
 
