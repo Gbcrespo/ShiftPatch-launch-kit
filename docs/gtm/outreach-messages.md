@@ -6,6 +6,8 @@ ShiftPatch is a pre-launch concept. Nothing is built. Nothing here has been sent
 1. A LinkedIn connection note, 300 characters or fewer including spaces, no link, one cited fact.
 2. A first message of about 500 characters, sent once the invite is accepted. It says this is an idea being tested and nothing is built, asks one question, and carries the same link for everyone: https://shiftpatch-concept.pages.dev/go/direct_outreach?c=msg_v1
 
+**Why the messages share a sentence.** The one sentence on how the idea would work is the same, or nearly the same, in every first message. It is the only approved claim (D-010), so it is kept the same on purpose rather than reworded 20 ways. The cited fact and the question are written for each person.
+
 Character counts below include spaces and the sign-off "Gabriel". The link is the same for everyone and carries no per-person tag.
 
 **How to use.**

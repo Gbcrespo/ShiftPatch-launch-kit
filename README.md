@@ -4,6 +4,8 @@ ShiftPatch is a **pre-launch concept**: an idea for helping hospitals fill short
 
 Decisions, and the reasons for them, are in [`docs/decisions.md`](docs/decisions.md).
 
+Not in this repo, by design: the full AI session transcripts (unedited) and the 75-second promo video. Both are delivered with the submission email. How the video was made, and where its source lives, is in [`docs/gtm/video.md`](docs/gtm/video.md).
+
 ## Run it locally
 
 ```sh
