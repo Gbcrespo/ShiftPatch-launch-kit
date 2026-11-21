@@ -26,5 +26,7 @@
   "d299c033-5d88-5d5e-a299-282436bc7ed7": "Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check)",
   "eb48ecba-e4e1-5170-a5d7-a029762a66da": "Unattributed 2: one direct $pageview only (no landing_page_viewed), Chrome on Windows, 2026-11-21 01:35 UTC, unknown, kept",
   "3257de69-5499-5a0e-9628-f26fda7bbc69": "Automated: headless Chrome on Linux (800x600 screen reported), direct, 2026-11-21 08:29 UTC, nothing after landing; excluded by the test-account filter (D-063)",
-  "20920abe-cc85-5510-96eb-c26461d73e19": "Unidentified: direct visit, Chrome on iOS 390x844, 2026-11-21 08:34 UTC, exposed to time; not matched to the owner's tests (other browser, 18 h later), kept as a real visit (D-063)"
+  "20920abe-cc85-5510-96eb-c26461d73e19": "Unidentified: direct visit, Chrome on iOS 390x844, 2026-11-21 08:34 UTC, exposed to time; not matched to the owner's tests (other browser, 18 h later), kept as a real visit (D-063)",
+  "81c3f15d-076c-5e7c-bed2-5a33309be11d": "Owner, D-064 preview test 1 (?internal=1, step-12 preview, 2026-11-21 21:42 UTC; reused browser storage, no signup)",
+  "352fa853-06e8-536d-95ca-5c86ba9eabc4": "Owner, D-064 preview test 2 (?internal=1, fresh private window, step-12 preview, 2026-11-21 21:53 UTC): one person landing to identify"
 }
