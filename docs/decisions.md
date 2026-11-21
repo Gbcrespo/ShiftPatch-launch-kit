@@ -484,6 +484,7 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **Effect:** they're all of variant B's exposures so far, most of the A/B and channel signups, and most survey answers after launch. **The memo has to exclude them by hand.** Count only events before 2026-11-20 14:44 UTC, or leave out these person IDs.
 - **Reason:** the owner's call.
 - **Note (2026-11-21):** 01e2abcf… also has visits after the test window, on 2026-11-21 at 03:02 and 13:36 UTC, including its only experiment exposure (found in the review, `docs/review-2026-11-21.md`). The owner confirmed it's them: "same browser as my D-045 tests". It's an owner test, and the memo excludes all of its events. Because of these later visits, the time cut-off above doesn't cover it, so the memo must leave out the person IDs.
+- **Correction (2026-11-21, owner):** these were **not** owner tests. Each of the seven profiles is tied to a welcome email sent to a non-owner address. The owner's own tests always used `gbcrespo10`, `gbcre.eng` or `example.com` addresses, which the test-account filter already excludes. They count as real visitors and signups. Their pre-consent halves ad527ed3 and 59492d76 were merged into 56850f68 and 87d66938 (D-063). This entry's "memo has to exclude them" no longer applies.
 
 ## D-046: The promo video is made with HyperFrames
 
@@ -643,3 +644,30 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **Owner calls kept:** post count (D-027), both hero lines (D-010), video lines (D-048).
   - New memo limit: both hero lines state an unsourced pain as fact, and the next version would phrase it as a question.
 - **Reason:** fix only what a reviewer would mark down and can be done before the 22 Nov submission. Everything else is stated honestly in the memo or the email.
+
+## D-063: Merge the six consent-split pairs; owner tests become internal
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Problem:** the funnel showed 19 "Landed" and the channel table 15 visitors. Accepting cookies splits a visitor into a cookieless pre-consent person and a post-consent person (D-023), so both numbers counted some visitors twice. Stitched by timing, there are 12 real visitors.
+- **Decision:** merge each pre-consent cookieless person into its post-consent person with `$merge_dangerously` (irreversible). The pairs were matched by the same browser version, screen, `utm_source` and A/B variant on both halves, with the new ID appearing 0.5–18 s after the landing view:
+  - de6bea2a → d68070ca (merged first, as a test)
+  - 3cb63f99 → f7f85f93, ad527ed3 → 56850f68, 59492d76 → 87d66938, 40d49bfe → a3ff6e77, a90a76a0 → 2573b0a6 (after the owner checks the first merge)
+- **Then, after the owner's second yes:** funnel step 1 excludes `utm_source = welcome_email` (D-034). Every D-045 owner-test person (post-merge IDs) and de17f0f0 (the owner opening the welcome email on a PC, owner-confirmed) get the person property `is_internal = true`. Nothing is deleted. This replaces D-045's "they stay in the numbers": the dashboard shows only real outside visitors, matching the memo.
+- **Ruled out:** (b1), counting "Landed" on every tile (consistent but still double-counts); deleting the pre-consent profiles (loses landings and exposures, and the numbers still don't match); a visit ID (not captured, D-023).
+- **Reason:** "I want the numbers consistent AND factual."
+- **Done (2026-11-21, ~20:46–20:51 UTC):** all six merges applied (the six pre-consent persons are gone from the persons table), and funnel `d1JCOgLG` step 1 now excludes `utm_source = welcome_email`. Every visitor tile shows 12 (9 personal network + 3 direct); the experiment shows control 3 / time 8 with every signup kept. The audit compares the funnel's totals as the tile shows them, has a raw definition for `9s0dwQbs`, and fails only on *unlabeled* test survey answers. The after run passed with no mismatch.
+- **Not done, and replaced:** `is_internal = true` on the owner tests. With person-on-events, the test-account filter reads person properties as they were when each event was captured (see D-037), so setting it now would not remove any past visit from a tile or the experiment, and audit check 6a would flag every one of their tile events.
+- **Owner tests and automated visits (2026-11-21 ~21:00 UTC, corrected ~21:10 UTC):**
+  - Static cohort 747567 "Owner tests" was first filled with the five D-045 persons. **That was wrong.** The owner checked Gmail: every one of them is tied to a non-owner email (checked in PostHog without printing any email). All five were removed, and the cohort's query now matches nobody. It stays empty in the filter, ready for a future owner test that the email and `is_internal` conditions can't catch.
+  - The owner's own addresses (`gbcrespo10`, `gbcre.eng`, `example.com`) belong to 3 profiles. None of their tile events gets past the existing filter, so none needs the cohort.
+  - A HogQL condition, `person_id NOT IN (…)`, excludes the two automated visits, 836fe88c and 3257de69, plus de17f0f0 (below). The two automated visits are headless Chrome on Linux reporting an 800x600 screen, with nothing after landing and no agent-log entry. The condition sits in the project test-account filter, which the experiment also uses. The SQL of `9s0dwQbs` lists only the two automated IDs, because it already drops de17f0f0's `welcome_email` landing.
+  - de17f0f0 (a welcome-email link opened on a Windows PC, no email tied to it) is excluded too, by the same ID condition. The owner's reason: it's a returning signup opening the welcome email on another device, not a new visitor, which is the same reason `welcome_email` landings are kept out of the visitor tiles (D-034). This takes its one exposure out of the experiment.
+  - 20920abe stays in as a real direct visit, labeled "unidentified".
+- **Result (audit passed, no mismatch):**
+  - Funnel 10 → 7 → 7 → 3 → 0.
+  - Channel table and traffic: 9 personal network + 1 direct = 10 visitors, 7 signups, 1 buyer.
+  - Link clicks: 10.
+  - Experiment: control 3 / time 7 exposed (signups 2 vs 5, buyers 1 vs 0). The 10 exposed people are the same 10 people as the visitors (checked person by person), and the experiment's 7 signups match the dashboard's.
+- **Signups vs emails (owner-confirmed):** people = PostHog persons (7); list size = distinct emails (8, one person tested with a second address). The same friend signed up twice, using a second address to test the form. The channel table's description says so.
+- **Superseded:** the first version of this entry excluded five non-owner signups as owner tests. Replaced by the above.

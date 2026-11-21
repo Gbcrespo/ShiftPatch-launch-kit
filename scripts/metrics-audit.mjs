@@ -83,9 +83,21 @@ async function hogql(sql) {
 	return j.results.map((row) => Object.fromEntries(j.columns.map((c, i) => [c, row[i]])));
 }
 
-// ---- What counts as test traffic (D-029, D-037, D-038, localhost, /preview/) --
+// ---- What counts as test traffic (D-029, D-037, D-038, D-063, localhost, /preview/) --
 const isTrue = (expr) => `ifNull(lower(toString(${expr})) = 'true', 0)`;
+// D-063: the owner-test cohort (empty unless an owner test can't be caught by
+// email or is_internal) and the two automated headless-Chrome visits, mirrored
+// from the project test-account filter.
+const OWNER_COHORT = 747567;
+const AUTOMATED = ['836fe88c-eb65-5e90-b897-69b497b5398e', '3257de69-5499-5a0e-9628-f26fda7bbc69'];
+// A returning signup opening the welcome email on another device: not a new
+// visitor, so it's kept out of the experiment like welcome_email landings are
+// kept out of the visitor tiles (D-034, D-063).
+const RETURNING_DEVICE = ['de17f0f0-d3d7-5bf5-a5bb-de54d4f26633'];
 const REASONS = {
+	owner_test: `person_id IN COHORT ${OWNER_COHORT}`,
+	automated: `toString(person_id) IN (${AUTOMATED.map((id) => `'${id}'`).join(', ')})`,
+	returning_device: `toString(person_id) IN (${RETURNING_DEVICE.map((id) => `'${id}'`).join(', ')})`,
 	internal_person: isTrue('person.properties.is_internal'),
 	test_user: isTrue('person.properties.$internal_or_test_user'),
 	internal_event: isTrue('properties.is_internal'),
@@ -180,9 +192,10 @@ function funnel(ev, isStep2) {
 
 // Generic per-person ordered funnel: steps[0] is step 1; each later step must
 // come after the previous one and within `windowMs` of step 1. Breakdown is the
-// utm_source of the step 1 event (PostHog "attributed to step 1", D-040).
+// utm_source of the step 1 event (PostHog "attributed to step 1", D-040), or
+// none when the tile has no breakdown (every row then lands under "(none)").
 const isLanded = (e) => e.event === 'landing_page_viewed' || e.event === 'cookie_banner_answered';
-function stageFunnel(ev, steps, windowMs) {
+function stageFunnel(ev, steps, windowMs, { breakdown = true } = {}) {
 	const from = utc(INSIGHT_START);
 	const byPerson = new Map();
 	for (const e of ev) if (e.t >= from) (byPerson.get(e.pid) ?? byPerson.set(e.pid, []).get(e.pid)).push(e);
@@ -198,7 +211,7 @@ function stageFunnel(ev, steps, windowMs) {
 				reached++;
 				t = hit.t;
 			}
-			if (!best || reached > best.reached) best = { reached, b: bd(s1.utm_source) };
+			if (!best || reached > best.reached) best = { reached, b: breakdown ? bd(s1.utm_source) : NONE };
 		}
 		if (!best) continue;
 		for (let n = 1; n <= best.reached; n++) out[`step${n}|${best.b}`] = (out[`step${n}|${best.b}`] ?? 0) + 1;
@@ -222,13 +235,37 @@ const RAW = {
 		fn: (ev) => funnel(ev, isSignup),
 	},
 	d1JCOgLG: {
-		about: 'Stage funnel (D-040), per person, ordered, 7-day window: Landed → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Breakdown: utm_source of step 1.',
+		about: 'Stage funnel (D-040, D-063), per person, ordered, 7-day window: Landed with utm_source not welcome_email → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Totals only, no breakdown, as the tile shows them.',
 		fn: (ev) =>
 			stageFunnel(
 				ev,
-				[isLanded, (e) => e.event === 'signup_form_started', isSignup, (e) => e.event === 'welcome_email_opened', (e) => e.event === 'welcome_email_link_clicked'],
+				[(e) => isLanded(e) && isChannel(e), (e) => e.event === 'signup_form_started', isSignup, (e) => e.event === 'welcome_email_opened', (e) => e.event === 'welcome_email_link_clicked'],
 				7 * 86400e3,
+				{ breakdown: false },
 			),
+	},
+	'9s0dwQbs': {
+		about: 'Channel table (D-060, SQL tile): per channel label, unique persons with landing_page_viewed (visitors), signup_form_submitted (signups) and buyer signups, plus both rates rounded to whole percent; welcome_email excluded.',
+		fn: (ev) => {
+			const LABEL = { personal_network: 'Personal network (shared link)', linkedin: 'LinkedIn (organic)', linkedin_ads: 'LinkedIn Ads', fonl_annual_2027: 'FONL Annual 2027' };
+			const ch = (e) => (e.utm_source ? LABEL[e.utm_source] ?? e.utm_source : 'Direct (no tracked link)');
+			const w = ev.filter((e) => e.t >= utc(INSIGHT_START) && isChannel(e));
+			const V = uniqBy(w.filter((e) => e.event === 'landing_page_viewed'), ch);
+			const S = uniqBy(w.filter(isSignup), ch);
+			const B = uniqBy(w.filter((e) => isSignup(e) && e.buyer), ch);
+			const out = {};
+			for (const k of new Set([...Object.keys(V), ...Object.keys(S)])) {
+				const v = V[k] ?? 0;
+				Object.assign(out, {
+					[`visitors|${k}`]: v,
+					[`signups|${k}`]: S[k] ?? 0,
+					[`signup_rate|${k}`]: v ? Math.round((100 * (S[k] ?? 0)) / v) : 0,
+					[`buyer_signups|${k}`]: B[k] ?? 0,
+					[`buyer_rate|${k}`]: v ? Math.round((100 * (B[k] ?? 0)) / v) : 0,
+				});
+			}
+			return out;
+		},
 	},
 	opzPWguM: {
 		about: 'Channel table (D-042): unique persons per utm_source (welcome_email excluded) for visitors (landing_page_viewed), all signups, buyer signups and hero clicks, plus all signups ÷ visitors and buyer signups ÷ visitors.',
@@ -348,6 +385,15 @@ function flattenInsight(ins) {
 				const b = bd(Array.isArray(s.breakdown_value) ? s.breakdown_value.join('::') : s.breakdown_value);
 				out[`step${s.order + 1}|${b}`] = (out[`step${s.order + 1}|${b}`] ?? 0) + s.count;
 			}
+	} else if (kind === 'HogQLQuery') {
+		// SQL tile: rows of values; the first column is the row label. Percent
+		// strings like "58%" compare as numbers.
+		const cols = ins.columns ?? (ins.query?.tableSettings?.columns ?? []).map((c) => c.column);
+		for (const row of ins.result ?? [])
+			cols.slice(1).forEach((c, i) => {
+				const v = row[i + 1];
+				out[`${c}|${row[0]}`] = typeof v === 'string' ? parseFloat(v) : v;
+			});
 	} else {
 		for (const r of ins.result ?? []) {
 			const b = Array.isArray(r.breakdown_value) ? r.breakdown_value.map(bd).join('::') : bd(r.breakdown_value);
@@ -547,7 +593,10 @@ LIMIT 10000`);
 	md.push('**After launch** (these are what the survey tile and memo read):', '');
 	md.push(table(['Person', 'Label', 'Answers', 'Test/internal?', 'First', 'Last'], post.map((s) => [s.pid, label(s.pid), s.post_launch, sReason(s) || 'no', fmtTime(Date.parse(s.first.replace(' ', 'T') + 'Z')), fmtTime(Date.parse(s.last.replace(' ', 'T') + 'Z'))])), '');
 	const postTest = post.filter((s) => sReason(s));
-	if (postTest.length) mismatches.push(`internal/test survey answers after launch: ${postTest.map((s) => s.pid).join(', ')}`);
+	// Test answers are already kept off the survey tile by its test filter, so
+	// only an unexplained one needs attention: a labeled one is listed above.
+	const postTestUnlabeled = postTest.filter((s) => !label(s.pid));
+	if (postTestUnlabeled.length) mismatches.push(`unlabeled internal/test survey answers after launch: ${postTestUnlabeled.map((s) => s.pid).join(', ')}`);
 	md.push(`**Before launch:** ${pre.reduce((a, s) => a + Number(s.answers), 0)} answers from ${pre.length} persons (${pre.filter((s) => Number(s.has_record) === 1).length} with a person record, ${pre.filter((s) => Number(s.has_record) !== 1).length} cookieless with none, which can't be deleted). Read survey results from ${INSIGHT_START} UTC.`, '');
 	Object.assign(metrics, { 'survey|post_launch_persons': post.length, 'survey|post_launch_test_persons': postTest.length, 'survey|pre_launch_answers': pre.reduce((a, s) => a + Number(s.answers), 0), 'survey|pre_launch_persons': pre.length });
 
@@ -644,7 +693,7 @@ GROUP BY t_internal, t_test LIMIT 100`);
 	}
 
 	// Summary
-	md.splice(4, 0, '### Summary', '', mismatches.length ? mismatches.map((m) => `- ≠ ${m}`).join('\n') : '- ✓ Every tile matches its raw count. No internal/test answers after launch. Every unattributed visit is labeled.', '');
+	md.splice(4, 0, '### Summary', '', mismatches.length ? mismatches.map((m) => `- ≠ ${m}`).join('\n') : '- ✓ Every tile matches its raw count. No unlabeled internal/test answers after launch. Every unattributed visit is labeled.', '');
 	md.push(`<!-- audit-json ${JSON.stringify({ runAt: fmtTime(runAt), note: NOTE, metrics })} -->`, '', '---', '');
 
 	const section = md.join('\n');
