@@ -161,7 +161,7 @@ Each entry records what was decided, by whom, and why. Newest at the bottom.
 - **Date:** 2026-11-18
 - **Decided by:** project owner
 - **Decision:** The customer profile and the 30 prospects cover Florida hospitals only.
-- **Reason:** It matches Juan's base and gives one coherent outreach story. Florida has 200+ CMS-listed hospitals and one license lookup (FL DOH MQA), so verification stays consistent. Narrowing is easy to explain.
+- **Reason:** It matches Juan's base (Juan is the founder in the challenge brief, who runs operations for a hospital network in Florida) and gives one coherent outreach story. Florida has 200+ CMS-listed hospitals and one license lookup (FL DOH MQA), so verification stays consistent. Narrowing is easy to explain.
 - **Known trade-off:** fewer hospitals with recent, specific evidence of the problem than nationwide, so some rows may land at medium confidence.
 - **Ruled out:** all of the US (outreach spread thin, 50 state boards to verify against) and 3–4 shortage states (needs its own sourced justification and several license lookups).
 
@@ -626,3 +626,20 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **Decided by:** project owner (Agent 3's suggestion, with `9s0dwQbs` for rates)
 - **Decision:** in `docs/research/traction-channels.md`, H1–H3 say where their numbers live: `9s0dwQbs` for rates, `d1JCOgLG` for stages, `ZS0Uhz2p` for clicks, `d9eeKWIG` for H2's roles and `KK0a37NQ` for the survey step in H1 and H3. This replaces "the Funnel insight described in the shared notes".
 - **Reason:** the brief requires each hypothesis to say where its number lives in PostHog (review finding, `docs/review-2026-11-21.md`).
+
+## D-062: Asset review fixes before submission
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner (from the asset review, `docs/reviews/assets-review.md`)
+- **Decision:** apply five fixes:
+  - F1: give posts 1, 2 and 5 their own graphic (`post01.png`, `post02.png`, `post05.png`), each headlined with that post's own question.
+  - F2: add a header note to the outreach file saying the "how it would work" sentence is shared on purpose.
+  - F3: say why Florida in `target-customer.md`, and say who Juan is in D-015.
+  - F7: add a README pointer to the transcripts and the video.
+  - F5: reword post 6's "I got that picture from conversation". The owner did not have those conversations, so it now reads "That's a hunch, not something I've checked yet." (owner's wording, replacing the evaluator's suggested line).
+- **Not fixed:**
+  - F4: the page's "one question" vs the five-question email survey becomes a memo limit, so the live page doesn't change mid-experiment.
+  - F6: the hashtags stay.
+- **Owner calls kept:** post count (D-027), both hero lines (D-010), video lines (D-048).
+  - New memo limit: both hero lines state an unsourced pain as fact, and the next version would phrase it as a question.
+- **Reason:** fix only what a reviewer would mark down and can be done before the 22 Nov submission. Everything else is stated honestly in the memo or the email.

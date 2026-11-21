@@ -13,14 +13,14 @@ LinkedIn organic ranked #2 of 19 traction channels, scoring 19/25 (`docs/researc
 - The only description of how it would work is the landing page's "How it would work" section (D-010: nurses come from the hospital's own staff and float pool).
 - Only link used: `/go/linkedin?c=postNN`. No new links, no new events.
 - Every post is signed "Gabriel".
-- Graphic: `docs/gtm/assets/linkedin-template.png` (default headline is post 4's question). For other posts, re-render with the post's question (see `design/social-graphic/README.md`).
+- Graphic: every post has one, headlined with that post's own question. The template's default render, `docs/gtm/assets/linkedin-template.png`, is post 4's. The others were re-rendered from the same template (see `design/social-graphic/README.md`).
 
 ---
 
 ## Post 01
 
 - **Publish date:** Mon 2026-11-23
-- **Graphic:** no
+- **Graphic:** yes, `docs/gtm/assets/post01.png` (headline "When a shift opens up with very little warning, what's the first thing that happens?", source line "A question, not a claim")
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post01
 - **Sources:** none (no facts used)
 
@@ -47,7 +47,7 @@ Gabriel
 ## Post 02
 
 - **Publish date:** Tue 2026-11-24
-- **Graphic:** no
+- **Graphic:** yes, `docs/gtm/assets/post02.png` (headline "Who decides which nurses get asked first when a shift opens?", source line "A question, not a claim")
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post02
 - **Sources:** none (the "own staff and float pool" description is the landing page's "How it would work", D-010)
 
@@ -120,7 +120,7 @@ https://shiftpatch-concept.pages.dev/go/linkedin?c=post04
 ## Post 05
 
 - **Publish date:** Wed 2026-12-02
-- **Graphic:** no
+- **Graphic:** yes, `docs/gtm/assets/post05.png` (headline "What's the first thing that would worry you about this idea?", source line "A question, not a claim")
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post05
 - **Sources:** none (the "own staff and float pool" description is the landing page's "How it would work", D-010)
 
@@ -155,7 +155,7 @@ Where the idea is written down: https://shiftpatch-concept.pages.dev/go/linkedin
 
 Last one in this round, and the one I'm least sure about.
 
-I have a picture in my head of a manager working down a list of names to fill an open shift. I got that picture from conversation, not from data, and I can't point to a source for it.
+I have a picture in my head of a manager working down a list of names to fill an open shift. That's a hunch, not something I've checked yet.
 
 So: is that actually how it goes where you work? Or is it a text thread, a scheduling system, a float pool office, something else entirely? If my picture is wrong, I'd rather know.
 
@@ -169,7 +169,7 @@ https://shiftpatch-concept.pages.dev/go/linkedin?c=post06
 
 ## Proposed changes (owner decides)
 
-- Posts 3 and 6 need their own graphic renders; the template supports it, but only the default (post 4) is rendered. Decide whether to render them.
+- Done: every post now has its own graphic (posts 3 and 6 were rendered after this log, and posts 1, 2 and 5 on 2026-11-21, D-062).
 - No new events or links needed.
 - Post 1 says "mostly to nurse leaders and staffing leaders in Florida": organic posts cannot target by state, so this is an invitation, not targeting.
 
@@ -184,5 +184,5 @@ https://shiftpatch-concept.pages.dev/go/linkedin?c=post06
 - **Method:** Read CLAUDE.md, decisions D-001/D-010/D-019/D-027, tracking-plan.md, target-customer.md, traction-channels.md, LandingPage.astro. Drafted posts with varied length and structure, each asking one question. Built the graphic as HTML/inline SVG and rendered it with headless Chrome, then checked the PNG size (1200x627) and viewed it.
 - **Sources:** traction-channels.md (channel #15, 19/25, [S10]); target-customer.md section 4 (The Capitolist, 2026-01-23, FHA report); LandingPage.astro "How it would work".
 - **Kept / dropped:** Only vacancy and turnover figures used (neutral). Dropped overtime, agency and Jackson Health dollar figures (they favor money) and the 67% early-departure figure (not needed). No labor-dispute material (CLAUDE.md).
-- **Known gaps:** Florida nurse leaders' organic LinkedIn activity is unverified. Post 3's figure comes from a news report of the FHA report, not the FHA PDF. The default PNG is rendered only for post 4; posts 3 and 6 need re-renders. Real signer name not in repo. Posts not checked against LinkedIn's own rendering.
+- **Known gaps:** Florida nurse leaders' organic LinkedIn activity is unverified. Post 3's figure comes from a news report of the FHA report, not the FHA PDF. The default PNG is rendered only for post 4; posts 3 and 6 need re-renders (since done: all six posts have a graphic, D-062). Real signer name not in repo. Posts not checked against LinkedIn's own rendering.
 - **Output files:** C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\linkedin-posts.md; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\design\social-graphic\template.html; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\design\social-graphic\render.ps1; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\design\social-graphic\README.md; C:\Users\Gabriel\Downloads\ShiftPatch Repo\shiftpatch-launch-kit\docs\gtm\assets\linkedin-template.png

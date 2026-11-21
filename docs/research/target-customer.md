@@ -2,6 +2,8 @@
 
 ShiftPatch is a pre-launch concept. Nothing is built. This profile describes who the concept would approach first (the buyer side, Florida only) and what public sources say about their problem. All sources were accessed on 2026-11-18 unless noted. Items marked "national" are not Florida-specific. Items marked "search summary" were seen only in search-result text because the page itself blocked fetching; treat those as unverified until opened in a browser.
 
+**Why Florida only (D-015).** The founder this concept is for runs operations for a hospital network in Florida, so Florida buyers are the ones whose problem matches the founder's. One state also keeps the evidence consistent: 223 CMS hospital records (section 2) and one public nurse license lookup (FL DOH MQA), instead of 50 state boards. The trade-off is fewer hospitals with recent, specific public evidence of the problem than a nationwide list would have.
+
 ## 1. Job titles (who owns the problem or the budget)
 
 | Role | Why they matter | Source |
