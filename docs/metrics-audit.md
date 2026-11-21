@@ -4986,3 +4986,1953 @@ _No number moved._
 <!-- audit-json {"runAt":"2026-11-21 16:48:41 UTC","note":"after D-060/D-061 doc edits (no PostHog change, no site visits)","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":6,"experiment|exposures|control|raw":6,"experiment|exposures|time|shown":11,"experiment|exposures|time|raw":11,"d1JCOgLG|step1|(none)|shown":3,"d1JCOgLG|step1|(none)|raw":3,"d1JCOgLG|step1|personal_network|shown":15,"d1JCOgLG|step1|personal_network|raw":15,"d1JCOgLG|step1|welcome_email|shown":1,"d1JCOgLG|step1|welcome_email|raw":1,"d1JCOgLG|step2|personal_network|shown":7,"d1JCOgLG|step2|personal_network|raw":7,"d1JCOgLG|step3|personal_network|shown":7,"d1JCOgLG|step3|personal_network|raw":7,"d1JCOgLG|step4|personal_network|shown":3,"d1JCOgLG|step4|personal_network|raw":3,"dBS4IKQb|Visitors|(none)|shown":3,"dBS4IKQb|Visitors|(none)|raw":3,"dBS4IKQb|Visitors|personal_network|shown":12,"dBS4IKQb|Visitors|personal_network|raw":12,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":4,"oMvaY0hy|Visitors|a|raw":4,"oMvaY0hy|Visitors|b|shown":10,"oMvaY0hy|Visitors|b|raw":10,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":3,"KK0a37NQ|step1|(none)|raw":3,"KK0a37NQ|step1|personal_network|shown":15,"KK0a37NQ|step1|personal_network|raw":15,"KK0a37NQ|step1|welcome_email|shown":1,"KK0a37NQ|step1|welcome_email|raw":1,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":3,"dRTNVtm9|step1|(none)|raw":3,"dRTNVtm9|step1|personal_network|shown":15,"dRTNVtm9|step1|personal_network|raw":15,"dRTNVtm9|step1|welcome_email|shown":1,"dRTNVtm9|step1|welcome_email|raw":1,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":6,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":13,"variant|time|exposed_persons":11,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":2,"persons_by_source|(none)":3,"persons_by_source|personal_network":17,"persons_by_source|welcome_email":1,"test|persons":11,"test|events":72,"unattributed|persons":4,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
 
 ---
+## Audit 2026-11-21 20:50:30 UTC — before D-063 merge of de6bea2a into d68070ca
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ≠ d1JCOgLG: step1|(none) shows 19, raw 3
+- ≠ d1JCOgLG: step1|personal_network shows 0, raw 15
+- ≠ d1JCOgLG: step1|welcome_email shows 0, raw 1
+- ≠ d1JCOgLG: step2|(none) shows 7, raw 0
+- ≠ d1JCOgLG: step2|personal_network shows 0, raw 7
+- ≠ d1JCOgLG: step3|(none) shows 7, raw 0
+- ≠ d1JCOgLG: step3|personal_network shows 0, raw 7
+- ≠ d1JCOgLG: step4|(none) shows 3, raw 0
+- ≠ d1JCOgLG: step4|personal_network shows 0, raw 3
+- ≠ 9s0dwQbs: no raw definition
+- ≠ unlabeled unattributed visits: eb48ecba-e4e1-5170-a5d7-a029762a66da, 3257de69-5499-5a0e-9628-f26fda7bbc69, 20920abe-cc85-5510-96eb-c26461d73e19
+- ≠ internal/test survey answers after launch: d299c033-5d88-5d5e-a299-282436bc7ed7
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 5 | 5 | ✓ | not-enough-exposures |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 3 | 3 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 6 | 6 | ✓ |  |
+| exposures\|time | 11 | 11 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040), per person, ordered, 7-day window: Landed → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Breakdown: utm_source of step 1.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 19 | 3 | ≠ MISMATCH |
+| step1\|personal_network | 0 | 15 | ≠ MISMATCH |
+| step1\|welcome_email | 0 | 1 | ≠ MISMATCH |
+| step2\|(none) | 7 | 0 | ≠ MISMATCH |
+| step2\|personal_network | 0 | 7 | ≠ MISMATCH |
+| step3\|(none) | 7 | 0 | ≠ MISMATCH |
+| step3\|personal_network | 0 | 7 | ≠ MISMATCH |
+| step4\|(none) | 3 | 0 | ≠ MISMATCH |
+| step4\|personal_network | 0 | 3 | ≠ MISMATCH |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: _none_
+
+_No raw definition in the audit for this tile. Add one to `RAW`._
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 3 | 3 | ✓ |
+| Visitors\|personal_network | 12 | 12 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 10 | 10 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 4 | 4 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 2 | 2 | ✓ |
+| Respondents\|More than 60 | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 5 | 5 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 4 | 4 | ✓ |
+| Visitors\|b | 10 | 10 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 6 | 6 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 3 | 3 | ✓ |
+| step1\|personal_network | 15 | 15 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 3 | 3 | ✓ |
+| step1\|personal_network | 15 | 15 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 7 | 7 | ✓ |
+| step3\|personal_network | 5 | 5 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 6 | 3 | 2 | 1 |
+| time | 13 | 11 | 3 | 6 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 2 (836fe88c-eb65-5e90-b897-69b497b5398e, 3257de69-5499-5a0e-9628-f26fda7bbc69).
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 3 | no (direct) |
+| personal_network | 17 | yes |
+| welcome_email | 1 | no (D-034) |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 |  | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Unattributed 1: direct visit, Chrome on Linux, 2026-11-19 19:14 UTC, possibly the owner (unconfirmed), kept | 2026-11-19 19:14:31 UTC | shiftpatch-concept.pages.dev | Chrome / Linux |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | **UNLABELED** | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | **UNLABELED** | 2026-11-21 08:29:04 UTC | shiftpatch-concept.pages.dev | Chrome / Linux |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | **UNLABELED** | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up) | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC and again 2026-11-21 03:02 and 13:36 UTC (owner-confirmed, same browser; left in, D-045) | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 |  | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 16:48:41 UTC (after D-060/D-061 doc edits (no PostHog change, no site visits)).
+
+| Number | Before | Now |  |
+| :--- | :--- | :--- | :--- |
+| d1JCOgLG\|step1\|(none)\|shown | 3 | 19 | ▲ check it is real traffic |
+| d1JCOgLG\|step1\|personal_network\|shown | 15 | 0 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|welcome_email\|shown | 1 | 0 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step2\|(none)\|shown | — | 7 | ▲ new breakdown value: check it is real traffic |
+| d1JCOgLG\|step2\|personal_network\|shown | 7 | 0 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step3\|(none)\|shown | — | 7 | ▲ new breakdown value: check it is real traffic |
+| d1JCOgLG\|step3\|personal_network\|shown | 7 | 0 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step4\|(none)\|shown | — | 3 | ▲ new breakdown value: check it is real traffic |
+| d1JCOgLG\|step4\|personal_network\|shown | 3 | 0 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+
+<!-- audit-json {"runAt":"2026-11-21 20:50:30 UTC","note":"before D-063 merge of de6bea2a into d68070ca","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":6,"experiment|exposures|control|raw":6,"experiment|exposures|time|shown":11,"experiment|exposures|time|raw":11,"d1JCOgLG|step1|(none)|shown":19,"d1JCOgLG|step1|(none)|raw":3,"d1JCOgLG|step1|personal_network|shown":0,"d1JCOgLG|step1|personal_network|raw":15,"d1JCOgLG|step1|welcome_email|shown":0,"d1JCOgLG|step1|welcome_email|raw":1,"d1JCOgLG|step2|(none)|shown":7,"d1JCOgLG|step2|(none)|raw":0,"d1JCOgLG|step2|personal_network|shown":0,"d1JCOgLG|step2|personal_network|raw":7,"d1JCOgLG|step3|(none)|shown":7,"d1JCOgLG|step3|(none)|raw":0,"d1JCOgLG|step3|personal_network|shown":0,"d1JCOgLG|step3|personal_network|raw":7,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":0,"d1JCOgLG|step4|personal_network|shown":0,"d1JCOgLG|step4|personal_network|raw":3,"dBS4IKQb|Visitors|(none)|shown":3,"dBS4IKQb|Visitors|(none)|raw":3,"dBS4IKQb|Visitors|personal_network|shown":12,"dBS4IKQb|Visitors|personal_network|raw":12,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":4,"oMvaY0hy|Visitors|a|raw":4,"oMvaY0hy|Visitors|b|shown":10,"oMvaY0hy|Visitors|b|raw":10,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":3,"KK0a37NQ|step1|(none)|raw":3,"KK0a37NQ|step1|personal_network|shown":15,"KK0a37NQ|step1|personal_network|raw":15,"KK0a37NQ|step1|welcome_email|shown":1,"KK0a37NQ|step1|welcome_email|raw":1,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":3,"dRTNVtm9|step1|(none)|raw":3,"dRTNVtm9|step1|personal_network|shown":15,"dRTNVtm9|step1|personal_network|raw":15,"dRTNVtm9|step1|welcome_email|shown":1,"dRTNVtm9|step1|welcome_email|raw":1,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":6,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":13,"variant|time|exposed_persons":11,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":2,"persons_by_source|(none)":3,"persons_by_source|personal_network":17,"persons_by_source|welcome_email":1,"test|persons":11,"test|events":72,"unattributed|persons":4,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
+## Audit 2026-11-21 20:52:43 UTC — after D-063 merge 1 of 6 (de6bea2a into d68070ca)
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ≠ d1JCOgLG: step1|(none) shows 18, raw 3
+- ≠ d1JCOgLG: step1|personal_network shows 0, raw 14
+- ≠ d1JCOgLG: step1|welcome_email shows 0, raw 1
+- ≠ d1JCOgLG: step2|(none) shows 7, raw 0
+- ≠ d1JCOgLG: step2|personal_network shows 0, raw 7
+- ≠ d1JCOgLG: step3|(none) shows 7, raw 0
+- ≠ d1JCOgLG: step3|personal_network shows 0, raw 7
+- ≠ d1JCOgLG: step4|(none) shows 3, raw 0
+- ≠ d1JCOgLG: step4|personal_network shows 0, raw 3
+- ≠ 9s0dwQbs: no raw definition
+- ≠ unlabeled unattributed visits: eb48ecba-e4e1-5170-a5d7-a029762a66da, 3257de69-5499-5a0e-9628-f26fda7bbc69, 20920abe-cc85-5510-96eb-c26461d73e19
+- ≠ internal/test survey answers after launch: d299c033-5d88-5d5e-a299-282436bc7ed7
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 5 | 5 | ✓ | not-enough-exposures |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 3 | 3 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 6 | 6 | ✓ |  |
+| exposures\|time | 10 | 10 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040), per person, ordered, 7-day window: Landed → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Breakdown: utm_source of step 1.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 18 | 3 | ≠ MISMATCH |
+| step1\|personal_network | 0 | 14 | ≠ MISMATCH |
+| step1\|welcome_email | 0 | 1 | ≠ MISMATCH |
+| step2\|(none) | 7 | 0 | ≠ MISMATCH |
+| step2\|personal_network | 0 | 7 | ≠ MISMATCH |
+| step3\|(none) | 7 | 0 | ≠ MISMATCH |
+| step3\|personal_network | 0 | 7 | ≠ MISMATCH |
+| step4\|(none) | 3 | 0 | ≠ MISMATCH |
+| step4\|personal_network | 0 | 3 | ≠ MISMATCH |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: _none_
+
+_No raw definition in the audit for this tile. Add one to `RAW`._
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 3 | 3 | ✓ |
+| Visitors\|personal_network | 12 | 12 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 10 | 10 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 4 | 4 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 2 | 2 | ✓ |
+| Respondents\|More than 60 | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 5 | 5 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 4 | 4 | ✓ |
+| Visitors\|b | 10 | 10 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 6 | 6 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 3 | 3 | ✓ |
+| step1\|personal_network | 14 | 14 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 3 | 3 | ✓ |
+| step1\|personal_network | 14 | 14 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 7 | 7 | ✓ |
+| step3\|personal_network | 5 | 5 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 6 | 3 | 2 | 1 |
+| time | 13 | 10 | 3 | 6 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 2 (836fe88c-eb65-5e90-b897-69b497b5398e, 3257de69-5499-5a0e-9628-f26fda7bbc69).
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 3 | no (direct) |
+| personal_network | 16 | yes |
+| welcome_email | 1 | no (D-034) |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 |  | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Unattributed 1: direct visit, Chrome on Linux, 2026-11-19 19:14 UTC, possibly the owner (unconfirmed), kept | 2026-11-19 19:14:31 UTC | shiftpatch-concept.pages.dev | Chrome / Linux |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | **UNLABELED** | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | **UNLABELED** | 2026-11-21 08:29:04 UTC | shiftpatch-concept.pages.dev | Chrome / Linux |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | **UNLABELED** | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up) | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC and again 2026-11-21 03:02 and 13:36 UTC (owner-confirmed, same browser; left in, D-045) | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 |  | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 20:50:30 UTC (before D-063 merge of de6bea2a into d68070ca).
+
+| Number | Before | Now |  |
+| :--- | :--- | :--- | :--- |
+| KK0a37NQ\|step1\|personal_network\|raw | 15 | 14 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|personal_network\|shown | 15 | 14 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|(none)\|shown | 19 | 18 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|personal_network\|raw | 15 | 14 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|personal_network\|raw | 15 | 14 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|personal_network\|shown | 15 | 14 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|raw | 11 | 10 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|shown | 11 | 10 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| persons_by_source\|personal_network | 17 | 16 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|exposed_persons | 11 | 10 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+
+<!-- audit-json {"runAt":"2026-11-21 20:52:43 UTC","note":"after D-063 merge 1 of 6 (de6bea2a into d68070ca)","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":6,"experiment|exposures|control|raw":6,"experiment|exposures|time|shown":10,"experiment|exposures|time|raw":10,"d1JCOgLG|step1|(none)|shown":18,"d1JCOgLG|step1|(none)|raw":3,"d1JCOgLG|step1|personal_network|shown":0,"d1JCOgLG|step1|personal_network|raw":14,"d1JCOgLG|step1|welcome_email|shown":0,"d1JCOgLG|step1|welcome_email|raw":1,"d1JCOgLG|step2|(none)|shown":7,"d1JCOgLG|step2|(none)|raw":0,"d1JCOgLG|step2|personal_network|shown":0,"d1JCOgLG|step2|personal_network|raw":7,"d1JCOgLG|step3|(none)|shown":7,"d1JCOgLG|step3|(none)|raw":0,"d1JCOgLG|step3|personal_network|shown":0,"d1JCOgLG|step3|personal_network|raw":7,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":0,"d1JCOgLG|step4|personal_network|shown":0,"d1JCOgLG|step4|personal_network|raw":3,"dBS4IKQb|Visitors|(none)|shown":3,"dBS4IKQb|Visitors|(none)|raw":3,"dBS4IKQb|Visitors|personal_network|shown":12,"dBS4IKQb|Visitors|personal_network|raw":12,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":4,"oMvaY0hy|Visitors|a|raw":4,"oMvaY0hy|Visitors|b|shown":10,"oMvaY0hy|Visitors|b|raw":10,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":3,"KK0a37NQ|step1|(none)|raw":3,"KK0a37NQ|step1|personal_network|shown":14,"KK0a37NQ|step1|personal_network|raw":14,"KK0a37NQ|step1|welcome_email|shown":1,"KK0a37NQ|step1|welcome_email|raw":1,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":3,"dRTNVtm9|step1|(none)|raw":3,"dRTNVtm9|step1|personal_network|shown":14,"dRTNVtm9|step1|personal_network|raw":14,"dRTNVtm9|step1|welcome_email|shown":1,"dRTNVtm9|step1|welcome_email|raw":1,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":6,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":13,"variant|time|exposed_persons":10,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":2,"persons_by_source|(none)":3,"persons_by_source|personal_network":16,"persons_by_source|welcome_email":1,"test|persons":11,"test|events":72,"unattributed|persons":4,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
+## Audit 2026-11-21 20:59:08 UTC — after D-063: all 6 merges, funnel step 1 without welcome_email, audit compares tile totals
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ✓ Every tile matches its raw count. No internal/test answers after launch. Every unattributed visit is labeled.
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 5 | 5 | ✓ | not-enough-exposures |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 3 | 3 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 3 | 3 | ✓ |  |
+| exposures\|time | 8 | 8 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040, D-063), per person, ordered, 7-day window: Landed with utm_source not welcome_email → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Totals only, no breakdown, as the tile shows them.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 12 | 12 | ✓ |
+| step2\|(none) | 7 | 7 | ✓ |
+| step3\|(none) | 7 | 7 | ✓ |
+| step4\|(none) | 3 | 3 | ✓ |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: _none_
+
+Raw = Channel table (D-060, SQL tile): per channel label, unique persons with landing_page_viewed (visitors), signup_form_submitted (signups) and buyer signups, plus both rates rounded to whole percent; welcome_email excluded.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| buyer_rate\|Personal network (shared link) | 11 | 11 | ✓ |
+| buyer_signups\|Personal network (shared link) | 1 | 1 | ✓ |
+| signup_rate\|Personal network (shared link) | 78 | 78 | ✓ |
+| signups\|Personal network (shared link) | 7 | 7 | ✓ |
+| visitors\|Direct (no tracked link) | 3 | 3 | ✓ |
+| visitors\|Personal network (shared link) | 9 | 9 | ✓ |
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 3 | 3 | ✓ |
+| Visitors\|personal_network | 9 | 9 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 10 | 10 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 4 | 4 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 2 | 2 | ✓ |
+| Respondents\|More than 60 | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 5 | 5 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 3 | 3 | ✓ |
+| Visitors\|b | 8 | 8 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 6 | 6 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 3 | 3 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 3 | 3 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 7 | 7 | ✓ |
+| step3\|personal_network | 5 | 5 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 3 | 3 | 2 | 1 |
+| time | 13 | 8 | 3 | 6 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 2 (836fe88c-eb65-5e90-b897-69b497b5398e, 3257de69-5499-5a0e-9628-f26fda7bbc69).
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 3 | no (direct) |
+| personal_network | 11 | yes |
+| welcome_email | 1 | no (D-034) |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Unattributed 1: direct visit, Chrome on Linux, 2026-11-19 19:14 UTC, possibly the owner (unconfirmed), kept | 2026-11-19 19:14:31 UTC | shiftpatch-concept.pages.dev | Chrome / Linux |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | Unattributed 2: one direct $pageview only (no landing_page_viewed), Chrome on Windows, 2026-11-21 01:35 UTC, unknown, kept | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | Unattributed 3: direct visit, Chrome on Linux, 2026-11-21 08:29 UTC, no exposure, unknown, kept | 2026-11-21 08:29:04 UTC | shiftpatch-concept.pages.dev | Chrome / Linux |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | Unattributed 4: direct visit, Chrome on iOS, 2026-11-21 08:34 UTC, exposed, unknown, kept | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up); holds profile 2's events since the D-063 merge | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed, D-045); holds ad527ed3's events since the D-063 merge | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed, D-045); holds 59492d76's events since the D-063 merge | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; left in, D-045) | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC and again 2026-11-21 03:02 and 13:36 UTC (owner-confirmed, same browser; left in, D-045) | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 20:52:43 UTC (after D-063 merge 1 of 6 (de6bea2a into d68070ca)).
+
+| Number | Before | Now |  |
+| :--- | :--- | :--- | :--- |
+| 9s0dwQbs\|buyer_rate\|Personal network (shared link)\|raw | — | 11 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|buyer_rate\|Personal network (shared link)\|shown | — | 11 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|buyer_signups\|Personal network (shared link)\|raw | — | 1 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|buyer_signups\|Personal network (shared link)\|shown | — | 1 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|signup_rate\|Personal network (shared link)\|raw | — | 78 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|signup_rate\|Personal network (shared link)\|shown | — | 78 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|signups\|Personal network (shared link)\|raw | — | 7 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|signups\|Personal network (shared link)\|shown | — | 7 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|visitors\|Direct (no tracked link)\|raw | — | 3 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|visitors\|Direct (no tracked link)\|shown | — | 3 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|visitors\|Personal network (shared link)\|raw | — | 9 | new key (a tile or series added), not traffic |
+| 9s0dwQbs\|visitors\|Personal network (shared link)\|shown | — | 9 | new key (a tile or series added), not traffic |
+| KK0a37NQ\|step1\|personal_network\|raw | 14 | 9 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|personal_network\|shown | 14 | 9 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|(none)\|raw | 3 | 12 | ▲ check it is real traffic |
+| d1JCOgLG\|step1\|(none)\|shown | 18 | 12 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|personal_network\|raw | 14 | — | key gone (a tile or series removed), not lost data |
+| d1JCOgLG\|step1\|welcome_email\|raw | 1 | — | key gone (a tile or series removed), not lost data |
+| d1JCOgLG\|step2\|(none)\|raw | 0 | 7 | ▲ check it is real traffic |
+| d1JCOgLG\|step2\|personal_network\|raw | 7 | — | key gone (a tile or series removed), not lost data |
+| d1JCOgLG\|step3\|(none)\|raw | 0 | 7 | ▲ check it is real traffic |
+| d1JCOgLG\|step3\|personal_network\|raw | 7 | — | key gone (a tile or series removed), not lost data |
+| d1JCOgLG\|step4\|(none)\|raw | 0 | 3 | ▲ check it is real traffic |
+| d1JCOgLG\|step4\|personal_network\|raw | 3 | — | key gone (a tile or series removed), not lost data |
+| dBS4IKQb\|Visitors\|personal_network\|raw | 12 | 9 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dBS4IKQb\|Visitors\|personal_network\|shown | 12 | 9 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|personal_network\|raw | 14 | 9 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|personal_network\|shown | 14 | 9 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|control\|raw | 6 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|control\|shown | 6 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|raw | 10 | 8 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|shown | 10 | 8 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|a\|raw | 4 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|a\|shown | 4 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|b\|raw | 10 | 8 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|b\|shown | 10 | 8 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| persons_by_source\|personal_network | 16 | 11 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|control\|exposed_persons | 6 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|exposed_persons | 10 | 8 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+
+<!-- audit-json {"runAt":"2026-11-21 20:59:08 UTC","note":"after D-063: all 6 merges, funnel step 1 without welcome_email, audit compares tile totals","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":3,"experiment|exposures|control|raw":3,"experiment|exposures|time|shown":8,"experiment|exposures|time|raw":8,"d1JCOgLG|step1|(none)|shown":12,"d1JCOgLG|step1|(none)|raw":12,"d1JCOgLG|step2|(none)|shown":7,"d1JCOgLG|step2|(none)|raw":7,"d1JCOgLG|step3|(none)|shown":7,"d1JCOgLG|step3|(none)|raw":7,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":3,"9s0dwQbs|buyer_rate|Personal network (shared link)|shown":11,"9s0dwQbs|buyer_rate|Personal network (shared link)|raw":11,"9s0dwQbs|buyer_signups|Personal network (shared link)|shown":1,"9s0dwQbs|buyer_signups|Personal network (shared link)|raw":1,"9s0dwQbs|signup_rate|Personal network (shared link)|shown":78,"9s0dwQbs|signup_rate|Personal network (shared link)|raw":78,"9s0dwQbs|signups|Personal network (shared link)|shown":7,"9s0dwQbs|signups|Personal network (shared link)|raw":7,"9s0dwQbs|visitors|Direct (no tracked link)|shown":3,"9s0dwQbs|visitors|Direct (no tracked link)|raw":3,"9s0dwQbs|visitors|Personal network (shared link)|shown":9,"9s0dwQbs|visitors|Personal network (shared link)|raw":9,"dBS4IKQb|Visitors|(none)|shown":3,"dBS4IKQb|Visitors|(none)|raw":3,"dBS4IKQb|Visitors|personal_network|shown":9,"dBS4IKQb|Visitors|personal_network|raw":9,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":3,"oMvaY0hy|Visitors|a|raw":3,"oMvaY0hy|Visitors|b|shown":8,"oMvaY0hy|Visitors|b|raw":8,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":3,"KK0a37NQ|step1|(none)|raw":3,"KK0a37NQ|step1|personal_network|shown":9,"KK0a37NQ|step1|personal_network|raw":9,"KK0a37NQ|step1|welcome_email|shown":1,"KK0a37NQ|step1|welcome_email|raw":1,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":3,"dRTNVtm9|step1|(none)|raw":3,"dRTNVtm9|step1|personal_network|shown":9,"dRTNVtm9|step1|personal_network|raw":9,"dRTNVtm9|step1|welcome_email|shown":1,"dRTNVtm9|step1|welcome_email|raw":1,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":3,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":13,"variant|time|exposed_persons":8,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":2,"persons_by_source|(none)":3,"persons_by_source|personal_network":11,"persons_by_source|welcome_email":1,"test|persons":11,"test|events":72,"unattributed|persons":4,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
+## Audit 2026-11-21 21:06:18 UTC — after D-063: owner tests excluded (cohort 747567 + 3 profile-less IDs) in the test filter and the channel table
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ✓ Every tile matches its raw count. No unlabeled internal/test answers after launch. Every unattributed visit is labeled.
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 3 | 3 | ✓ |  |
+| exposures\|time | 2 | 2 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040, D-063), per person, ordered, 7-day window: Landed with utm_source not welcome_email → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Totals only, no breakdown, as the tile shows them.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 5 | 5 | ✓ |
+| step2\|(none) | 3 | 3 | ✓ |
+| step3\|(none) | 3 | 3 | ✓ |
+| step4\|(none) | 3 | 3 | ✓ |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: _none_
+
+Raw = Channel table (D-060, SQL tile): per channel label, unique persons with landing_page_viewed (visitors), signup_form_submitted (signups) and buyer signups, plus both rates rounded to whole percent; welcome_email excluded.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| buyer_rate\|Personal network (shared link) | 25 | 25 | ✓ |
+| buyer_signups\|Personal network (shared link) | 1 | 1 | ✓ |
+| signup_rate\|Personal network (shared link) | 75 | 75 | ✓ |
+| signups\|Personal network (shared link) | 3 | 3 | ✓ |
+| visitors\|Direct (no tracked link) | 1 | 1 | ✓ |
+| visitors\|Personal network (shared link) | 4 | 4 | ✓ |
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 1 | 1 | ✓ |
+| Visitors\|personal_network | 4 | 4 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 5 | 5 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 1 | 1 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 1 | 1 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 3 | 3 | ✓ |
+| Visitors\|b | 2 | 2 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 2 | 2 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 4 | 4 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 4 | 4 | ✓ |
+| step2\|personal_network | 3 | 3 | ✓ |
+| step3\|personal_network | 3 | 3 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 3 | 3 | 2 | 1 |
+| time | 3 | 2 | 1 | 1 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 0.
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 1 | no (direct) |
+| personal_network | 6 | yes |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Automated: headless Chrome on Linux (800x600 screen in a 1920x993 window), direct, 2026-11-19 19:14 UTC, nothing after landing; excluded with the owner tests (D-063) | 3 | owner_test | 2026-11-19 19:14:31 UTC | 2026-11-19 19:14:33 UTC | $pageview, $feature_flag_called, landing_page_viewed |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed, D-045); holds ad527ed3's events since the D-063 merge; in cohort 747567 "Owner tests", excluded from every tile (D-063) | 24 | owner_test | 2026-11-20 14:44:54 UTC | 2026-11-21 20:51:01 UTC | channel_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed, cookie_banner_answered, signup_form_started, signup_form_submitted, survey shown, $identify, welcome_email_sent, survey sent, $merge_dangerously |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed, D-045); holds 59492d76's events since the D-063 merge; in cohort 747567 "Owner tests", excluded from every tile (D-063) | 19 | owner_test | 2026-11-20 14:48:00 UTC | 2026-11-21 20:50:59 UTC | channel_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed, cookie_banner_answered, signup_form_started, signup_form_submitted, $identify, survey shown, welcome_email_sent, survey sent, $merge_dangerously |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; D-045); in cohort 747567 "Owner tests", excluded from every tile (D-063) | 10 | owner_test | 2026-11-20 14:49:16 UTC | 2026-11-20 14:49:48 UTC | survey shown, welcome_email_sent, survey sent, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed, hero_cta_clicked, signup_form_started, signup_form_submitted |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; D-045); in cohort 747567 "Owner tests", excluded from every tile (D-063) | 10 | owner_test | 2026-11-20 14:49:48 UTC | 2026-11-20 14:50:20 UTC | survey shown, welcome_email_sent, survey sent, $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, hero_cta_clicked, signup_form_started, signup_form_submitted |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC and again 2026-11-21 03:02 and 13:36 UTC (owner-confirmed, same browser; D-045); in cohort 747567 "Owner tests", excluded from every tile (D-063) | 9 | owner_test | 2026-11-20 14:50:20 UTC | 2026-11-21 13:36:13 UTC | survey shown, welcome_email_sent, survey sent, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| de17f0f0-d3d7-5bf5-a5bb-de54d4f26633 | Owner test (owner-confirmed): welcome email link on a Windows PC, 2026-11-20 14:59 UTC, utm_source=welcome_email; excluded with the owner tests (D-063) | 4 | owner_test | 2026-11-20 14:59:38 UTC | 2026-11-20 14:59:39 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | Automated: headless Chrome on Linux (800x600 screen reported), direct, 2026-11-21 08:29 UTC, nothing after landing; excluded with the owner tests (D-063) | 2 | owner_test | 2026-11-21 08:29:04 UTC | 2026-11-21 08:29:06 UTC | $pageview, landing_page_viewed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | Unattributed 2: one direct $pageview only (no landing_page_viewed), Chrome on Windows, 2026-11-21 01:35 UTC, unknown, kept | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | Unidentified: direct visit, Chrome on iOS 390x844, 2026-11-21 08:34 UTC, exposed to time; not matched to the owner's tests (other browser, 18 h later), kept as a real visit (D-063) | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up); holds profile 2's events since the D-063 merge | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed, D-045); holds ad527ed3's events since the D-063 merge; in cohort 747567 "Owner tests", excluded from every tile (D-063) | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; D-045); in cohort 747567 "Owner tests", excluded from every tile (D-063) | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed, D-045); holds 59492d76's events since the D-063 merge; in cohort 747567 "Owner tests", excluded from every tile (D-063) | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC (owner-confirmed; D-045); in cohort 747567 "Owner tests", excluded from every tile (D-063) | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Owner test on iPhone without ?internal=1, 2026-11-20 14:44–14:50 UTC and again 2026-11-21 03:02 and 13:36 UTC (owner-confirmed, same browser; D-045); in cohort 747567 "Owner tests", excluded from every tile (D-063) | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 20:59:08 UTC (after D-063: all 6 merges, funnel step 1 without welcome_email, audit compares tile totals).
+
+| Number | Before | Now |  |
+| :--- | :--- | :--- | :--- |
+| 9s0dwQbs\|buyer_rate\|Personal network (shared link)\|raw | 11 | 25 | ▲ check it is real traffic |
+| 9s0dwQbs\|buyer_rate\|Personal network (shared link)\|shown | 11 | 25 | ▲ check it is real traffic |
+| 9s0dwQbs\|signup_rate\|Personal network (shared link)\|raw | 78 | 75 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|signup_rate\|Personal network (shared link)\|shown | 78 | 75 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|signups\|Personal network (shared link)\|raw | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|signups\|Personal network (shared link)\|shown | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|visitors\|Direct (no tracked link)\|raw | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|visitors\|Direct (no tracked link)\|shown | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|visitors\|Personal network (shared link)\|raw | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|visitors\|Personal network (shared link)\|shown | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|(none)\|raw | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|(none)\|shown | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|personal_network\|raw | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|personal_network\|shown | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| KK0a37NQ\|step1\|welcome_email\|raw | 1 | — | key gone (a tile or series removed), not lost data |
+| KK0a37NQ\|step1\|welcome_email\|shown | 1 | — | key gone (a tile or series removed), not lost data |
+| ZS0Uhz2p\|Link clicks\|personal_network\|raw | 10 | 5 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| ZS0Uhz2p\|Link clicks\|personal_network\|shown | 10 | 5 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| clicks\|total | 10 | 5 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|(none)\|raw | 12 | 5 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step1\|(none)\|shown | 12 | 5 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step2\|(none)\|raw | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step2\|(none)\|shown | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step3\|(none)\|raw | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d1JCOgLG\|step3\|(none)\|shown | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d9eeKWIG\|Signups\|Just helping test::personal_network\|raw | 6 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| d9eeKWIG\|Signups\|Just helping test::personal_network\|shown | 6 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dBS4IKQb\|Visitors\|(none)\|raw | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dBS4IKQb\|Visitors\|(none)\|shown | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dBS4IKQb\|Visitors\|personal_network\|raw | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dBS4IKQb\|Visitors\|personal_network\|shown | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|(none)\|raw | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|(none)\|shown | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|personal_network\|raw | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|personal_network\|shown | 9 | 4 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step1\|welcome_email\|raw | 1 | — | key gone (a tile or series removed), not lost data |
+| dRTNVtm9\|step1\|welcome_email\|shown | 1 | — | key gone (a tile or series removed), not lost data |
+| dRTNVtm9\|step2\|personal_network\|raw | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step2\|personal_network\|shown | 7 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step3\|personal_network\|raw | 5 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| dRTNVtm9\|step3\|personal_network\|shown | 5 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|All signups\|time\|raw | 5 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|All signups\|time\|shown | 5 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|Volume question answered\|time\|raw | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|Volume question answered\|time\|shown | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|raw | 8 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|shown | 8 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| flag\|fallback_views | 2 | 0 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| lQ1PbGvG\|Respondents\|16–30\|raw | 4 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| lQ1PbGvG\|Respondents\|16–30\|shown | 4 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| lQ1PbGvG\|Respondents\|I don't know\|raw | 2 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| lQ1PbGvG\|Respondents\|I don't know\|shown | 2 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| lQ1PbGvG\|Respondents\|More than 60\|raw | 1 | — | key gone (a tile or series removed), not lost data |
+| lQ1PbGvG\|Respondents\|More than 60\|shown | 1 | — | key gone (a tile or series removed), not lost data |
+| oMvaY0hy\|All signups\|b\|raw | 5 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|All signups\|b\|shown | 5 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|b\|raw | 8 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|b\|shown | 8 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| persons_by_source\|(none) | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| persons_by_source\|personal_network | 11 | 6 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| persons_by_source\|welcome_email | 1 | — | key gone (a tile or series removed), not lost data |
+| test\|events | 72 | 153 | ▲ check it is real traffic |
+| test\|persons | 11 | 19 | ▲ check it is real traffic |
+| unattributed\|persons | 4 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|exposed_persons | 8 | 2 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|exposure_events | 13 | 3 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|resent | 3 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|signups | 6 | 1 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+
+<!-- audit-json {"runAt":"2026-11-21 21:06:18 UTC","note":"after D-063: owner tests excluded (cohort 747567 + 3 profile-less IDs) in the test filter and the channel table","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":1,"experiment|All signups|time|raw":1,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":1,"experiment|Volume question answered|time|raw":1,"experiment|exposures|control|shown":3,"experiment|exposures|control|raw":3,"experiment|exposures|time|shown":2,"experiment|exposures|time|raw":2,"d1JCOgLG|step1|(none)|shown":5,"d1JCOgLG|step1|(none)|raw":5,"d1JCOgLG|step2|(none)|shown":3,"d1JCOgLG|step2|(none)|raw":3,"d1JCOgLG|step3|(none)|shown":3,"d1JCOgLG|step3|(none)|raw":3,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":3,"9s0dwQbs|buyer_rate|Personal network (shared link)|shown":25,"9s0dwQbs|buyer_rate|Personal network (shared link)|raw":25,"9s0dwQbs|buyer_signups|Personal network (shared link)|shown":1,"9s0dwQbs|buyer_signups|Personal network (shared link)|raw":1,"9s0dwQbs|signup_rate|Personal network (shared link)|shown":75,"9s0dwQbs|signup_rate|Personal network (shared link)|raw":75,"9s0dwQbs|signups|Personal network (shared link)|shown":3,"9s0dwQbs|signups|Personal network (shared link)|raw":3,"9s0dwQbs|visitors|Direct (no tracked link)|shown":1,"9s0dwQbs|visitors|Direct (no tracked link)|raw":1,"9s0dwQbs|visitors|Personal network (shared link)|shown":4,"9s0dwQbs|visitors|Personal network (shared link)|raw":4,"dBS4IKQb|Visitors|(none)|shown":1,"dBS4IKQb|Visitors|(none)|raw":1,"dBS4IKQb|Visitors|personal_network|shown":4,"dBS4IKQb|Visitors|personal_network|raw":4,"ZS0Uhz2p|Link clicks|personal_network|shown":5,"ZS0Uhz2p|Link clicks|personal_network|raw":5,"lQ1PbGvG|Respondents|16–30|shown":1,"lQ1PbGvG|Respondents|16–30|raw":1,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":1,"lQ1PbGvG|Respondents|I don't know|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":1,"oMvaY0hy|All signups|b|raw":1,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":3,"oMvaY0hy|Visitors|a|raw":3,"oMvaY0hy|Visitors|b|shown":2,"oMvaY0hy|Visitors|b|raw":2,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":2,"d9eeKWIG|Signups|Just helping test::personal_network|raw":2,"KK0a37NQ|step1|(none)|shown":1,"KK0a37NQ|step1|(none)|raw":1,"KK0a37NQ|step1|personal_network|shown":4,"KK0a37NQ|step1|personal_network|raw":4,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":1,"dRTNVtm9|step1|(none)|raw":1,"dRTNVtm9|step1|personal_network|shown":4,"dRTNVtm9|step1|personal_network|raw":4,"dRTNVtm9|step2|personal_network|shown":3,"dRTNVtm9|step2|personal_network|raw":3,"dRTNVtm9|step3|personal_network|shown":3,"dRTNVtm9|step3|personal_network|raw":3,"variant|control|exposure_events":7,"variant|control|exposed_persons":3,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":3,"variant|time|exposed_persons":2,"variant|time|resent":1,"variant|time|signups":1,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":0,"persons_by_source|personal_network":6,"persons_by_source|(none)":1,"test|persons":19,"test|events":153,"unattributed|persons":2,"clicks|total":5,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
+## Audit 2026-11-21 21:15:33 UTC — D-063 correction: cohort emptied (5 were non-owner signups), only the 2 automated visits excluded
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ✓ Every tile matches its raw count. No unlabeled internal/test answers after launch. Every unattributed visit is labeled.
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 5 | 5 | ✓ | not-enough-exposures |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 3 | 3 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 3 | 3 | ✓ |  |
+| exposures\|time | 8 | 8 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040, D-063), per person, ordered, 7-day window: Landed with utm_source not welcome_email → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Totals only, no breakdown, as the tile shows them.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 10 | 10 | ✓ |
+| step2\|(none) | 7 | 7 | ✓ |
+| step3\|(none) | 7 | 7 | ✓ |
+| step4\|(none) | 3 | 3 | ✓ |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: _none_
+
+Raw = Channel table (D-060, SQL tile): per channel label, unique persons with landing_page_viewed (visitors), signup_form_submitted (signups) and buyer signups, plus both rates rounded to whole percent; welcome_email excluded.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| buyer_rate\|Personal network (shared link) | 11 | 11 | ✓ |
+| buyer_signups\|Personal network (shared link) | 1 | 1 | ✓ |
+| signup_rate\|Personal network (shared link) | 78 | 78 | ✓ |
+| signups\|Personal network (shared link) | 7 | 7 | ✓ |
+| visitors\|Direct (no tracked link) | 1 | 1 | ✓ |
+| visitors\|Personal network (shared link) | 9 | 9 | ✓ |
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 1 | 1 | ✓ |
+| Visitors\|personal_network | 9 | 9 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 10 | 10 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 4 | 4 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 2 | 2 | ✓ |
+| Respondents\|More than 60 | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 5 | 5 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 3 | 3 | ✓ |
+| Visitors\|b | 8 | 8 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 6 | 6 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step1\|welcome_email | 1 | 1 | ✓ |
+| step2\|personal_network | 7 | 7 | ✓ |
+| step3\|personal_network | 5 | 5 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 3 | 3 | 2 | 1 |
+| time | 13 | 8 | 3 | 6 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 0.
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 1 | no (direct) |
+| personal_network | 11 | yes |
+| welcome_email | 1 | no (D-034) |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Automated: headless Chrome on Linux (800x600 screen in a 1920x993 window), direct, 2026-11-19 19:14 UTC, nothing after landing; excluded by the test-account filter (D-063) | 3 | automated | 2026-11-19 19:14:31 UTC | 2026-11-19 19:14:33 UTC | $pageview, $feature_flag_called, landing_page_viewed |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | Automated: headless Chrome on Linux (800x600 screen reported), direct, 2026-11-21 08:29 UTC, nothing after landing; excluded by the test-account filter (D-063) | 2 | automated | 2026-11-21 08:29:04 UTC | 2026-11-21 08:29:06 UTC | $pageview, landing_page_viewed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | Unattributed 2: one direct $pageview only (no landing_page_viewed), Chrome on Windows, 2026-11-21 01:35 UTC, unknown, kept | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | Unidentified: direct visit, Chrome on iOS 390x844, 2026-11-21 08:34 UTC, exposed to time; not matched to the owner's tests (other browser, 18 h later), kept as a real visit (D-063) | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up); holds profile 2's events since the D-063 merge | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; holds ad527ed3's events since the D-063 merge | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; holds 59492d76's events since the D-063 merge | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; also visits on 2026-11-21 03:02 and 13:36 UTC | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 21:06:18 UTC (after D-063: owner tests excluded (cohort 747567 + 3 profile-less IDs) in the test filter and the channel table).
+
+| Number | Before | Now |  |
+| :--- | :--- | :--- | :--- |
+| 9s0dwQbs\|buyer_rate\|Personal network (shared link)\|raw | 25 | 11 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|buyer_rate\|Personal network (shared link)\|shown | 25 | 11 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| 9s0dwQbs\|signup_rate\|Personal network (shared link)\|raw | 75 | 78 | ▲ check it is real traffic |
+| 9s0dwQbs\|signup_rate\|Personal network (shared link)\|shown | 75 | 78 | ▲ check it is real traffic |
+| 9s0dwQbs\|signups\|Personal network (shared link)\|raw | 3 | 7 | ▲ check it is real traffic |
+| 9s0dwQbs\|signups\|Personal network (shared link)\|shown | 3 | 7 | ▲ check it is real traffic |
+| 9s0dwQbs\|visitors\|Personal network (shared link)\|raw | 4 | 9 | ▲ check it is real traffic |
+| 9s0dwQbs\|visitors\|Personal network (shared link)\|shown | 4 | 9 | ▲ check it is real traffic |
+| KK0a37NQ\|step1\|personal_network\|raw | 4 | 9 | ▲ check it is real traffic |
+| KK0a37NQ\|step1\|personal_network\|shown | 4 | 9 | ▲ check it is real traffic |
+| KK0a37NQ\|step1\|welcome_email\|raw | — | 1 | ▲ new breakdown value: check it is real traffic |
+| KK0a37NQ\|step1\|welcome_email\|shown | — | 1 | ▲ new breakdown value: check it is real traffic |
+| ZS0Uhz2p\|Link clicks\|personal_network\|raw | 5 | 10 | ▲ check it is real traffic |
+| ZS0Uhz2p\|Link clicks\|personal_network\|shown | 5 | 10 | ▲ check it is real traffic |
+| clicks\|total | 5 | 10 | ▲ check it is real traffic |
+| d1JCOgLG\|step1\|(none)\|raw | 5 | 10 | ▲ check it is real traffic |
+| d1JCOgLG\|step1\|(none)\|shown | 5 | 10 | ▲ check it is real traffic |
+| d1JCOgLG\|step2\|(none)\|raw | 3 | 7 | ▲ check it is real traffic |
+| d1JCOgLG\|step2\|(none)\|shown | 3 | 7 | ▲ check it is real traffic |
+| d1JCOgLG\|step3\|(none)\|raw | 3 | 7 | ▲ check it is real traffic |
+| d1JCOgLG\|step3\|(none)\|shown | 3 | 7 | ▲ check it is real traffic |
+| d9eeKWIG\|Signups\|Just helping test::personal_network\|raw | 2 | 6 | ▲ check it is real traffic |
+| d9eeKWIG\|Signups\|Just helping test::personal_network\|shown | 2 | 6 | ▲ check it is real traffic |
+| dBS4IKQb\|Visitors\|personal_network\|raw | 4 | 9 | ▲ check it is real traffic |
+| dBS4IKQb\|Visitors\|personal_network\|shown | 4 | 9 | ▲ check it is real traffic |
+| dRTNVtm9\|step1\|personal_network\|raw | 4 | 9 | ▲ check it is real traffic |
+| dRTNVtm9\|step1\|personal_network\|shown | 4 | 9 | ▲ check it is real traffic |
+| dRTNVtm9\|step1\|welcome_email\|raw | — | 1 | ▲ new breakdown value: check it is real traffic |
+| dRTNVtm9\|step1\|welcome_email\|shown | — | 1 | ▲ new breakdown value: check it is real traffic |
+| dRTNVtm9\|step2\|personal_network\|raw | 3 | 7 | ▲ check it is real traffic |
+| dRTNVtm9\|step2\|personal_network\|shown | 3 | 7 | ▲ check it is real traffic |
+| dRTNVtm9\|step3\|personal_network\|raw | 3 | 5 | ▲ check it is real traffic |
+| dRTNVtm9\|step3\|personal_network\|shown | 3 | 5 | ▲ check it is real traffic |
+| experiment\|All signups\|time\|raw | 1 | 5 | ▲ check it is real traffic |
+| experiment\|All signups\|time\|shown | 1 | 5 | ▲ check it is real traffic |
+| experiment\|Volume question answered\|time\|raw | 1 | 3 | ▲ check it is real traffic |
+| experiment\|Volume question answered\|time\|shown | 1 | 3 | ▲ check it is real traffic |
+| experiment\|exposures\|time\|raw | 2 | 8 | ▲ check it is real traffic |
+| experiment\|exposures\|time\|shown | 2 | 8 | ▲ check it is real traffic |
+| lQ1PbGvG\|Respondents\|16–30\|raw | 1 | 4 | ▲ check it is real traffic |
+| lQ1PbGvG\|Respondents\|16–30\|shown | 1 | 4 | ▲ check it is real traffic |
+| lQ1PbGvG\|Respondents\|I don't know\|raw | 1 | 2 | ▲ check it is real traffic |
+| lQ1PbGvG\|Respondents\|I don't know\|shown | 1 | 2 | ▲ check it is real traffic |
+| lQ1PbGvG\|Respondents\|More than 60\|raw | — | 1 | ▲ new breakdown value: check it is real traffic |
+| lQ1PbGvG\|Respondents\|More than 60\|shown | — | 1 | ▲ new breakdown value: check it is real traffic |
+| oMvaY0hy\|All signups\|b\|raw | 1 | 5 | ▲ check it is real traffic |
+| oMvaY0hy\|All signups\|b\|shown | 1 | 5 | ▲ check it is real traffic |
+| oMvaY0hy\|Visitors\|b\|raw | 2 | 8 | ▲ check it is real traffic |
+| oMvaY0hy\|Visitors\|b\|shown | 2 | 8 | ▲ check it is real traffic |
+| persons_by_source\|personal_network | 6 | 11 | ▲ check it is real traffic |
+| persons_by_source\|welcome_email | — | 1 | new key (a tile or series added), not traffic |
+| test\|events | 153 | 77 | ▼ |
+| test\|persons | 19 | 13 | ▼ |
+| variant\|time\|exposed_persons | 2 | 8 | ▲ check it is real traffic |
+| variant\|time\|exposure_events | 3 | 13 | ▲ check it is real traffic |
+| variant\|time\|resent | 1 | 3 | ▲ check it is real traffic |
+| variant\|time\|signups | 1 | 6 | ▲ check it is real traffic |
+
+<!-- audit-json {"runAt":"2026-11-21 21:15:33 UTC","note":"D-063 correction: cohort emptied (5 were non-owner signups), only the 2 automated visits excluded","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":3,"experiment|exposures|control|raw":3,"experiment|exposures|time|shown":8,"experiment|exposures|time|raw":8,"d1JCOgLG|step1|(none)|shown":10,"d1JCOgLG|step1|(none)|raw":10,"d1JCOgLG|step2|(none)|shown":7,"d1JCOgLG|step2|(none)|raw":7,"d1JCOgLG|step3|(none)|shown":7,"d1JCOgLG|step3|(none)|raw":7,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":3,"9s0dwQbs|buyer_rate|Personal network (shared link)|shown":11,"9s0dwQbs|buyer_rate|Personal network (shared link)|raw":11,"9s0dwQbs|buyer_signups|Personal network (shared link)|shown":1,"9s0dwQbs|buyer_signups|Personal network (shared link)|raw":1,"9s0dwQbs|signup_rate|Personal network (shared link)|shown":78,"9s0dwQbs|signup_rate|Personal network (shared link)|raw":78,"9s0dwQbs|signups|Personal network (shared link)|shown":7,"9s0dwQbs|signups|Personal network (shared link)|raw":7,"9s0dwQbs|visitors|Direct (no tracked link)|shown":1,"9s0dwQbs|visitors|Direct (no tracked link)|raw":1,"9s0dwQbs|visitors|Personal network (shared link)|shown":9,"9s0dwQbs|visitors|Personal network (shared link)|raw":9,"dBS4IKQb|Visitors|(none)|shown":1,"dBS4IKQb|Visitors|(none)|raw":1,"dBS4IKQb|Visitors|personal_network|shown":9,"dBS4IKQb|Visitors|personal_network|raw":9,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":3,"oMvaY0hy|Visitors|a|raw":3,"oMvaY0hy|Visitors|b|shown":8,"oMvaY0hy|Visitors|b|raw":8,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":1,"KK0a37NQ|step1|(none)|raw":1,"KK0a37NQ|step1|personal_network|shown":9,"KK0a37NQ|step1|personal_network|raw":9,"KK0a37NQ|step1|welcome_email|shown":1,"KK0a37NQ|step1|welcome_email|raw":1,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":1,"dRTNVtm9|step1|(none)|raw":1,"dRTNVtm9|step1|personal_network|shown":9,"dRTNVtm9|step1|personal_network|raw":9,"dRTNVtm9|step1|welcome_email|shown":1,"dRTNVtm9|step1|welcome_email|raw":1,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":3,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":13,"variant|time|exposed_persons":8,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":0,"persons_by_source|personal_network":11,"persons_by_source|welcome_email":1,"persons_by_source|(none)":1,"test|persons":13,"test|events":77,"unattributed|persons":2,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
+## Audit 2026-11-21 21:25:15 UTC — D-063: de17f0f0 (returning signup, other device) excluded from the experiment
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ✓ Every tile matches its raw count. No unlabeled internal/test answers after launch. Every unattributed visit is labeled.
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 5 | 5 | ✓ | not-enough-exposures |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 3 | 3 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 3 | 3 | ✓ |  |
+| exposures\|time | 7 | 7 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040, D-063), per person, ordered, 7-day window: Landed with utm_source not welcome_email → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Totals only, no breakdown, as the tile shows them.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 10 | 10 | ✓ |
+| step2\|(none) | 7 | 7 | ✓ |
+| step3\|(none) | 7 | 7 | ✓ |
+| step4\|(none) | 3 | 3 | ✓ |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: _none_
+
+Raw = Channel table (D-060, SQL tile): per channel label, unique persons with landing_page_viewed (visitors), signup_form_submitted (signups) and buyer signups, plus both rates rounded to whole percent; welcome_email excluded.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| buyer_rate\|Personal network (shared link) | 11 | 11 | ✓ |
+| buyer_signups\|Personal network (shared link) | 1 | 1 | ✓ |
+| signup_rate\|Personal network (shared link) | 78 | 78 | ✓ |
+| signups\|Personal network (shared link) | 7 | 7 | ✓ |
+| visitors\|Direct (no tracked link) | 1 | 1 | ✓ |
+| visitors\|Personal network (shared link) | 9 | 9 | ✓ |
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 1 | 1 | ✓ |
+| Visitors\|personal_network | 9 | 9 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 10 | 10 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 4 | 4 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 2 | 2 | ✓ |
+| Respondents\|More than 60 | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 5 | 5 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 3 | 3 | ✓ |
+| Visitors\|b | 7 | 7 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 6 | 6 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step2\|personal_network | 7 | 7 | ✓ |
+| step3\|personal_network | 5 | 5 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 3 | 3 | 2 | 1 |
+| time | 12 | 7 | 3 | 6 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 0.
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 1 | no (direct) |
+| personal_network | 11 | yes |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Automated: headless Chrome on Linux (800x600 screen in a 1920x993 window), direct, 2026-11-19 19:14 UTC, nothing after landing; excluded by the test-account filter (D-063) | 3 | automated | 2026-11-19 19:14:31 UTC | 2026-11-19 19:14:33 UTC | $pageview, $feature_flag_called, landing_page_viewed |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| de17f0f0-d3d7-5bf5-a5bb-de54d4f26633 | Returning signup (owner's call): opened a welcome-email link on another device (Windows PC), 2026-11-20 14:59 UTC, utm_source=welcome_email; not a new visitor, so excluded by the test-account filter, experiment included (D-063) | 4 | returning_device | 2026-11-20 14:59:38 UTC | 2026-11-20 14:59:39 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | Automated: headless Chrome on Linux (800x600 screen reported), direct, 2026-11-21 08:29 UTC, nothing after landing; excluded by the test-account filter (D-063) | 2 | automated | 2026-11-21 08:29:04 UTC | 2026-11-21 08:29:06 UTC | $pageview, landing_page_viewed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | Unattributed 2: one direct $pageview only (no landing_page_viewed), Chrome on Windows, 2026-11-21 01:35 UTC, unknown, kept | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | Unidentified: direct visit, Chrome on iOS 390x844, 2026-11-21 08:34 UTC, exposed to time; not matched to the owner's tests (other browser, 18 h later), kept as a real visit (D-063) | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up); holds profile 2's events since the D-063 merge | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; holds ad527ed3's events since the D-063 merge | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; holds 59492d76's events since the D-063 merge | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; also visits on 2026-11-21 03:02 and 13:36 UTC | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 21:15:33 UTC (D-063 correction: cohort emptied (5 were non-owner signups), only the 2 automated visits excluded).
+
+| Number | Before | Now |  |
+| :--- | :--- | :--- | :--- |
+| KK0a37NQ\|step1\|welcome_email\|raw | 1 | — | key gone (a tile or series removed), not lost data |
+| KK0a37NQ\|step1\|welcome_email\|shown | 1 | — | key gone (a tile or series removed), not lost data |
+| dRTNVtm9\|step1\|welcome_email\|raw | 1 | — | key gone (a tile or series removed), not lost data |
+| dRTNVtm9\|step1\|welcome_email\|shown | 1 | — | key gone (a tile or series removed), not lost data |
+| experiment\|exposures\|time\|raw | 8 | 7 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| experiment\|exposures\|time\|shown | 8 | 7 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|b\|raw | 8 | 7 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| oMvaY0hy\|Visitors\|b\|shown | 8 | 7 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| persons_by_source\|welcome_email | 1 | — | key gone (a tile or series removed), not lost data |
+| test\|events | 77 | 81 | ▲ check it is real traffic |
+| test\|persons | 13 | 14 | ▲ check it is real traffic |
+| variant\|time\|exposed_persons | 8 | 7 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+| variant\|time\|exposure_events | 13 | 12 | ▼ UNEXPECTED unless a filter change or deletion explains it |
+
+<!-- audit-json {"runAt":"2026-11-21 21:25:15 UTC","note":"D-063: de17f0f0 (returning signup, other device) excluded from the experiment","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":3,"experiment|exposures|control|raw":3,"experiment|exposures|time|shown":7,"experiment|exposures|time|raw":7,"d1JCOgLG|step1|(none)|shown":10,"d1JCOgLG|step1|(none)|raw":10,"d1JCOgLG|step2|(none)|shown":7,"d1JCOgLG|step2|(none)|raw":7,"d1JCOgLG|step3|(none)|shown":7,"d1JCOgLG|step3|(none)|raw":7,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":3,"9s0dwQbs|buyer_rate|Personal network (shared link)|shown":11,"9s0dwQbs|buyer_rate|Personal network (shared link)|raw":11,"9s0dwQbs|buyer_signups|Personal network (shared link)|shown":1,"9s0dwQbs|buyer_signups|Personal network (shared link)|raw":1,"9s0dwQbs|signup_rate|Personal network (shared link)|shown":78,"9s0dwQbs|signup_rate|Personal network (shared link)|raw":78,"9s0dwQbs|signups|Personal network (shared link)|shown":7,"9s0dwQbs|signups|Personal network (shared link)|raw":7,"9s0dwQbs|visitors|Direct (no tracked link)|shown":1,"9s0dwQbs|visitors|Direct (no tracked link)|raw":1,"9s0dwQbs|visitors|Personal network (shared link)|shown":9,"9s0dwQbs|visitors|Personal network (shared link)|raw":9,"dBS4IKQb|Visitors|(none)|shown":1,"dBS4IKQb|Visitors|(none)|raw":1,"dBS4IKQb|Visitors|personal_network|shown":9,"dBS4IKQb|Visitors|personal_network|raw":9,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":3,"oMvaY0hy|Visitors|a|raw":3,"oMvaY0hy|Visitors|b|shown":7,"oMvaY0hy|Visitors|b|raw":7,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":1,"KK0a37NQ|step1|(none)|raw":1,"KK0a37NQ|step1|personal_network|shown":9,"KK0a37NQ|step1|personal_network|raw":9,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":1,"dRTNVtm9|step1|(none)|raw":1,"dRTNVtm9|step1|personal_network|shown":9,"dRTNVtm9|step1|personal_network|raw":9,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":3,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":12,"variant|time|exposed_persons":7,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":0,"persons_by_source|personal_network":11,"persons_by_source|(none)":1,"test|persons":14,"test|events":81,"unattributed|persons":2,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
+## Audit 2026-11-21 21:27:49 UTC — D-063 final: channel table description (7 people, 8 addresses)
+
+Read-only run of `scripts/metrics-audit.mjs`. Events from 2026-11-19 17:48:18 UTC (experiment start, 14:48 BRT); insight tiles from 2026-11-19 18:00:00 UTC (15:00 BRT). Raw counts leave out internal/test persons, `is_internal` events, test emails, localhost and `/preview/` (D-029), and use the step 8 target definitions (D-030, D-031, D-034), so a tile still waiting for its change shows a mismatch until it's applied.
+
+### Summary
+
+- ✓ Every tile matches its raw count. No unlabeled internal/test answers after launch. Every unattributed visit is labeled.
+
+### 1. Tiles: PostHog vs raw
+
+**Experiment 612484** (dashboard tile). Exposure `$experiment_exposure`, test accounts filtered: true, multiple variants: exclude.
+
+| Number | PostHog | Raw |  | PostHog hides results because |
+| :--- | :--- | :--- | :--- | :--- |
+| All signups\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| All signups\|time | 5 | 5 | ✓ | not-enough-exposures |
+| Buyer-role signups (D-009 headline)\|control | 1 | 1 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Buyer-role signups (D-009 headline)\|time | 0 | 0 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|control | 2 | 2 | ✓ | not-enough-exposures, not-enough-metric-data |
+| Volume question answered\|time | 3 | 3 | ✓ | not-enough-exposures, not-enough-metric-data |
+| exposures\|control | 3 | 3 | ✓ |  |
+| exposures\|time | 7 | 7 | ✓ |  |
+
+**Signup Funnel: landed → e-mail link clicked (all channels)** (`d1JCOgLG`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “People per channel from landing to the welcome email link, counted from 15:00 BRT on 19 Nov (D-040).”
+
+Raw = Stage funnel (D-040, D-063), per person, ordered, 7-day window: Landed with utm_source not welcome_email → signup_form_started → signup_form_submitted (all roles) → welcome_email_opened → welcome_email_link_clicked. Totals only, no breakdown, as the tile shows them.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 10 | 10 | ✓ |
+| step2\|(none) | 7 | 7 | ✓ |
+| step3\|(none) | 7 | 7 | ✓ |
+| step4\|(none) | 3 | 3 | ✓ |
+
+**Channels: visitors → signups → buyers** (`9s0dwQbs`, dashboard tile). Test accounts filtered: undefined. From undefined.
+Caption: “7 people signed up; 8 email addresses (one person tested the form with a second address).”
+
+Raw = Channel table (D-060, SQL tile): per channel label, unique persons with landing_page_viewed (visitors), signup_form_submitted (signups) and buyer signups, plus both rates rounded to whole percent; welcome_email excluded.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| buyer_rate\|Personal network (shared link) | 11 | 11 | ✓ |
+| buyer_signups\|Personal network (shared link) | 1 | 1 | ✓ |
+| signup_rate\|Personal network (shared link) | 78 | 78 | ✓ |
+| signups\|Personal network (shared link) | 7 | 7 | ✓ |
+| visitors\|Direct (no tracked link) | 1 | 1 | ✓ |
+| visitors\|Personal network (shared link) | 9 | 9 | ✓ |
+
+**Channels: traffic (visitors by utm_source)** (`dBS4IKQb`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Unique landing-page visitors per channel from 15:00 BRT on 19 Nov, with welcome_email left out and direct visits shown as (none) (D-034).”
+
+Raw = Unique persons with landing_page_viewed per utm_source (welcome_email excluded).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Visitors\|(none) | 1 | 1 | ✓ |
+| Visitors\|personal_network | 9 | 9 | ✓ |
+
+**Channels: link clicks (by channel)** (`ZS0Uhz2p`, dashboard tile). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Clicks on each channel's /go/ link from 15:00 BRT on 19 Nov, shown on their own because a click can't be joined to the visit (D-022).”
+
+Raw = Total channel_link_clicked events per channel (welcome_email excluded). Includes link previews; see "Clicks with no visit after".
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Link clicks\|personal_network | 10 | 10 | ✓ |
+
+**Volume question answers (pricing input)** (`lQ1PbGvG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Answers to the volume question per answer from 15:00 BRT on 19 Nov, which leaves out the pre-launch test answers (D-032).”
+
+Raw = Unique persons answering the volume question, per answer.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Respondents\|16–30 | 4 | 4 | ✓ |
+| Respondents\|5–15 | 1 | 1 | ✓ |
+| Respondents\|I don't know | 2 | 2 | ✓ |
+| Respondents\|More than 60 | 1 | 1 | ✓ |
+
+**A/B: buyer-signup rate per visitor (by hero_variant)** (`oMvaY0hy`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Visitors and signups per hero variant outside the experiment, counting only events from exposed visitors (D-031).”
+
+Raw = Unique persons per hero_variant, only events that carry $feature/hero-framing (D-031: leaves out flag-timeout fallbacks that showed A with no exposure).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| All signups\|a | 2 | 2 | ✓ |
+| All signups\|b | 5 | 5 | ✓ |
+| Buyer-role signups\|a | 1 | 1 | ✓ |
+| Visitors\|a | 3 | 3 | ✓ |
+| Visitors\|b | 7 | 7 | ✓ |
+
+**Signups by role (by utm_source)** (`d9eeKWIG`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Signups per role and channel from 15:00 BRT on 19 Nov, where welcome_email rows are returning signups, not a channel (D-034).”
+
+Raw = Unique persons with signup_form_submitted per role × utm_source.
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| Signups\|Finance or operations::personal_network | 1 | 1 | ✓ |
+| Signups\|Just helping test::personal_network | 6 | 6 | ✓ |
+
+**Channels: funnel visit → buyer signup → volume answer (by utm_source)** (`KK0a37NQ`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older buyer-only funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed (landing_page_viewed or cookie_banner_answered) → buyer signup → volume answer. Breakdown: utm_source of the first step (first touch).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step2\|personal_network | 1 | 1 | ✓ |
+| step3\|personal_network | 1 | 1 | ✓ |
+
+**Channels: funnel visit → any signup → volume answer (by utm_source)** (`dRTNVtm9`, not on the dashboard). Test accounts filtered: true. From 2026-11-19T18:00:00Z.
+Caption: “Older all-roles funnel, kept saved but off the dashboard since the stage funnel replaced it (D-040).”
+
+Raw = Per-person funnel, ordered, 1-day window: Landed → any signup (all roles) → volume answer. Breakdown: utm_source of the first step (D-036).
+
+| Series | breakdown | PostHog | Raw |  |
+| :--- | :--- | :--- | :--- |
+| step1\|(none) | 1 | 1 | ✓ |
+| step1\|personal_network | 9 | 9 | ✓ |
+| step2\|personal_network | 7 | 7 | ✓ |
+| step3\|personal_network | 5 | 5 | ✓ |
+
+### 2. Exposures and signups per variant
+
+| Variant | $experiment_exposure events | Exposed persons | Re-sent after Accept | Signups (hero_variant, flag property set) | Buyer signups |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| control | 7 | 3 | 3 | 2 | 1 |
+| time | 12 | 7 | 3 | 6 | 0 |
+
+- `$feature_flag_called` for hero-framing: 27 (with a response: 26, empty response: 1). `$experiment_exposure`: 26.
+- Page views shown A by fallback (no flag, no exposure): 0.
+
+### 3. Persons per utm_source (clean, all events since experiment start)
+
+| utm_source | Persons | Counted as a channel |
+| :--- | :--- | :--- |
+| (none) | 1 | no (direct) |
+| personal_network | 11 | yes |
+
+### 4. Internal, test and unattributed traffic since experiment start
+
+**Excluded as internal/test** (kept out of the raw counts):
+
+| Person | Label | Events | Why excluded | First | Last | Event types |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 836fe88c-eb65-5e90-b897-69b497b5398e | Automated: headless Chrome on Linux (800x600 screen in a 1920x993 window), direct, 2026-11-19 19:14 UTC, nothing after landing; excluded by the test-account filter (D-063) | 3 | automated | 2026-11-19 19:14:31 UTC | 2026-11-19 19:14:33 UTC | $pageview, $feature_flag_called, landing_page_viewed |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 9 | internal_event, internal_person, test_user | 2026-11-19 19:46:01 UTC | 2026-11-21 15:08:51 UTC | $pageview, landing_page_viewed, signup_form_started, signup_form_submitted |
+| 1681bc92-b4ef-52d5-96c8-c58ee16a40aa | Owner, local QA clicks from localhost:8799 (step 7) | 2 | localhost | 2026-11-19 20:35:57 UTC | 2026-11-19 20:35:57 UTC | channel_link_clicked |
+| 66c13370-0e79-5431-927d-52e35920c579 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:07 UTC | 2026-11-20 13:26:07 UTC | channel_link_clicked |
+| a1db1b4a-8304-5b09-98c6-98e1c3e6cbf1 | Owner, step 8 local /go/ check (localhost:8799) | 1 | localhost | 2026-11-20 13:26:08 UTC | 2026-11-20 13:26:08 UTC | channel_link_clicked |
+| 476d4df1-2c74-58c7-82ea-5e520e91571c | Owner (confirmed): one $pageview on the per-deploy preview URL f6db5f66…, 2026-11-20 13:30 UTC, opened without ?internal=1 | 1 | preview_host | 2026-11-20 13:30:05 UTC | 2026-11-20 13:30:05 UTC | $pageview |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 3 | internal_event | 2026-11-20 13:30:50 UTC | 2026-11-20 13:30:50 UTC | $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 12 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:32:31 UTC | 2026-11-20 13:33:46 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 14 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:34:55 UTC | 2026-11-20 13:35:51 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 8 | internal_person, test_user, internal_event, preview_host | 2026-11-20 13:36:15 UTC | 2026-11-20 13:37:13 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 10 | internal_person, test_user, internal_event | 2026-11-20 14:46:23 UTC | 2026-11-20 14:47:29 UTC | $pageview, $feature_flag_called, $experiment_exposure, landing_page_viewed, survey shown, survey dismissed |
+| de17f0f0-d3d7-5bf5-a5bb-de54d4f26633 | Returning signup (owner's call): opened a welcome-email link on another device (Windows PC), 2026-11-20 14:59 UTC, utm_source=welcome_email; not a new visitor, so excluded by the test-account filter, experiment included (D-063) | 4 | returning_device | 2026-11-20 14:59:38 UTC | 2026-11-20 14:59:39 UTC | $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+| 3257de69-5499-5a0e-9628-f26fda7bbc69 | Automated: headless Chrome on Linux (800x600 screen reported), direct, 2026-11-21 08:29 UTC, nothing after landing; excluded by the test-account filter (D-063) | 2 | automated | 2026-11-21 08:29:04 UTC | 2026-11-21 08:29:06 UTC | $pageview, landing_page_viewed |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 11 | internal_event, test_email | 2026-11-21 15:08:51 UTC | 2026-11-21 15:23:48 UTC | survey shown, survey sent, welcome_email_sent, welcome_email_opened, welcome_email_link_clicked, $pageview, $experiment_exposure, $feature_flag_called, landing_page_viewed |
+
+**Unattributed visits** (clean page views with no utm_source, from persons not excluded above):
+
+| Person | Label | First view | Host | Browser / OS |
+| :--- | :--- | :--- | :--- | :--- |
+| eb48ecba-e4e1-5170-a5d7-a029762a66da | Unattributed 2: one direct $pageview only (no landing_page_viewed), Chrome on Windows, 2026-11-21 01:35 UTC, unknown, kept | 2026-11-21 01:35:06 UTC | shiftpatch-concept.pages.dev | Chrome / Windows |
+| 20920abe-cc85-5510-96eb-c26461d73e19 | Unidentified: direct visit, Chrome on iOS 390x844, 2026-11-21 08:34 UTC, exposed to time; not matched to the owner's tests (other browser, 18 h later), kept as a real visit (D-063) | 2026-11-21 08:34:25 UTC | shiftpatch-concept.pages.dev | Chrome iOS / iOS |
+
+**Clicks with no visit after** (no `landing_page_viewed` from that channel within 10 minutes; likely link previews or prefetches):
+
+| Person | Label | Channel | Time |
+| :--- | :--- | :--- | :--- |
+| d4ce36f0-c81e-547d-b67b-d45c165a6ce1 | Unknown 1: personal_network click with no page view after it, likely a link preview (unconfirmed) | personal_network | 2026-11-19 23:38:16 UTC |
+
+### 5. Volume-question answers by person
+
+**After launch** (these are what the survey tile and memo read):
+
+| Person | Label | Answers | Test/internal? | First | Last |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| f7f85f93-e73b-5c9e-9806-6ff644e50f47 | Friend 1, profile 3 of 3: after Accept (identified, signed up); holds profile 2's events since the D-063 merge | 1 | no | 2026-11-20 00:27:43 UTC | 2026-11-20 00:27:43 UTC |
+| 56850f68-a988-58a1-bb1c-7d9598e479e8 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; holds ad527ed3's events since the D-063 merge | 1 | no | 2026-11-20 14:46:33 UTC | 2026-11-20 14:46:33 UTC |
+| c5c0d8d4-d47d-5761-9ce4-528ef0ee873c | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor | 1 | no | 2026-11-20 14:49:19 UTC | 2026-11-20 14:49:19 UTC |
+| 87d66938-3912-5dba-b879-a5b5a2e674e5 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; holds 59492d76's events since the D-063 merge | 1 | no | 2026-11-20 14:49:31 UTC | 2026-11-20 14:49:31 UTC |
+| 99ecd560-7927-559d-acc0-c4f88d6ab8f1 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor | 1 | no | 2026-11-20 14:49:51 UTC | 2026-11-20 14:49:51 UTC |
+| 01e2abcf-af7f-5fce-b7c1-1f9e0a6f95f2 | Non-owner signup: welcome email sent to a non-owner address, 2026-11-20 14:46–14:50 UTC; not an owner test (D-045 corrected 2026-11-21, D-063). Counted as a real visitor; also visits on 2026-11-21 03:02 and 13:36 UTC | 1 | no | 2026-11-20 14:50:24 UTC | 2026-11-20 14:50:24 UTC |
+| a3ff6e77-03c1-54d6-86c6-47643d0f76b0 |  | 1 | no | 2026-11-20 15:07:18 UTC | 2026-11-20 15:07:18 UTC |
+| d68070ca-0a94-5987-9104-f440a9e7ec99 |  | 1 | no | 2026-11-21 13:50:11 UTC | 2026-11-21 13:50:11 UTC |
+| d299c033-5d88-5d5e-a299-282436bc7ed7 | Owner test (is_internal at event time): welcome email link to the survey, Windows PC, 2026-11-21 15:08 UTC (step 11 check) | 1 | test_email | 2026-11-21 15:08:53 UTC | 2026-11-21 15:08:53 UTC |
+
+**Before launch:** 24 answers from 22 persons (3 with a person record, 19 cookieless with none, which can't be deleted). Read survey results from 2026-11-19 18:00:00 UTC.
+
+### 6. Checks
+
+**a) Internal/test persons whose events slip past the person conditions** (no internal flag at event time):
+
+| Person | Label | Time | Event | Reaches a tile? | Has event property is_internal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| b7b21c2e-c1d0-525e-940c-6e060f49d1b8 | Owner, main profile (is_internal), kept as step-5 evidence | 2026-11-19 19:46:01.076000 | $pageview | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:49.922000 | $pageview | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.018000 | $opt_in | no (not a tile event) | no |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $experiment_exposure | **yes** | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.081000 | $feature_flag_called | no (not a tile event) | yes |
+| c6d3e84a-62e8-505e-8de9-c69f12931a3c | Owner, step 8 test 0: reference visit, live site, old code (?internal=1) | 2026-11-20 13:30:50.082000 | landing_page_viewed | **yes** | yes |
+| f29dc930-b2ed-5ba0-a7bf-855d6e069d3d | Owner, step 8 test 1: background-tab test on the preview (?internal=1) | 2026-11-20 13:31:51.805000 | $opt_in | no (not a tile event) | no |
+| 9fceb1b9-7a19-5c7f-b704-eb71ab1928dd | Owner, step 8 test 2: preview, variant B (?internal=1) | 2026-11-20 13:34:55.237000 | $opt_in | no (not a tile event) | no |
+| d1688f5f-3225-5f24-8dfe-a5a2c783f189 | Owner, step 8 test 3: preview, variant A (?internal=1) | 2026-11-20 13:36:15.721000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.435000 | $opt_in | no (not a tile event) | no |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $experiment_exposure | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.599000 | $feature_flag_called | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:23.600000 | landing_page_viewed | **yes** | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:24.989000 | $autocapture | no (not a tile event) | yes |
+| 6c686719-86c5-5263-b171-b463312a3646 | Owner, ?internal=1 desktop visit, 2026-11-20 14:46 UTC (step 9) | 2026-11-20 14:46:25.002000 | survey shown | no (not a tile event) | yes |
+
+Caught anyway by the event condition `is_internal` (D-037): 9. Getting through both: 6 (0 on a tile event).
+
+**b) Stored type of the internal flags on person records:**
+
+| is_internal | $internal_or_test_user | Persons |
+| :--- | :--- | :--- |
+| Bool | Bool | 6 |
+
+**c) `$feature/hero-framing` on page views:** 36 of 38 `landing_page_viewed` (internal included) carry it. 28 followed a flag answer within 60 s; 0 of those are missing it.
+
+**d) Hygiene:**
+
+| Check | Result |
+| :--- | :--- |
+| Key read from | .env |
+| .env exists and is gitignored | yes |
+| Labels file has no email address | yes |
+| This audit doc has no email address | yes |
+
+### 7. Diff against the previous run
+
+Previous run: 2026-11-21 21:25:15 UTC (D-063: de17f0f0 (returning signup, other device) excluded from the experiment).
+
+_No number moved._
+
+<!-- audit-json {"runAt":"2026-11-21 21:27:49 UTC","note":"D-063 final: channel table description (7 people, 8 addresses)","metrics":{"experiment|All signups|control|shown":2,"experiment|All signups|control|raw":2,"experiment|All signups|time|shown":5,"experiment|All signups|time|raw":5,"experiment|Buyer-role signups (D-009 headline)|control|shown":1,"experiment|Buyer-role signups (D-009 headline)|control|raw":1,"experiment|Buyer-role signups (D-009 headline)|time|shown":0,"experiment|Buyer-role signups (D-009 headline)|time|raw":0,"experiment|Volume question answered|control|shown":2,"experiment|Volume question answered|control|raw":2,"experiment|Volume question answered|time|shown":3,"experiment|Volume question answered|time|raw":3,"experiment|exposures|control|shown":3,"experiment|exposures|control|raw":3,"experiment|exposures|time|shown":7,"experiment|exposures|time|raw":7,"d1JCOgLG|step1|(none)|shown":10,"d1JCOgLG|step1|(none)|raw":10,"d1JCOgLG|step2|(none)|shown":7,"d1JCOgLG|step2|(none)|raw":7,"d1JCOgLG|step3|(none)|shown":7,"d1JCOgLG|step3|(none)|raw":7,"d1JCOgLG|step4|(none)|shown":3,"d1JCOgLG|step4|(none)|raw":3,"9s0dwQbs|buyer_rate|Personal network (shared link)|shown":11,"9s0dwQbs|buyer_rate|Personal network (shared link)|raw":11,"9s0dwQbs|buyer_signups|Personal network (shared link)|shown":1,"9s0dwQbs|buyer_signups|Personal network (shared link)|raw":1,"9s0dwQbs|signup_rate|Personal network (shared link)|shown":78,"9s0dwQbs|signup_rate|Personal network (shared link)|raw":78,"9s0dwQbs|signups|Personal network (shared link)|shown":7,"9s0dwQbs|signups|Personal network (shared link)|raw":7,"9s0dwQbs|visitors|Direct (no tracked link)|shown":1,"9s0dwQbs|visitors|Direct (no tracked link)|raw":1,"9s0dwQbs|visitors|Personal network (shared link)|shown":9,"9s0dwQbs|visitors|Personal network (shared link)|raw":9,"dBS4IKQb|Visitors|(none)|shown":1,"dBS4IKQb|Visitors|(none)|raw":1,"dBS4IKQb|Visitors|personal_network|shown":9,"dBS4IKQb|Visitors|personal_network|raw":9,"ZS0Uhz2p|Link clicks|personal_network|shown":10,"ZS0Uhz2p|Link clicks|personal_network|raw":10,"lQ1PbGvG|Respondents|16–30|shown":4,"lQ1PbGvG|Respondents|16–30|raw":4,"lQ1PbGvG|Respondents|5–15|shown":1,"lQ1PbGvG|Respondents|5–15|raw":1,"lQ1PbGvG|Respondents|I don't know|shown":2,"lQ1PbGvG|Respondents|I don't know|raw":2,"lQ1PbGvG|Respondents|More than 60|shown":1,"lQ1PbGvG|Respondents|More than 60|raw":1,"oMvaY0hy|All signups|a|shown":2,"oMvaY0hy|All signups|a|raw":2,"oMvaY0hy|All signups|b|shown":5,"oMvaY0hy|All signups|b|raw":5,"oMvaY0hy|Buyer-role signups|a|shown":1,"oMvaY0hy|Buyer-role signups|a|raw":1,"oMvaY0hy|Visitors|a|shown":3,"oMvaY0hy|Visitors|a|raw":3,"oMvaY0hy|Visitors|b|shown":7,"oMvaY0hy|Visitors|b|raw":7,"d9eeKWIG|Signups|Finance or operations::personal_network|shown":1,"d9eeKWIG|Signups|Finance or operations::personal_network|raw":1,"d9eeKWIG|Signups|Just helping test::personal_network|shown":6,"d9eeKWIG|Signups|Just helping test::personal_network|raw":6,"KK0a37NQ|step1|(none)|shown":1,"KK0a37NQ|step1|(none)|raw":1,"KK0a37NQ|step1|personal_network|shown":9,"KK0a37NQ|step1|personal_network|raw":9,"KK0a37NQ|step2|personal_network|shown":1,"KK0a37NQ|step2|personal_network|raw":1,"KK0a37NQ|step3|personal_network|shown":1,"KK0a37NQ|step3|personal_network|raw":1,"dRTNVtm9|step1|(none)|shown":1,"dRTNVtm9|step1|(none)|raw":1,"dRTNVtm9|step1|personal_network|shown":9,"dRTNVtm9|step1|personal_network|raw":9,"dRTNVtm9|step2|personal_network|shown":7,"dRTNVtm9|step2|personal_network|raw":7,"dRTNVtm9|step3|personal_network|shown":5,"dRTNVtm9|step3|personal_network|raw":5,"variant|control|exposure_events":7,"variant|control|exposed_persons":3,"variant|control|resent":3,"variant|control|signups":2,"variant|control|buyer_signups":1,"variant|time|exposure_events":12,"variant|time|exposed_persons":7,"variant|time|resent":3,"variant|time|signups":6,"variant|time|buyer_signups":0,"flag|called":27,"flag|empty_response":1,"flag|experiment_exposure":26,"flag|fallback_views":0,"persons_by_source|personal_network":11,"persons_by_source|(none)":1,"test|persons":14,"test|events":81,"unattributed|persons":2,"clicks|total":10,"clicks|no_visit_after":1,"survey|post_launch_persons":9,"survey|post_launch_test_persons":1,"survey|pre_launch_answers":24,"survey|pre_launch_persons":22,"check|filter_leak_events":15,"check|filter_leak_through_both":6,"check|filter_leak_tile_events":0,"check|views_missing_flag_prop":0}} -->
+
+---
