@@ -483,6 +483,7 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
 - **What:** seven iOS profiles came in through `/go/personal_network` on 2026-11-20 between 14:44 and 14:50 UTC: ad527ed3…, 56850f68…, 59492d76…, 87d66938…, c5c0d8d4…, 99ecd560… and 01e2abcf…. They were the owner testing on an iPhone without `?internal=1`. They aren't deleted or filtered, and they're labeled in `scripts/metrics-audit.labels.json`.
 - **Effect:** they're all of variant B's exposures so far, most of the A/B and channel signups, and most survey answers after launch. **The memo has to exclude them by hand.** Count only events before 2026-11-20 14:44 UTC, or leave out these person IDs.
 - **Reason:** the owner's call.
+- **Note (2026-11-21):** 01e2abcf… also has visits after the test window, on 2026-11-21 at 03:02 and 13:36 UTC, including its only experiment exposure (found in the review, `docs/review-2026-11-21.md`). The owner confirmed it's them: "same browser as my D-045 tests". It's an owner test, and the memo excludes all of its events. Because of these later visits, the time cut-off above doesn't cover it, so the memo must leave out the person IDs.
 
 ## D-046: The promo video is made with HyperFrames
 
