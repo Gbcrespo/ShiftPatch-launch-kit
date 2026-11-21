@@ -548,3 +548,54 @@ Since D-043 (2026-11-20), the limits are listed in the dashboard description and
   - The caption track is hidden (`data-hidden` on its host in `index.html`), not deleted.
   - The captioned render is kept as `renders/video-captioned.mp4`.
 - **Effect:** the brief's "captions on" no longer applies to this version.
+
+## D-052: The email link goes to the Google Form survey
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** the email CTA goes to the Google Form (`https://forms.gle/Trhg58CsaBRQ6bCn6`) through the same tracked redirect (`/email/click`). `welcome_email_link_clicked` still fires. The form has 5 multiple-choice questions on the buyer's pain points: how short-notice shifts get filled, time to fill, when coverage is confirmed, how often staff are asked to stay, and what to fix first.
+- **Reason:** "the welcome email should collect buyer pain-point data, not only show re-engagement."
+
+## D-053: All three emails carry the same survey link
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** the welcome email and both follow-ups link to the survey through the same tracked redirect. Only the CTA lines and the link text change.
+  - Every click fires `welcome_email_link_clicked` with `email_step: 'welcome'`, whichever email it came from (known limit).
+  - The `link` property changes from `how_it_would_work` to `qualification_survey` (value chosen by Claude, owner can override). Clicks before the change keep the old value.
+- **Reason:** "They are follow ups to see if the user answered them."
+
+## D-054: No PostHog event for form submissions
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner ("Scratch the PostHog integration, every click on the email link is already counted")
+- **Decision:** no Apps Script `onFormSubmit` trigger, no `qualification_survey_submitted` event, and no new funnel stage. The answers stay in Google Forms. The last funnel stage stays `welcome_email_link_clicked`. This replaces the step 11 brief's Apps Script and funnel-stage steps.
+- **Reason:** "every click on the email link is already counted."
+
+## D-055: No privacy policy change for the survey
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** the privacy page stays as it is.
+- **Reason:** "the form collects no email or name, only multiple-choice answers."
+
+## D-056: Existing signups are not emailed the survey link
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner
+- **Decision:** no email to people who signed up before the change, and no draft.
+- **Reason:** "this is an extra deliverable, not an acceptance criteria."
+
+## D-057: Privacy page names the follow-up link clicks
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner ("Ok")
+- **Decision:** the privacy page's Emails section now says "The emails can tell us whether their link was clicked, and the welcome email whether it was opened." Last updated: 21 November 2026. This replaces D-055 (no privacy change).
+- **Reason:** since D-053 the follow-ups carry the tracked link, so the old sentence ("The welcome email can tell us…") was no longer accurate.
+
+## D-058: Email lines and subjects match the survey ask
+
+- **Date:** 2026-11-21
+- **Decided by:** project owner ("Go with the suggestion")
+- **Decision:** beyond the CTA lines (D-053), the welcome email says "I'll send two short reminders" instead of "two short notes, each with one question". Follow-up 1's subject is "The 1-minute survey" and follow-up 2's is "Last note: the 1-minute survey". The 15-minute call ask is gone.
+- **Reason:** the old lines and subjects promised a question and a call that the emails no longer ask for.

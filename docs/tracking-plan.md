@@ -112,6 +112,8 @@ Sent by the `/email/<action>` Cloudflare function, with `distinct_id` = the cont
 | :--- | :--- | :--- | :--- |
 | `welcome_email_sent` | Apps Script has sent the welcome email (signed call to `/email/sent`) | server | `email_step` (`welcome`) |
 | `welcome_email_opened` | The welcome email's 1×1 image loads (`/email/open`). Inflated: Apple Mail and Gmail's image proxy load images automatically | server | `email_step` |
-| `welcome_email_link_clicked` | The welcome email's "How it would work" link is clicked (`/email/click`, then a redirect to `/?utm_source=welcome_email…#how-heading`). The honest engagement number | server | `email_step`, `link` (`how_it_would_work`) |
+| `welcome_email_link_clicked` | The survey link in any of the three emails is clicked (`/email/click`, then a redirect to the Google Form `forms.gle/Trhg58CsaBRQ6bCn6`, D-052, D-053). Before step 11 it was the welcome email's "How it would work" link to `/?utm_source=welcome_email…#how-heading`. The honest engagement number | server | `email_step` (always `welcome`, even for a click in a follow-up, D-053), `link` (`qualification_survey`; `how_it_would_work` before step 11) |
 
-Follow-up emails aren't tracked in PostHog. Their send times are in the Google Sheet (D-024).
+Follow-up sends and opens aren't tracked in PostHog; their send times are in the Google Sheet (D-024). Since step 11 the follow-ups carry the same tracked survey link, so their clicks count as `welcome_email_link_clicked` and can't be told apart from welcome clicks (D-053).
+
+Survey answers stay in Google Forms. Form submissions aren't sent to PostHog, so there's no survey-submitted event or funnel stage (D-054).

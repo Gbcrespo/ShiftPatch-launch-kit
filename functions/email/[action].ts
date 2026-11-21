@@ -1,7 +1,7 @@
 // Step 5c (D-024): the email function.
 //   POST /email/sent         Apps Script reports a send (HMAC-signed) -> welcome_email_sent
 //   GET  /email/open         1x1 image in the welcome email            -> welcome_email_opened
-//   GET  /email/click        the welcome email's link                  -> welcome_email_link_clicked, then redirect
+//   GET  /email/click        the survey link in all three emails       -> welcome_email_link_clicked, then redirect to the Google Form
 //   GET  /email/unsubscribe  confirm page (link scanners only GET, so nobody is unsubscribed by accident)
 //   POST /email/unsubscribe  marks the contact unsubscribed in the Sheet via Apps Script
 // Links carry e=<base64url email> and t=<HMAC token for that email and action>,
@@ -19,6 +19,7 @@ const GIF = Uint8Array.from(atob('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAA
 	c.charCodeAt(0),
 );
 const MAX_SKEW_MS = 10 * 60 * 1000;
+const SURVEY_URL = 'https://forms.gle/Trhg58CsaBRQ6bCn6';
 
 export const onRequest: PagesFunction<EmailEnv> = async (ctx) => {
 	const { request, params, env } = ctx;
@@ -77,15 +78,12 @@ async function open({ request, env, waitUntil }: Ctx): Promise<Response> {
 async function click({ request, env, waitUntil }: Ctx): Promise<Response> {
 	const url = new URL(request.url);
 	const email = await verifiedEmail(url, env.EMAIL_SECRET, 'click');
-	// Fixed destination (no open redirect): the "How it would work" section.
-	const target = new URL('/', url.origin);
-	target.searchParams.set('utm_source', 'welcome_email');
-	target.searchParams.set('utm_medium', 'email');
-	target.searchParams.set('utm_campaign', 'prelaunch-2026-11');
-	target.hash = 'how-heading';
+	// Fixed destination (no open redirect): the 5-question Google Form survey (D-052).
+	// All three emails use this link, so email_step is 'welcome' for every click (D-053).
+	const target = new URL(SURVEY_URL);
 	if (email) {
 		waitUntil(
-			captureForEmail('welcome_email_link_clicked', email, { email_step: 'welcome', link: 'how_it_would_work' }, request),
+			captureForEmail('welcome_email_link_clicked', email, { email_step: 'welcome', link: 'qualification_survey' }, request),
 		);
 	}
 	return new Response(null, { status: 302, headers: { location: target.toString(), 'cache-control': 'no-store' } });
