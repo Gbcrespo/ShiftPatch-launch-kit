@@ -166,7 +166,7 @@ export function track(event: string, properties: Record<string, unknown> = {}) {
 	posthog.capture(event, properties);
 }
 
-export function isBuyerRole(role: string) {
+function isBuyerRole(role: string) {
 	return (buyerRoles as readonly string[]).includes(role);
 }
 
