@@ -4,7 +4,7 @@ ShiftPatch is a **pre-launch concept**: an idea for helping hospitals fill short
 
 Decisions, and the reasons for them, are in [`docs/decisions.md`](docs/decisions.md).
 
-Not in this repo, by design: the full AI session transcripts (unedited) and the 75-second promo video. Both are delivered with the submission email. How the video was made, and where its source lives, is in [`docs/gtm/video.md`](docs/gtm/video.md).
+Not in this repo, by design: the full AI session transcripts (unedited), which are delivered with the submission email, and the 75-second promo video, which is [on Google Drive](https://drive.google.com/file/d/1xnr8oOLdcrH_Ilol_9T_X4d-P67eDitb/view?usp=sharing). How the video was made, and where its source lives, is in [`docs/gtm/video.md`](docs/gtm/video.md).
 
 ## Where to find each deliverable
 
@@ -19,7 +19,7 @@ Grouped by the brief's four parts.
 | A/B test | PostHog experiment "Hero framing: money vs time", flag `hero-framing`. Metrics in [`docs/tracking-plan.md`](docs/tracking-plan.md#feature-flag-and-experiment) |
 | Feedback widget and one-question survey | Live on the page. Set up in [`src/layouts/Layout.astro`](src/layouts/Layout.astro) and [`src/components/SignupForm.astro`](src/components/SignupForm.astro), survey events in [`docs/tracking-plan.md`](docs/tracking-plan.md#survey-properties-posthogs-names) |
 | Funnel, named and instrumented | [`docs/tracking-plan.md`](docs/tracking-plan.md#funnel) |
-| One-screen dashboard | [PostHog dashboard (public link)](PLACEHOLDER-POSTHOG-DASHBOARD-PUBLIC-LINK) |
+| One-screen dashboard | [PostHog dashboard (public link)](https://us.posthog.com/shared/j6ETsnpSEfOHnHlENoe44CGIhC1hMQ) |
 
 ### 2. Email and content
 
@@ -27,7 +27,7 @@ Grouped by the brief's four parts.
 | :--- | :--- |
 | Email list, welcome email and two follow-ups | [`apps-script/Code.gs`](apps-script/Code.gs) |
 | Two weeks of social posts with graphics | [`docs/gtm/linkedin-posts.md`](docs/gtm/linkedin-posts.md), graphics in [`docs/gtm/assets/`](docs/gtm/assets/) |
-| Promo video | [Video](PLACEHOLDER-VIDEO-LINK). How it was made: [`docs/gtm/video.md`](docs/gtm/video.md) |
+| Promo video | [Video](https://drive.google.com/file/d/1xnr8oOLdcrH_Ilol_9T_X4d-P67eDitb/view?usp=sharing). How it was made: [`docs/gtm/video.md`](docs/gtm/video.md) |
 
 ### 3. Go-to-market
 
