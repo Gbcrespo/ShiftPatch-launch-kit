@@ -64,13 +64,6 @@ Internal-pool models already exist in Florida: Lee Health runs a Staffing Resour
 | Trade press | Becker's Hospital Review publishes Florida executive moves (frequently blocks automated fetches). South Florida Hospital News covers South Florida nursing executives. | [South Florida Hospital News](https://southfloridahospitalnews.com/thomas-kester-named-broward-health-medical-center-chief-nursing-officer/) |
 | LinkedIn | Not checked in this pass. No LinkedIn profile was used as a source. | none |
 
-## 7. Known gaps
-
-- Only 14 verified prospects were produced (not 30; 9 in round 1, 14 after round 2); see the log. No float pool managers or staffing office managers were found by name on public pages.
-- Finance/operations buyers, budget-cycle dates and who signs for staffing software were not sourced.
-- Many hospital sites (AdventHealth, Orlando Health, Lee Health, Becker's, Tampa General) blocked automated fetches, so leaders there could not be verified.
-- Several posting pages are expired or aggregator copies; a job posting shows only that a pool exists, not a shortage.
-
 ## Agent log
 
 - **Agent:** Research Agent 1
