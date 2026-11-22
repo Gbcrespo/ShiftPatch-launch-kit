@@ -21,6 +21,7 @@ LinkedIn organic ranked #2 of 19 traction channels, scoring 19/25 (`docs/researc
 
 - **Publish date:** Mon 2026-11-23
 - **Graphic:** yes, `docs/gtm/assets/post01.png` (headline "When a shift opens up with very little warning, what's the first thing that happens?", source line "A question, not a claim")
+  ![Post 01 graphic](assets/post01.png)
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post01
 - **Sources:** none (no facts used)
 
@@ -48,6 +49,7 @@ Gabriel
 
 - **Publish date:** Tue 2026-11-24
 - **Graphic:** yes, `docs/gtm/assets/post02.png` (headline "Who decides which nurses get asked first when a shift opens?", source line "A question, not a claim")
+  ![Post 02 graphic](assets/post02.png)
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post02
 - **Sources:** none (the "own staff and float pool" description is the landing page's "How it would work", D-010)
 
@@ -71,6 +73,7 @@ Link, if you'd rather read than reply: https://shiftpatch-concept.pages.dev/go/l
 
 - **Publish date:** Wed 2026-11-25
 - **Graphic:** yes, `docs/gtm/assets/post03.png` (headline "Is the short-notice gap smaller, the same, or just different?", source line "Source: The Capitolist, 2026-01-23 (FHA workforce report)")
+  ![Post 03 graphic](assets/post03.png)
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post03
 - **Sources:** RN vacancy 21% (2022) to 10% (2025) and RN turnover 32% to 17%: The Capitolist, 2026-01-23, reporting the Florida Hospital Association workforce report (https://thecapitolist.com/florida-hospitals-add-jobs-and-ease-nurse-shortages-but-retention-challenges-remain/), via `docs/research/target-customer.md` section 4. The report covered 132 member hospitals (about 48% of Florida beds), May 2024 to April 2025.
 
@@ -98,6 +101,7 @@ https://shiftpatch-concept.pages.dev/go/linkedin?c=post03
 
 - **Publish date:** Tue 2026-12-01
 - **Graphic:** yes, `docs/gtm/assets/linkedin-template.png` (the default template headline)
+  ![Post 04 graphic](assets/linkedin-template.png)
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post04
 - **Sources:** none (no facts used)
 
@@ -121,6 +125,7 @@ https://shiftpatch-concept.pages.dev/go/linkedin?c=post04
 
 - **Publish date:** Wed 2026-12-02
 - **Graphic:** yes, `docs/gtm/assets/post05.png` (headline "What's the first thing that would worry you about this idea?", source line "A question, not a claim")
+  ![Post 05 graphic](assets/post05.png)
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post05
 - **Sources:** none (the "own staff and float pool" description is the landing page's "How it would work", D-010)
 
@@ -148,6 +153,7 @@ Where the idea is written down: https://shiftpatch-concept.pages.dev/go/linkedin
 
 - **Publish date:** Thu 2026-12-03
 - **Graphic:** yes, `docs/gtm/assets/post06.png` (headline "Is phoning around part of how a shift gets filled?", source line "A question, not a claim")
+  ![Post 06 graphic](assets/post06.png)
 - **Link:** https://shiftpatch-concept.pages.dev/go/linkedin?c=post06
 - **Sources:** none. The phoning-around pain is unsourced (`target-customer.md` section 4: "an assumption of the concept to test in interviews, not a sourced fact"), so it is asked as a question only.
 
